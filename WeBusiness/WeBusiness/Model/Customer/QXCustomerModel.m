@@ -8,8 +8,6 @@
 
 #import "QXCustomerModel.h"
 
-
-
 @implementation QXCustomerModel
 
 
@@ -23,20 +21,8 @@
 }
 
 
-
-
 - (void)insert:(FMDatabase*)db
 {
-    /*
-     @property (assign, nonatomic) NSInteger uid;
-     @property (copy, nonatomic, nullable) NSString *name;
-     @property (copy, nonatomic, nullable) NSString *tel;
-     @property (copy, nonatomic, nullable) NSString *address;
-     @property (copy, nonatomic, nullable) NSString *wechatID;
-     @property (assign, nonatomic) NSInteger type;
-     @property (copy, nonatomic, nullable) NSString *picID;
-     @property (assign, nonatomic) CFTimeInterval ts;
-     */
     NSString *SQLString = @"INSERT INTO CUSTOMER (NAME,TEL,ADDRESS,WECHATID,TYPE,PICID,TS) VALUES (?,?,?,?,?,?,?)";
     [db executeUpdate:SQLString,self.name,self.tel,self.address,self.wechatID,@(self.type),self.picID,@(self.ts)];
 }

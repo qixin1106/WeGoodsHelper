@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 @interface QXBaseModel : NSObject
 @property (assign, nonatomic) CFTimeInterval ts;

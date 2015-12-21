@@ -33,6 +33,7 @@
 		99F26B6C1C2680AC00C66DE1 /* QXFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B6B1C2680AC00C66DE1 /* QXFileUtil.m */; };
 		99F26B751C26965C00C66DE1 /* QXBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B741C26965C00C66DE1 /* QXBaseModel.m */; };
 		99F34EA21C28064D00ED54F2 /* QXGoodsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F34EA11C28064D00ED54F2 /* QXGoodsMainViewController.m */; };
+		99F34EA61C28189500ED54F2 /* QXGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F34EA51C28189500ED54F2 /* QXGoodsModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,8 @@
 		99F26B741C26965C00C66DE1 /* QXBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXBaseModel.m; sourceTree = "<group>"; };
 		99F34EA01C28064D00ED54F2 /* QXGoodsMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXGoodsMainViewController.h; sourceTree = "<group>"; };
 		99F34EA11C28064D00ED54F2 /* QXGoodsMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXGoodsMainViewController.m; sourceTree = "<group>"; };
+		99F34EA41C28189500ED54F2 /* QXGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXGoodsModel.h; sourceTree = "<group>"; };
+		99F34EA51C28189500ED54F2 /* QXGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXGoodsModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +272,7 @@
 		99594DD51C2407A6002660E6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				99F34EA31C28186300ED54F2 /* Goods */,
 				99A56AA71C271B0F00D757ED /* Customer */,
 				99F26B731C26965C00C66DE1 /* QXBaseModel.h */,
 				99F26B741C26965C00C66DE1 /* QXBaseModel.m */,
@@ -403,6 +407,15 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		99F34EA31C28186300ED54F2 /* Goods */ = {
+			isa = PBXGroup;
+			children = (
+				99F34EA41C28189500ED54F2 /* QXGoodsModel.h */,
+				99F34EA51C28189500ED54F2 /* QXGoodsModel.m */,
+			);
+			path = Goods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -534,6 +547,7 @@
 				99A56AAD1C271B0F00D757ED /* QXCustomerModel.m in Sources */,
 				99F34EA21C28064D00ED54F2 /* QXGoodsMainViewController.m in Sources */,
 				99A56A9C1C27071A00D757ED /* QXCustomerDetailViewController.m in Sources */,
+				99F34EA61C28189500ED54F2 /* QXGoodsModel.m in Sources */,
 				99594DC11C2403D3002660E6 /* AppDelegate.m in Sources */,
 				99594D741C23FCE0002660E6 /* main.m in Sources */,
 				99594DC21C2403D3002660E6 /* QXRootViewController.m in Sources */,
