@@ -48,6 +48,12 @@
     [db executeUpdate:SQLString,self.name,self.tel,self.address,self.wechatID,@(self.type),self.picID,@(self.uid)];
 }
 
+- (void)delete:(FMDatabase*)db
+{
+    NSString *SQLString = @"DELETE FROM CUSTOMER WHERE UID=?";
+    [db executeUpdate:SQLString,@(self.uid)];
+}
+
 
 - (NSArray*)selectAll:(FMDatabase*)db
 {
@@ -96,14 +102,28 @@
 
 - (void)store
 {
-    QXCustomerModel *model = [self fetchModel];
     [[QXSQLiteHelper sharedDatabaseQueue] inTransaction:^(FMDatabase *db, BOOL *rollback) {
         [self createTable:db];
-        (model)?[self update:db]:[self insert:db];
+        [self insert:db];
+    }];
+}
+
+- (void)refresh
+{
+    [[QXSQLiteHelper sharedDatabaseQueue] inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        [self createTable:db];
+        [self update:db];
     }];
 }
 
 
+- (void)remove
+{
+    [[QXSQLiteHelper sharedDatabaseQueue] inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        [self createTable:db];
+        [self delete:db];
+    }];
+}
 
 
 - (NSArray*)fetchAll

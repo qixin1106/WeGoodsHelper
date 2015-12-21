@@ -23,30 +23,46 @@ static NSString *identifier = @"QXCustomerMainCell";
 @implementation QXCustomerMainViewController
 
 
+- (void)customerModelRefresh:(NSNotification*)sender
+{
+    [self loadData];
+    [self.tableView reloadData];
+}
 
 
-
+- (void)onEditClick:(UIBarButtonItem*)sender
+{
+    [self.tableView setEditing:YES animated:YES];
+}
 
 - (void)onAddClick:(UIBarButtonItem*)sender
 {
+    QXCustomerDetailViewController *customerDetailViewController = [[QXCustomerDetailViewController alloc] init];
+    customerDetailViewController.templateType = TemplateType_Add;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:customerDetailViewController];
+    [self presentViewController:navigationController animated:YES completion:NULL];
+    [customerDetailViewController setSaveCustomerBlock:^(QXCustomerModel *customerModel){
+        //保存
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            @autoreleasepool
+            {
+                [customerModel store];
+            }
+        });
+        [self.dataArray insertObject:customerModel atIndex:0];
+        //刷新UI
+        [self.tableView beginUpdates];
+        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+        [self.tableView endUpdates];
+    }];
+    /*
     QXCustomerModel *model = [[QXCustomerModel alloc] init];
     model.name = @"神秘人";
     model.tel = @"18612341234";
     model.address = @"宇宙太阳系地球亚洲中国北京宇宙太阳系地球亚洲中国北京宇宙太阳系地球亚洲中国北京";
     model.wechatID = @"helloworld";
     model.type = 0;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @autoreleasepool
-        {
-            [model store];
-        }
-    });
-    
-    [self.dataArray insertObject:model atIndex:0];
-    //刷新UI
-    [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
-    [self.tableView endUpdates];
+    */
 }
 
 
@@ -55,7 +71,8 @@ static NSString *identifier = @"QXCustomerMainCell";
     self.title = @"客户";
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAddClick:)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+//    UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(onEditClick:)];
+    self.navigationItem.rightBarButtonItems = @[rightItem];
     
     
     self.tableView.tableFooterView = [UIView new];
@@ -74,8 +91,14 @@ static NSString *identifier = @"QXCustomerMainCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(customerModelRefresh:) name:kCustomRefresh object:nil];
     [self loadData];
     [self loadUI];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kCustomRefresh object:nil];
 }
 
 
@@ -102,6 +125,30 @@ static NSString *identifier = @"QXCustomerMainCell";
 
 
 #pragma mark - UITableViewDelegate
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle==UITableViewCellEditingStyleDelete)
+    {
+        QXCustomerModel *model = self.dataArray[indexPath.row];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            @autoreleasepool
+            {
+                [model remove];
+            }
+        });
+        [self.dataArray removeObject:model];
+        
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        [self.tableView endUpdates];
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

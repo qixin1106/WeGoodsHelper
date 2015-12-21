@@ -32,35 +32,52 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
         {
             if (self.customerModel)
             {
-                [self.customerModel store];
+                (self.templateType==TemplateType_Display)?[self.customerModel refresh]:[self.customerModel store];
             }
         }
     });
 }
 
 
-- (void)onAddClick:(UIBarButtonItem*)sender
+
+- (void)onSaveClick:(UIBarButtonItem*)sender
 {
-    if (self.tableView.editing)
+    if (kIsStringValid(self.customerModel.name) && kIsStringValid(self.customerModel.tel) && kIsStringValid(self.customerModel.address))
     {
-        [self.tableView setEditing:NO animated:YES];
-        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(onAddClick:)];
-        self.navigationItem.rightBarButtonItem = rightItem;
+        if (self.saveCustomerBlock)
+        {
+            self.saveCustomerBlock(self.customerModel);
+        }
+        [self dismissViewControllerAnimated:YES completion:NULL];
     }
     else
     {
-        [self.tableView setEditing:YES animated:YES];
-        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onAddClick:)];
-        self.navigationItem.rightBarButtonItem = rightItem;
+        ALERT(@"姓名,手机,地址为必填", nil);
     }
 }
+
+- (void)onBackClick:(UIBarButtonItem*)sender
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
 
 
 - (void)loadUI
 {
-    self.title = @"客户详情";
-//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(onAddClick:)];
-//    self.navigationItem.rightBarButtonItem = rightItem;
+    self.title = (self.templateType==TemplateType_Display)?@"客户详情":@"添加客户";
+    
+    if (self.templateType==TemplateType_Display)
+    {
+    }
+    else
+    {
+        UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(onBackClick:)];
+        self.navigationItem.leftBarButtonItem = leftItem;
+        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(onSaveClick:)];
+        self.navigationItem.rightBarButtonItem = rightItem;
+    }
     
     self.tableView.tableFooterView = [UIView new];
     [self.tableView registerClass:[QXCustomerDetailHeadCell class] forCellReuseIdentifier:identifier];
@@ -70,10 +87,17 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
 
 - (void)loadData
 {
-    self.headerTitles = @[@"姓名",@"手机",@"地址",@"微信号",@"关系"];
-    QXCustomerModel *model = [[QXCustomerModel alloc] init];
-    model.uid = self.uid;
-    self.customerModel = [model fetchModel];
+    self.headerTitles = @[@"姓名(必填)",@"手机(必填)",@"地址(必填)",@"微信号",@"关系"];
+    if (self.templateType==TemplateType_Display)
+    {
+        QXCustomerModel *model = [[QXCustomerModel alloc] init];
+        model.uid = self.uid;
+        self.customerModel = [model fetchModel];
+    }
+    else
+    {
+        self.customerModel = [[QXCustomerModel alloc] init];
+    }
 }
 
 
@@ -151,6 +175,7 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
             [self.tableView beginUpdates];
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
             [self.tableView endUpdates];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kCustomRefresh object:nil];
         }];
     }
     else if (indexPath.section==1)
@@ -175,6 +200,7 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
             [self.tableView beginUpdates];
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
             [self.tableView endUpdates];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kCustomRefresh object:nil];
         }];
     }
     else if (indexPath.section==3)
@@ -235,11 +261,4 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
 
 
 
-
-
-
-
-
-
-#pragma mark - QXInputStringViewControllerDelegate
 @end

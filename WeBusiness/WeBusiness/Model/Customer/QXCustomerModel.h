@@ -9,6 +9,9 @@
 #import "QXBaseModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+static NSString *kCustomRefresh = @"kCustomRefresh";
+
 @interface QXCustomerModel : QXBaseModel
 @property (assign, nonatomic) NSInteger uid;
 @property (copy, nonatomic, nullable) NSString *name;
@@ -19,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic, nullable) NSString *picID;
 
 - (void)store;//insert data
+- (void)refresh;//update data
+- (void)remove;//delete data
 - (NSArray*)fetchAll;//select all data
 - (QXCustomerModel*)fetchModel;//select model with uid
 @end
