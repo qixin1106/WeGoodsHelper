@@ -30,11 +30,11 @@ static NSString *identifier = @"QXCustomerMainCell";
 - (void)onAddClick:(UIBarButtonItem*)sender
 {
     QXCustomerModel *model = [[QXCustomerModel alloc] init];
-    model.name = @"亓鑫";
-    model.tel = @"18610620623";
-    model.address = @"北京市昌平区顺沙路19号院一区,北京市昌平区顺沙路19号院一区,北京市昌平区顺沙路19号院一区,北京市昌平区顺沙路19号院一区";
-    model.wechatID = @"qixin1106";
-    model.type = 0;//0:一般客户,1:下线代理,2:真实朋友
+    model.name = @"神秘人";
+    model.tel = @"18612341234";
+    model.address = @"宇宙太阳系地球亚洲中国北京宇宙太阳系地球亚洲中国北京宇宙太阳系地球亚洲中国北京";
+    model.wechatID = @"helloworld";
+    model.type = 0;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @autoreleasepool
         {
