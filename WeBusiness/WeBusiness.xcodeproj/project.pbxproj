@@ -1,0 +1,781 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		99594D741C23FCE0002660E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594D731C23FCE0002660E6 /* main.m */; };
+		99594D821C23FCE0002660E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99594D801C23FCE0002660E6 /* LaunchScreen.storyboard */; };
+		99594D8D1C23FCE0002660E6 /* WeBusinessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594D8C1C23FCE0002660E6 /* WeBusinessTests.m */; };
+		99594D981C23FCE0002660E6 /* WeBusinessUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594D971C23FCE0002660E6 /* WeBusinessUITests.m */; };
+		99594DC11C2403D3002660E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594DBC1C2403D3002660E6 /* AppDelegate.m */; };
+		99594DC21C2403D3002660E6 /* QXRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594DC01C2403D3002660E6 /* QXRootViewController.m */; };
+		99594DCB1C240621002660E6 /* QXOrderMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594DCA1C240621002660E6 /* QXOrderMainViewController.m */; };
+		99594DCE1C24065A002660E6 /* QXGoodsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594DCD1C24065A002660E6 /* QXGoodsMainViewController.m */; };
+		99594DD41C2406A9002660E6 /* QXSetupMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594DD31C2406A9002660E6 /* QXSetupMainViewController.m */; };
+		99594DD71C241155002660E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99594DD61C241155002660E6 /* Assets.xcassets */; };
+		99A56A9C1C27071A00D757ED /* QXCustomerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56A981C27071A00D757ED /* QXCustomerDetailViewController.m */; };
+		99A56A9D1C27071A00D757ED /* QXCustomerMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56A9B1C27071A00D757ED /* QXCustomerMainViewController.m */; };
+		99A56AA01C27078D00D757ED /* QXCustomerMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56A9F1C27078D00D757ED /* QXCustomerMainCell.m */; };
+		99A56AA31C27161700D757ED /* QXCustomerDetailHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56AA21C27161700D757ED /* QXCustomerDetailHeadCell.m */; };
+		99A56AAC1C271B0F00D757ED /* QXCustomerModel+TypeTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56AA91C271B0F00D757ED /* QXCustomerModel+TypeTranslation.m */; };
+		99A56AAD1C271B0F00D757ED /* QXCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56AAB1C271B0F00D757ED /* QXCustomerModel.m */; };
+		99A56AB21C271EE400D757ED /* QXInputStringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56AB11C271EE400D757ED /* QXInputStringViewController.m */; };
+		99F26B5A1C267CA400C66DE1 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B501C267CA400C66DE1 /* FMDatabase.m */; };
+		99F26B5B1C267CA400C66DE1 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B521C267CA400C66DE1 /* FMDatabaseAdditions.m */; };
+		99F26B5C1C267CA400C66DE1 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B541C267CA400C66DE1 /* FMDatabasePool.m */; };
+		99F26B5D1C267CA400C66DE1 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B561C267CA400C66DE1 /* FMDatabaseQueue.m */; };
+		99F26B5E1C267CA400C66DE1 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B591C267CA400C66DE1 /* FMResultSet.m */; };
+		99F26B631C267EA300C66DE1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F26B621C267EA300C66DE1 /* libsqlite3.tbd */; };
+		99F26B681C267F6500C66DE1 /* QXSQLiteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B671C267F6500C66DE1 /* QXSQLiteHelper.m */; };
+		99F26B6C1C2680AC00C66DE1 /* QXFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B6B1C2680AC00C66DE1 /* QXFileUtil.m */; };
+		99F26B751C26965C00C66DE1 /* QXBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B741C26965C00C66DE1 /* QXBaseModel.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		99594D891C23FCE0002660E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 99594D671C23FCE0002660E6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 99594D6E1C23FCE0002660E6;
+			remoteInfo = WeBusiness;
+		};
+		99594D941C23FCE0002660E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 99594D671C23FCE0002660E6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 99594D6E1C23FCE0002660E6;
+			remoteInfo = WeBusiness;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		99594D6F1C23FCE0002660E6 /* WeBusiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeBusiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		99594D731C23FCE0002660E6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		99594D831C23FCE0002660E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99594D881C23FCE0002660E6 /* WeBusinessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeBusinessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		99594D8C1C23FCE0002660E6 /* WeBusinessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeBusinessTests.m; sourceTree = "<group>"; };
+		99594D8E1C23FCE0002660E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99594D931C23FCE0002660E6 /* WeBusinessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeBusinessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		99594D971C23FCE0002660E6 /* WeBusinessUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeBusinessUITests.m; sourceTree = "<group>"; };
+		99594D991C23FCE0002660E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99594DB81C2402C8002660E6 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		99594DBB1C2403D3002660E6 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		99594DBC1C2403D3002660E6 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		99594DBF1C2403D3002660E6 /* QXRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXRootViewController.h; sourceTree = "<group>"; };
+		99594DC01C2403D3002660E6 /* QXRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXRootViewController.m; sourceTree = "<group>"; };
+		99594DC41C2404E0002660E6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		99594DC91C240621002660E6 /* QXOrderMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXOrderMainViewController.h; sourceTree = "<group>"; };
+		99594DCA1C240621002660E6 /* QXOrderMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXOrderMainViewController.m; sourceTree = "<group>"; };
+		99594DCC1C24065A002660E6 /* QXGoodsMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXGoodsMainViewController.h; sourceTree = "<group>"; };
+		99594DCD1C24065A002660E6 /* QXGoodsMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXGoodsMainViewController.m; sourceTree = "<group>"; };
+		99594DD21C2406A9002660E6 /* QXSetupMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXSetupMainViewController.h; sourceTree = "<group>"; };
+		99594DD31C2406A9002660E6 /* QXSetupMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXSetupMainViewController.m; sourceTree = "<group>"; };
+		99594DD61C241155002660E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		99A56A971C27071A00D757ED /* QXCustomerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXCustomerDetailViewController.h; sourceTree = "<group>"; };
+		99A56A981C27071A00D757ED /* QXCustomerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXCustomerDetailViewController.m; sourceTree = "<group>"; };
+		99A56A9A1C27071A00D757ED /* QXCustomerMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXCustomerMainViewController.h; sourceTree = "<group>"; };
+		99A56A9B1C27071A00D757ED /* QXCustomerMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXCustomerMainViewController.m; sourceTree = "<group>"; };
+		99A56A9E1C27078D00D757ED /* QXCustomerMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXCustomerMainCell.h; sourceTree = "<group>"; };
+		99A56A9F1C27078D00D757ED /* QXCustomerMainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXCustomerMainCell.m; sourceTree = "<group>"; };
+		99A56AA11C27161700D757ED /* QXCustomerDetailHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXCustomerDetailHeadCell.h; sourceTree = "<group>"; };
+		99A56AA21C27161700D757ED /* QXCustomerDetailHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXCustomerDetailHeadCell.m; sourceTree = "<group>"; };
+		99A56AA81C271B0F00D757ED /* QXCustomerModel+TypeTranslation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QXCustomerModel+TypeTranslation.h"; sourceTree = "<group>"; };
+		99A56AA91C271B0F00D757ED /* QXCustomerModel+TypeTranslation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QXCustomerModel+TypeTranslation.m"; sourceTree = "<group>"; };
+		99A56AAA1C271B0F00D757ED /* QXCustomerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXCustomerModel.h; sourceTree = "<group>"; };
+		99A56AAB1C271B0F00D757ED /* QXCustomerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXCustomerModel.m; sourceTree = "<group>"; };
+		99A56AB01C271EE400D757ED /* QXInputStringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXInputStringViewController.h; sourceTree = "<group>"; };
+		99A56AB11C271EE400D757ED /* QXInputStringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXInputStringViewController.m; sourceTree = "<group>"; };
+		99F26B4F1C267CA400C66DE1 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		99F26B501C267CA400C66DE1 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		99F26B511C267CA400C66DE1 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		99F26B521C267CA400C66DE1 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		99F26B531C267CA400C66DE1 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		99F26B541C267CA400C66DE1 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		99F26B551C267CA400C66DE1 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		99F26B561C267CA400C66DE1 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		99F26B571C267CA400C66DE1 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		99F26B581C267CA400C66DE1 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		99F26B591C267CA400C66DE1 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		99F26B621C267EA300C66DE1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		99F26B661C267F6500C66DE1 /* QXSQLiteHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXSQLiteHelper.h; sourceTree = "<group>"; };
+		99F26B671C267F6500C66DE1 /* QXSQLiteHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXSQLiteHelper.m; sourceTree = "<group>"; };
+		99F26B6A1C2680AC00C66DE1 /* QXFileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXFileUtil.h; sourceTree = "<group>"; };
+		99F26B6B1C2680AC00C66DE1 /* QXFileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXFileUtil.m; sourceTree = "<group>"; };
+		99F26B731C26965C00C66DE1 /* QXBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXBaseModel.h; sourceTree = "<group>"; };
+		99F26B741C26965C00C66DE1 /* QXBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXBaseModel.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		99594D6C1C23FCE0002660E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99F26B631C267EA300C66DE1 /* libsqlite3.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99594D851C23FCE0002660E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99594D901C23FCE0002660E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		99594D661C23FCE0002660E6 = {
+			isa = PBXGroup;
+			children = (
+				99594D711C23FCE0002660E6 /* WeBusiness */,
+				99594D8B1C23FCE0002660E6 /* WeBusinessTests */,
+				99594D961C23FCE0002660E6 /* WeBusinessUITests */,
+				99594D701C23FCE0002660E6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		99594D701C23FCE0002660E6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				99594D6F1C23FCE0002660E6 /* WeBusiness.app */,
+				99594D881C23FCE0002660E6 /* WeBusinessTests.xctest */,
+				99594D931C23FCE0002660E6 /* WeBusinessUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		99594D711C23FCE0002660E6 /* WeBusiness */ = {
+			isa = PBXGroup;
+			children = (
+				99F26B641C267EE700C66DE1 /* Framework */,
+				99F26B611C267E7200C66DE1 /* Utility */,
+				99F26B4D1C267C6900C66DE1 /* ThirdParty */,
+				99594DD51C2407A6002660E6 /* Model */,
+				99594DBA1C2403D3002660E6 /* AppDelegate */,
+				99594DBD1C2403D3002660E6 /* Controllers */,
+				99594D721C23FCE0002660E6 /* Supporting Files */,
+			);
+			path = WeBusiness;
+			sourceTree = "<group>";
+		};
+		99594D721C23FCE0002660E6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				99594DD61C241155002660E6 /* Assets.xcassets */,
+				99594D801C23FCE0002660E6 /* LaunchScreen.storyboard */,
+				99594D831C23FCE0002660E6 /* Info.plist */,
+				99594D731C23FCE0002660E6 /* main.m */,
+				99594DB81C2402C8002660E6 /* PrefixHeader.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		99594D8B1C23FCE0002660E6 /* WeBusinessTests */ = {
+			isa = PBXGroup;
+			children = (
+				99594D8C1C23FCE0002660E6 /* WeBusinessTests.m */,
+				99594D8E1C23FCE0002660E6 /* Info.plist */,
+			);
+			path = WeBusinessTests;
+			sourceTree = "<group>";
+		};
+		99594D961C23FCE0002660E6 /* WeBusinessUITests */ = {
+			isa = PBXGroup;
+			children = (
+				99594D971C23FCE0002660E6 /* WeBusinessUITests.m */,
+				99594D991C23FCE0002660E6 /* Info.plist */,
+			);
+			path = WeBusinessUITests;
+			sourceTree = "<group>";
+		};
+		99594DBA1C2403D3002660E6 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				99594DBB1C2403D3002660E6 /* AppDelegate.h */,
+				99594DBC1C2403D3002660E6 /* AppDelegate.m */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		99594DBD1C2403D3002660E6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				99A56AAE1C271EA500D757ED /* Common */,
+				99594DC51C2405CE002660E6 /* Customers */,
+				99594DC61C2405CE002660E6 /* Goods */,
+				99594DC71C2405CE002660E6 /* Orders */,
+				99594DC81C2405CE002660E6 /* Setup */,
+				99594DBE1C2403D3002660E6 /* Root */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		99594DBE1C2403D3002660E6 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				99594DBF1C2403D3002660E6 /* QXRootViewController.h */,
+				99594DC01C2403D3002660E6 /* QXRootViewController.m */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		99594DC51C2405CE002660E6 /* Customers */ = {
+			isa = PBXGroup;
+			children = (
+				99A56A961C27071A00D757ED /* Detail */,
+				99A56A991C27071A00D757ED /* Main */,
+			);
+			path = Customers;
+			sourceTree = "<group>";
+		};
+		99594DC61C2405CE002660E6 /* Goods */ = {
+			isa = PBXGroup;
+			children = (
+				99594DCC1C24065A002660E6 /* QXGoodsMainViewController.h */,
+				99594DCD1C24065A002660E6 /* QXGoodsMainViewController.m */,
+			);
+			path = Goods;
+			sourceTree = "<group>";
+		};
+		99594DC71C2405CE002660E6 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				99594DC91C240621002660E6 /* QXOrderMainViewController.h */,
+				99594DCA1C240621002660E6 /* QXOrderMainViewController.m */,
+			);
+			path = Orders;
+			sourceTree = "<group>";
+		};
+		99594DC81C2405CE002660E6 /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				99594DD21C2406A9002660E6 /* QXSetupMainViewController.h */,
+				99594DD31C2406A9002660E6 /* QXSetupMainViewController.m */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
+		99594DD51C2407A6002660E6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				99A56AA71C271B0F00D757ED /* Customer */,
+				99F26B731C26965C00C66DE1 /* QXBaseModel.h */,
+				99F26B741C26965C00C66DE1 /* QXBaseModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		99A56A961C27071A00D757ED /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				99A56A971C27071A00D757ED /* QXCustomerDetailViewController.h */,
+				99A56A981C27071A00D757ED /* QXCustomerDetailViewController.m */,
+				99A56AA11C27161700D757ED /* QXCustomerDetailHeadCell.h */,
+				99A56AA21C27161700D757ED /* QXCustomerDetailHeadCell.m */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		99A56A991C27071A00D757ED /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				99A56A9A1C27071A00D757ED /* QXCustomerMainViewController.h */,
+				99A56A9B1C27071A00D757ED /* QXCustomerMainViewController.m */,
+				99A56A9E1C27078D00D757ED /* QXCustomerMainCell.h */,
+				99A56A9F1C27078D00D757ED /* QXCustomerMainCell.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		99A56AA71C271B0F00D757ED /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				99A56AA81C271B0F00D757ED /* QXCustomerModel+TypeTranslation.h */,
+				99A56AA91C271B0F00D757ED /* QXCustomerModel+TypeTranslation.m */,
+				99A56AAA1C271B0F00D757ED /* QXCustomerModel.h */,
+				99A56AAB1C271B0F00D757ED /* QXCustomerModel.m */,
+			);
+			path = Customer;
+			sourceTree = "<group>";
+		};
+		99A56AAE1C271EA500D757ED /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				99A56AAF1C271EC600D757ED /* InputString */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		99A56AAF1C271EC600D757ED /* InputString */ = {
+			isa = PBXGroup;
+			children = (
+				99A56AB01C271EE400D757ED /* QXInputStringViewController.h */,
+				99A56AB11C271EE400D757ED /* QXInputStringViewController.m */,
+			);
+			path = InputString;
+			sourceTree = "<group>";
+		};
+		99F26B4D1C267C6900C66DE1 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				99F26B4E1C267CA400C66DE1 /* FMDB */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		99F26B4E1C267CA400C66DE1 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				99F26B4F1C267CA400C66DE1 /* FMDatabase.h */,
+				99F26B501C267CA400C66DE1 /* FMDatabase.m */,
+				99F26B511C267CA400C66DE1 /* FMDatabaseAdditions.h */,
+				99F26B521C267CA400C66DE1 /* FMDatabaseAdditions.m */,
+				99F26B531C267CA400C66DE1 /* FMDatabasePool.h */,
+				99F26B541C267CA400C66DE1 /* FMDatabasePool.m */,
+				99F26B551C267CA400C66DE1 /* FMDatabaseQueue.h */,
+				99F26B561C267CA400C66DE1 /* FMDatabaseQueue.m */,
+				99F26B571C267CA400C66DE1 /* FMDB.h */,
+				99F26B581C267CA400C66DE1 /* FMResultSet.h */,
+				99F26B591C267CA400C66DE1 /* FMResultSet.m */,
+			);
+			path = FMDB;
+			sourceTree = "<group>";
+		};
+		99F26B611C267E7200C66DE1 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				99F26B691C26809C00C66DE1 /* FileUitl */,
+				99F26B651C267F3600C66DE1 /* SQLiteHelper */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		99F26B641C267EE700C66DE1 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				99F26B621C267EA300C66DE1 /* libsqlite3.tbd */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		99F26B651C267F3600C66DE1 /* SQLiteHelper */ = {
+			isa = PBXGroup;
+			children = (
+				99F26B661C267F6500C66DE1 /* QXSQLiteHelper.h */,
+				99F26B671C267F6500C66DE1 /* QXSQLiteHelper.m */,
+			);
+			path = SQLiteHelper;
+			sourceTree = "<group>";
+		};
+		99F26B691C26809C00C66DE1 /* FileUitl */ = {
+			isa = PBXGroup;
+			children = (
+				99F26B6A1C2680AC00C66DE1 /* QXFileUtil.h */,
+				99F26B6B1C2680AC00C66DE1 /* QXFileUtil.m */,
+			);
+			path = FileUitl;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		99594D6E1C23FCE0002660E6 /* WeBusiness */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 99594D9C1C23FCE0002660E6 /* Build configuration list for PBXNativeTarget "WeBusiness" */;
+			buildPhases = (
+				99594D6B1C23FCE0002660E6 /* Sources */,
+				99594D6C1C23FCE0002660E6 /* Frameworks */,
+				99594D6D1C23FCE0002660E6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WeBusiness;
+			productName = WeBusiness;
+			productReference = 99594D6F1C23FCE0002660E6 /* WeBusiness.app */;
+			productType = "com.apple.product-type.application";
+		};
+		99594D871C23FCE0002660E6 /* WeBusinessTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 99594D9F1C23FCE0002660E6 /* Build configuration list for PBXNativeTarget "WeBusinessTests" */;
+			buildPhases = (
+				99594D841C23FCE0002660E6 /* Sources */,
+				99594D851C23FCE0002660E6 /* Frameworks */,
+				99594D861C23FCE0002660E6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				99594D8A1C23FCE0002660E6 /* PBXTargetDependency */,
+			);
+			name = WeBusinessTests;
+			productName = WeBusinessTests;
+			productReference = 99594D881C23FCE0002660E6 /* WeBusinessTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		99594D921C23FCE0002660E6 /* WeBusinessUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 99594DA21C23FCE0002660E6 /* Build configuration list for PBXNativeTarget "WeBusinessUITests" */;
+			buildPhases = (
+				99594D8F1C23FCE0002660E6 /* Sources */,
+				99594D901C23FCE0002660E6 /* Frameworks */,
+				99594D911C23FCE0002660E6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				99594D951C23FCE0002660E6 /* PBXTargetDependency */,
+			);
+			name = WeBusinessUITests;
+			productName = WeBusinessUITests;
+			productReference = 99594D931C23FCE0002660E6 /* WeBusinessUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		99594D671C23FCE0002660E6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "亓鑫";
+				TargetAttributes = {
+					99594D6E1C23FCE0002660E6 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					99594D871C23FCE0002660E6 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 99594D6E1C23FCE0002660E6;
+					};
+					99594D921C23FCE0002660E6 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 99594D6E1C23FCE0002660E6;
+					};
+				};
+			};
+			buildConfigurationList = 99594D6A1C23FCE0002660E6 /* Build configuration list for PBXProject "WeBusiness" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				"zh-Hans",
+			);
+			mainGroup = 99594D661C23FCE0002660E6;
+			productRefGroup = 99594D701C23FCE0002660E6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				99594D6E1C23FCE0002660E6 /* WeBusiness */,
+				99594D871C23FCE0002660E6 /* WeBusinessTests */,
+				99594D921C23FCE0002660E6 /* WeBusinessUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		99594D6D1C23FCE0002660E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99594DD71C241155002660E6 /* Assets.xcassets in Resources */,
+				99594D821C23FCE0002660E6 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99594D861C23FCE0002660E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99594D911C23FCE0002660E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		99594D6B1C23FCE0002660E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99A56AAD1C271B0F00D757ED /* QXCustomerModel.m in Sources */,
+				99A56A9C1C27071A00D757ED /* QXCustomerDetailViewController.m in Sources */,
+				99594DC11C2403D3002660E6 /* AppDelegate.m in Sources */,
+				99594D741C23FCE0002660E6 /* main.m in Sources */,
+				99594DC21C2403D3002660E6 /* QXRootViewController.m in Sources */,
+				99594DCB1C240621002660E6 /* QXOrderMainViewController.m in Sources */,
+				99F26B681C267F6500C66DE1 /* QXSQLiteHelper.m in Sources */,
+				99A56AB21C271EE400D757ED /* QXInputStringViewController.m in Sources */,
+				99F26B6C1C2680AC00C66DE1 /* QXFileUtil.m in Sources */,
+				99F26B5B1C267CA400C66DE1 /* FMDatabaseAdditions.m in Sources */,
+				99A56AAC1C271B0F00D757ED /* QXCustomerModel+TypeTranslation.m in Sources */,
+				99F26B751C26965C00C66DE1 /* QXBaseModel.m in Sources */,
+				99F26B5E1C267CA400C66DE1 /* FMResultSet.m in Sources */,
+				99A56AA01C27078D00D757ED /* QXCustomerMainCell.m in Sources */,
+				99A56A9D1C27071A00D757ED /* QXCustomerMainViewController.m in Sources */,
+				99A56AA31C27161700D757ED /* QXCustomerDetailHeadCell.m in Sources */,
+				99594DD41C2406A9002660E6 /* QXSetupMainViewController.m in Sources */,
+				99F26B5C1C267CA400C66DE1 /* FMDatabasePool.m in Sources */,
+				99F26B5D1C267CA400C66DE1 /* FMDatabaseQueue.m in Sources */,
+				99594DCE1C24065A002660E6 /* QXGoodsMainViewController.m in Sources */,
+				99F26B5A1C267CA400C66DE1 /* FMDatabase.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99594D841C23FCE0002660E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99594D8D1C23FCE0002660E6 /* WeBusinessTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99594D8F1C23FCE0002660E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99594D981C23FCE0002660E6 /* WeBusinessUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		99594D8A1C23FCE0002660E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 99594D6E1C23FCE0002660E6 /* WeBusiness */;
+			targetProxy = 99594D891C23FCE0002660E6 /* PBXContainerItemProxy */;
+		};
+		99594D951C23FCE0002660E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 99594D6E1C23FCE0002660E6 /* WeBusiness */;
+			targetProxy = 99594D941C23FCE0002660E6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		99594D801C23FCE0002660E6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				99594DC41C2404E0002660E6 /* zh-Hans */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		99594D9A1C23FCE0002660E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		99594D9B1C23FCE0002660E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		99594D9D1C23FCE0002660E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/WeBusiness/PrefixHeader.pch";
+				INFOPLIST_FILE = WeBusiness/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.qixin.WeBusiness;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		99594D9E1C23FCE0002660E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/WeBusiness/PrefixHeader.pch";
+				INFOPLIST_FILE = WeBusiness/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.qixin.WeBusiness;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		99594DA01C23FCE0002660E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = WeBusinessTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.qixin.WeBusinessTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeBusiness.app/WeBusiness";
+			};
+			name = Debug;
+		};
+		99594DA11C23FCE0002660E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = WeBusinessTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.qixin.WeBusinessTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeBusiness.app/WeBusiness";
+			};
+			name = Release;
+		};
+		99594DA31C23FCE0002660E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = WeBusinessUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.qixin.WeBusinessUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = WeBusiness;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		99594DA41C23FCE0002660E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = WeBusinessUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.qixin.WeBusinessUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = WeBusiness;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		99594D6A1C23FCE0002660E6 /* Build configuration list for PBXProject "WeBusiness" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99594D9A1C23FCE0002660E6 /* Debug */,
+				99594D9B1C23FCE0002660E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		99594D9C1C23FCE0002660E6 /* Build configuration list for PBXNativeTarget "WeBusiness" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99594D9D1C23FCE0002660E6 /* Debug */,
+				99594D9E1C23FCE0002660E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		99594D9F1C23FCE0002660E6 /* Build configuration list for PBXNativeTarget "WeBusinessTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99594DA01C23FCE0002660E6 /* Debug */,
+				99594DA11C23FCE0002660E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		99594DA21C23FCE0002660E6 /* Build configuration list for PBXNativeTarget "WeBusinessUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99594DA31C23FCE0002660E6 /* Debug */,
+				99594DA41C23FCE0002660E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 99594D671C23FCE0002660E6 /* Project object */;
+}

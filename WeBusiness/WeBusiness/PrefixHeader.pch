@@ -1,0 +1,64 @@
+//
+//  PrefixHeader.pch
+//  WeBusiness
+//
+//  Created by 亓鑫 on 15/12/18.
+//  Copyright © 2015年 亓鑫. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+
+/*************************************************************************************************/
+#pragma mark - 宏
+
+//MARK: Log打印
+#ifdef DEBUG
+#define QXLog(format, ...) NSLog(format, ## __VA_ARGS__)
+#else
+#define QXLog(format, ...)
+#endif
+
+//MARK: UIAlertView快捷宏
+#define ALERT(title,msg) dispatch_async(dispatch_get_main_queue(), ^{UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];[alert show];});
+
+//MARK: 格式化字符串宏
+#define STR_FORMAT(...) [NSString stringWithFormat:__VA_ARGS__]
+
+//MARK: 设置颜色
+#define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
+//MARK: 判断字符串是否有效
+#define kIsStringValid(text) (![NSStringFromClass([text class]) isEqualToString:@"NSNull"] && text && [text length]>0)
+
+//MARK: Frame
+#define Frame_Origin(obj,x,y) CGRectMake(x, y, obj.frame.size.width, obj.frame.size.height)
+#define Frame_OriginX(obj,x) CGRectMake(x, obj.frame.origin.y, obj.frame.size.width, obj.frame.size.height)
+#define Frame_OriginY(obj,y) CGRectMake(obj.frame.origin.x, y, obj.frame.size.width, obj.frame.size.height)
+
+//MARK: Size
+#define Frame_Size(obj,w,h) CGRectMake(obj.frame.origin.x, obj.frame.origin.y, w, h)
+#define Frame_SizeW(obj,w) CGRectMake(obj.frame.origin.x, obj.frame.origin.y, w, obj.frame.size.height)
+#define Frame_SizeH(obj,h) CGRectMake(obj.frame.origin.x, obj.frame.origin.y, obj.frame.size.width, h)
+
+//MARK: 一像素线适配在不同机型下
+#define kOnePixelValue 1/[[UIScreen mainScreen] scale]
+
+
+
+/*************************************************************************************************/
+
+
+
+
+/*************************************************************************************************/
+#pragma mark - 头文件
+#import "FMDB.h"
+#import "QXFileUtil.h"
+#import "QXSQLiteHelper.h"
+/*************************************************************************************************/
+
+
+#endif /* PrefixHeader_pch */

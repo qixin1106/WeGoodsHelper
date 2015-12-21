@@ -1,0 +1,16 @@
+//
+//  QXBaseModel.h
+//  WeBusiness
+//
+//  Created by 亓鑫 on 15/12/20.
+//  Copyright © 2015年 亓鑫. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface QXBaseModel : NSObject
+@property (assign, nonatomic) CFTimeInterval ts;
+
+
+- (BOOL)isExistTable:(NSString *)tableName db:(FMDatabase*)db;
+@end
