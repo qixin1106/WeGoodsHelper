@@ -25,6 +25,9 @@
 
 - (void)loadUI
 {
+    self.view.backgroundColor = [UIColor whiteColor];
+
+    
     NSMutableArray *controllers = [NSMutableArray arrayWithCapacity:4];
     {
         QXOrderMainViewController *vc = [[QXOrderMainViewController alloc] init];

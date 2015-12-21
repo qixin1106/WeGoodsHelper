@@ -16,6 +16,9 @@
 		99594DCB1C240621002660E6 /* QXOrderMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594DCA1C240621002660E6 /* QXOrderMainViewController.m */; };
 		99594DD41C2406A9002660E6 /* QXSetupMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594DD31C2406A9002660E6 /* QXSetupMainViewController.m */; };
 		99594DD71C241155002660E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99594DD61C241155002660E6 /* Assets.xcassets */; };
+		997D33101C286DD500C7EABB /* QXGoodsMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 997D330F1C286DD500C7EABB /* QXGoodsMainCell.m */; };
+		997D33131C287C4500C7EABB /* QXGoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997D33121C287C4500C7EABB /* QXGoodsDetailViewController.m */; };
+		997D33161C287CBA00C7EABB /* QXGoodsModel+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 997D33151C287CBA00C7EABB /* QXGoodsModel+Utils.m */; };
 		99A56A9C1C27071A00D757ED /* QXCustomerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56A981C27071A00D757ED /* QXCustomerDetailViewController.m */; };
 		99A56A9D1C27071A00D757ED /* QXCustomerMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56A9B1C27071A00D757ED /* QXCustomerMainViewController.m */; };
 		99A56AA01C27078D00D757ED /* QXCustomerMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56A9F1C27078D00D757ED /* QXCustomerMainCell.m */; };
@@ -74,6 +77,12 @@
 		99594DD21C2406A9002660E6 /* QXSetupMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXSetupMainViewController.h; sourceTree = "<group>"; };
 		99594DD31C2406A9002660E6 /* QXSetupMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXSetupMainViewController.m; sourceTree = "<group>"; };
 		99594DD61C241155002660E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		997D330E1C286DD500C7EABB /* QXGoodsMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXGoodsMainCell.h; sourceTree = "<group>"; };
+		997D330F1C286DD500C7EABB /* QXGoodsMainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXGoodsMainCell.m; sourceTree = "<group>"; };
+		997D33111C287C4500C7EABB /* QXGoodsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QXGoodsDetailViewController.h; path = WeBusiness/Controllers/Goods/Main/QXGoodsDetailViewController.h; sourceTree = SOURCE_ROOT; };
+		997D33121C287C4500C7EABB /* QXGoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QXGoodsDetailViewController.m; path = WeBusiness/Controllers/Goods/Main/QXGoodsDetailViewController.m; sourceTree = SOURCE_ROOT; };
+		997D33141C287CBA00C7EABB /* QXGoodsModel+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QXGoodsModel+Utils.h"; sourceTree = "<group>"; };
+		997D33151C287CBA00C7EABB /* QXGoodsModel+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QXGoodsModel+Utils.m"; sourceTree = "<group>"; };
 		99A56A971C27071A00D757ED /* QXCustomerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXCustomerDetailViewController.h; sourceTree = "<group>"; };
 		99A56A981C27071A00D757ED /* QXCustomerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXCustomerDetailViewController.m; sourceTree = "<group>"; };
 		99A56A9A1C27071A00D757ED /* QXCustomerMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXCustomerMainViewController.h; sourceTree = "<group>"; };
@@ -394,6 +403,8 @@
 		99F34E9E1C28064D00ED54F2 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				997D33111C287C4500C7EABB /* QXGoodsDetailViewController.h */,
+				997D33121C287C4500C7EABB /* QXGoodsDetailViewController.m */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -403,6 +414,8 @@
 			children = (
 				99F34EA01C28064D00ED54F2 /* QXGoodsMainViewController.h */,
 				99F34EA11C28064D00ED54F2 /* QXGoodsMainViewController.m */,
+				997D330E1C286DD500C7EABB /* QXGoodsMainCell.h */,
+				997D330F1C286DD500C7EABB /* QXGoodsMainCell.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -412,6 +425,8 @@
 			children = (
 				99F34EA41C28189500ED54F2 /* QXGoodsModel.h */,
 				99F34EA51C28189500ED54F2 /* QXGoodsModel.m */,
+				997D33141C287CBA00C7EABB /* QXGoodsModel+Utils.h */,
+				997D33151C287CBA00C7EABB /* QXGoodsModel+Utils.m */,
 			);
 			path = Goods;
 			sourceTree = "<group>";
@@ -544,6 +559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				997D33101C286DD500C7EABB /* QXGoodsMainCell.m in Sources */,
 				99A56AAD1C271B0F00D757ED /* QXCustomerModel.m in Sources */,
 				99F34EA21C28064D00ED54F2 /* QXGoodsMainViewController.m in Sources */,
 				99A56A9C1C27071A00D757ED /* QXCustomerDetailViewController.m in Sources */,
@@ -552,12 +568,14 @@
 				99594D741C23FCE0002660E6 /* main.m in Sources */,
 				99594DC21C2403D3002660E6 /* QXRootViewController.m in Sources */,
 				99594DCB1C240621002660E6 /* QXOrderMainViewController.m in Sources */,
+				997D33161C287CBA00C7EABB /* QXGoodsModel+Utils.m in Sources */,
 				99F26B681C267F6500C66DE1 /* QXSQLiteHelper.m in Sources */,
 				99A56AB21C271EE400D757ED /* QXInputStringViewController.m in Sources */,
 				99F26B6C1C2680AC00C66DE1 /* QXFileUtil.m in Sources */,
 				99F26B5B1C267CA400C66DE1 /* FMDatabaseAdditions.m in Sources */,
 				99A56AAC1C271B0F00D757ED /* QXCustomerModel+TypeTranslation.m in Sources */,
 				99F26B751C26965C00C66DE1 /* QXBaseModel.m in Sources */,
+				997D33131C287C4500C7EABB /* QXGoodsDetailViewController.m in Sources */,
 				99F26B5E1C267CA400C66DE1 /* FMResultSet.m in Sources */,
 				99A56AA01C27078D00D757ED /* QXCustomerMainCell.m in Sources */,
 				99A56A9D1C27071A00D757ED /* QXCustomerMainViewController.m in Sources */,

@@ -52,13 +52,13 @@
         model.gid = [rs longForColumn:@"GID"];
         model.name = [rs stringForColumn:@"NAME"];
         model.costPrice = [rs doubleForColumn:@"COST"];
-        model.delegatePrice = [rs doubleForColumn:@"ADDRESS"];
-        model.friendPrice = [rs doubleForColumn:@"WECHATID"];
-        model.retailPrice = [rs doubleForColumn:@"TYPE"];
-        model.count = [rs longForColumn:@"PICID"];
-        model.descs = [rs stringForColumn:@"TS"];
-        model.picID = [rs stringForColumn:@"TS"];
-        model.remark = [rs stringForColumn:@"TS"];
+        model.delegatePrice = [rs doubleForColumn:@"DELEGATE"];
+        model.friendPrice = [rs doubleForColumn:@"FRIEND"];
+        model.retailPrice = [rs doubleForColumn:@"RETAIL"];
+        model.count = [rs longForColumn:@"COUNT"];
+        model.descs = [rs stringForColumn:@"DESCS"];
+        model.picID = [rs stringForColumn:@"PICID"];
+        model.remark = [rs stringForColumn:@"REMARK"];
         model.ts = [rs doubleForColumn:@"TS"];
         [array addObject:model];
     }
@@ -77,13 +77,13 @@
         model.gid = [rs longForColumn:@"GID"];
         model.name = [rs stringForColumn:@"NAME"];
         model.costPrice = [rs doubleForColumn:@"COST"];
-        model.delegatePrice = [rs doubleForColumn:@"ADDRESS"];
-        model.friendPrice = [rs doubleForColumn:@"WECHATID"];
-        model.retailPrice = [rs doubleForColumn:@"TYPE"];
-        model.count = [rs longForColumn:@"PICID"];
-        model.descs = [rs stringForColumn:@"TS"];
-        model.picID = [rs stringForColumn:@"TS"];
-        model.remark = [rs stringForColumn:@"TS"];
+        model.delegatePrice = [rs doubleForColumn:@"DELEGATE"];
+        model.friendPrice = [rs doubleForColumn:@"FRIEND"];
+        model.retailPrice = [rs doubleForColumn:@"RETAIL"];
+        model.count = [rs longForColumn:@"COUNT"];
+        model.descs = [rs stringForColumn:@"DESCS"];
+        model.picID = [rs stringForColumn:@"PICID"];
+        model.remark = [rs stringForColumn:@"REMARK"];
         model.ts = [rs doubleForColumn:@"TS"];
         [array addObject:model];
     }

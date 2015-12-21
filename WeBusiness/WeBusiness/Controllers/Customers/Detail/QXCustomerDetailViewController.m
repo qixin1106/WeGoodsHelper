@@ -42,7 +42,7 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
 
 - (void)onSaveClick:(UIBarButtonItem*)sender
 {
-    if (kIsStringValid(self.customerModel.name) && kIsStringValid(self.customerModel.tel) && kIsStringValid(self.customerModel.address))
+    if (VALID_STRING(self.customerModel.name) && VALID_STRING(self.customerModel.tel) && VALID_STRING(self.customerModel.address))
     {
         if (self.saveCustomerBlock)
         {
@@ -67,7 +67,6 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
 - (void)loadUI
 {
     self.title = (self.templateType==TemplateType_Display)?@"客户详情":@"添加客户";
-    
     if (self.templateType==TemplateType_Display)
     {
     }
