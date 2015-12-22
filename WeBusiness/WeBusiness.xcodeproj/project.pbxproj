@@ -26,6 +26,8 @@
 		99A56AAC1C271B0F00D757ED /* QXCustomerModel+TypeTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56AA91C271B0F00D757ED /* QXCustomerModel+TypeTranslation.m */; };
 		99A56AAD1C271B0F00D757ED /* QXCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56AAB1C271B0F00D757ED /* QXCustomerModel.m */; };
 		99A56AB21C271EE400D757ED /* QXInputStringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56AB11C271EE400D757ED /* QXInputStringViewController.m */; };
+		99E7EC821C2977DC00DE6AE1 /* QXGoodsDetailGoodsImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E7EC811C2977DC00DE6AE1 /* QXGoodsDetailGoodsImageCell.m */; };
+		99E7EC861C2978F100DE6AE1 /* UIImageView+FitScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E7EC851C2978F100DE6AE1 /* UIImageView+FitScale.m */; };
 		99F26B5A1C267CA400C66DE1 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B501C267CA400C66DE1 /* FMDatabase.m */; };
 		99F26B5B1C267CA400C66DE1 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B521C267CA400C66DE1 /* FMDatabaseAdditions.m */; };
 		99F26B5C1C267CA400C66DE1 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B541C267CA400C66DE1 /* FMDatabasePool.m */; };
@@ -97,6 +99,10 @@
 		99A56AAB1C271B0F00D757ED /* QXCustomerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXCustomerModel.m; sourceTree = "<group>"; };
 		99A56AB01C271EE400D757ED /* QXInputStringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXInputStringViewController.h; sourceTree = "<group>"; };
 		99A56AB11C271EE400D757ED /* QXInputStringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXInputStringViewController.m; sourceTree = "<group>"; };
+		99E7EC801C2977DC00DE6AE1 /* QXGoodsDetailGoodsImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXGoodsDetailGoodsImageCell.h; sourceTree = "<group>"; };
+		99E7EC811C2977DC00DE6AE1 /* QXGoodsDetailGoodsImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXGoodsDetailGoodsImageCell.m; sourceTree = "<group>"; };
+		99E7EC841C2978F100DE6AE1 /* UIImageView+FitScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+FitScale.h"; sourceTree = "<group>"; };
+		99E7EC851C2978F100DE6AE1 /* UIImageView+FitScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+FitScale.m"; sourceTree = "<group>"; };
 		99F26B4F1C267CA400C66DE1 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		99F26B501C267CA400C66DE1 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		99F26B511C267CA400C66DE1 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -339,6 +345,15 @@
 			path = InputString;
 			sourceTree = "<group>";
 		};
+		99E7EC831C2978C600DE6AE1 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				99E7EC841C2978F100DE6AE1 /* UIImageView+FitScale.h */,
+				99E7EC851C2978F100DE6AE1 /* UIImageView+FitScale.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		99F26B4D1C267C6900C66DE1 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +383,7 @@
 		99F26B611C267E7200C66DE1 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				99E7EC831C2978C600DE6AE1 /* Category */,
 				99F26B691C26809C00C66DE1 /* FileUitl */,
 				99F26B651C267F3600C66DE1 /* SQLiteHelper */,
 			);
@@ -405,6 +421,8 @@
 			children = (
 				997D33111C287C4500C7EABB /* QXGoodsDetailViewController.h */,
 				997D33121C287C4500C7EABB /* QXGoodsDetailViewController.m */,
+				99E7EC801C2977DC00DE6AE1 /* QXGoodsDetailGoodsImageCell.h */,
+				99E7EC811C2977DC00DE6AE1 /* QXGoodsDetailGoodsImageCell.m */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -566,8 +584,10 @@
 				99F34EA61C28189500ED54F2 /* QXGoodsModel.m in Sources */,
 				99594DC11C2403D3002660E6 /* AppDelegate.m in Sources */,
 				99594D741C23FCE0002660E6 /* main.m in Sources */,
+				99E7EC821C2977DC00DE6AE1 /* QXGoodsDetailGoodsImageCell.m in Sources */,
 				99594DC21C2403D3002660E6 /* QXRootViewController.m in Sources */,
 				99594DCB1C240621002660E6 /* QXOrderMainViewController.m in Sources */,
+				99E7EC861C2978F100DE6AE1 /* UIImageView+FitScale.m in Sources */,
 				997D33161C287CBA00C7EABB /* QXGoodsModel+Utils.m in Sources */,
 				99F26B681C267F6500C66DE1 /* QXSQLiteHelper.m in Sources */,
 				99A56AB21C271EE400D757ED /* QXInputStringViewController.m in Sources */,

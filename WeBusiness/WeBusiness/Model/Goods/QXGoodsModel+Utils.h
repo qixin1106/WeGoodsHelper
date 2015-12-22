@@ -9,17 +9,9 @@
 #import "QXGoodsModel.h"
 
 @interface QXGoodsModel (Utils)
-/*
- @property (assign, nonatomic) CGFloat costPrice;//进价
- @property (assign, nonatomic) CGFloat delegatePrice;//代理价
- @property (assign, nonatomic) CGFloat friendPrice;//友情价
- @property (assign, nonatomic) CGFloat retailPrice;//单价
- @property (assign, nonatomic) NSInteger count;//数量
- */
 - (NSString*)costPriceToString;
 - (NSString*)delegatePriceToString;
 - (NSString*)friendPriceToString;
 - (NSString*)retailPriceToString;
 - (NSString*)countToString;
-
 @end
