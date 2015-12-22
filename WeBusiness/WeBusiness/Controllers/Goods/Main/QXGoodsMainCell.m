@@ -29,6 +29,14 @@
         self.nameLabel.text = _goodsModel.name;
         self.retailLabel.text = STR_FORMAT(@"￥%.2f",_goodsModel.retailPrice);
         self.countLabel.text = STR_FORMAT(@"%ld件",_goodsModel.count);
+        NSArray *imgs = [_goodsModel.picID componentsSeparatedByString:@";"];
+        if (imgs.count)
+        {
+            NSString *picID = [imgs firstObject];
+            NSString *imgPath = [[QXFileUtil assetsPath] stringByAppendingPathComponent:STR_FORMAT(@"%@.png",picID)];
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath options:NSDataReadingMapped error:nil]];
+            self.goodsImageView.image = image;
+        }
     }
 }
 
@@ -48,7 +56,7 @@
         self.goodsImageView = [[UIImageView alloc] init];
         self.goodsImageView.clipsToBounds = YES;
         self.goodsImageView.translatesAutoresizingMaskIntoConstraints = NO;
-        self.goodsImageView.image = [UIImage imageNamed:@"testtaobao"];
+        self.goodsImageView.image = [UIImage imageNamed:@"test"];
         self.goodsImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.goodsImageView];
 

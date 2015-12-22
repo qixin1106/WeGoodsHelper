@@ -48,7 +48,7 @@ static NSString *identifier = @"QXCustomerMainCell";
 - (void)loadUI
 {
     self.title = @"客户";
-    
+
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAddClick:)];
     self.navigationItem.rightBarButtonItems = @[rightItem];
     
@@ -74,7 +74,17 @@ static NSString *identifier = @"QXCustomerMainCell";
 }
 
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.hidesBottomBarWhenPushed = YES;
+}
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.hidesBottomBarWhenPushed = NO;
+}
 
 
 
