@@ -11,6 +11,8 @@
 #import "QXGoodsModel.h"
 #import "QXGoodsMainCell.h"
 
+#import "QXGoodsDetailViewController.h"
+
 static NSString *identifier = @"QXGoodsMainCell";
 
 @interface QXGoodsMainViewController () <UITableViewDataSource,UITableViewDelegate>
@@ -20,6 +22,11 @@ static NSString *identifier = @"QXGoodsMainCell";
 @implementation QXGoodsMainViewController
 
 
+- (void)refreshGoodsList:(NSNotification*)sender
+{
+    [self loadData];
+    [self.tableView reloadData];
+}
 
 
 
@@ -63,12 +70,17 @@ static NSString *identifier = @"QXGoodsMainCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshGoodsList:) name:kGoodsRefresh object:nil];
     [self loadData];
     [self loadUI];
 }
 
 
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kGoodsRefresh object:nil];
+}
 
 
 
@@ -97,7 +109,16 @@ static NSString *identifier = @"QXGoodsMainCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    QXGoodsModel *model = self.dataArray[indexPath.row];
+    QXGoodsDetailViewController *vc = [[QXGoodsDetailViewController alloc] initWithGid:model.ID];
+    vc.templateType = TemplateType_Display;
+    [vc setSaveGoodsBlock:^(QXGoodsModel *goodsModel) {
+        //保存
+        ([goodsModel fetchModel])?[goodsModel refresh]:[goodsModel store];
+        [self loadData];
+        [self.tableView reloadData];
+    }];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

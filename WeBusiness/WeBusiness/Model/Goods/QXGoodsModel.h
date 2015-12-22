@@ -8,8 +8,11 @@
 
 #import "QXBaseModel.h"
 NS_ASSUME_NONNULL_BEGIN
+
+
+static NSString *kGoodsRefresh = @"kGoodsRefresh";
+
 @interface QXGoodsModel : QXBaseModel
-@property (assign, nonatomic) NSInteger gid;//商品id
 @property (copy, nonatomic, nullable) NSString *name;//商品名
 @property (assign, nonatomic) CGFloat costPrice;//进价
 @property (assign, nonatomic) CGFloat delegatePrice;//代理价

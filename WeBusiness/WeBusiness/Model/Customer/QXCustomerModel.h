@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *kCustomRefresh = @"kCustomRefresh";
 
 @interface QXCustomerModel : QXBaseModel
-@property (assign, nonatomic) NSInteger uid;
 @property (copy, nonatomic, nullable) NSString *name;
 @property (copy, nonatomic, nullable) NSString *tel;
 @property (copy, nonatomic, nullable) NSString *address;

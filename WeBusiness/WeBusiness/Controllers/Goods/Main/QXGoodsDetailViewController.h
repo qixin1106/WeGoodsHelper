@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QXGoodsDetailViewController : UITableViewController
+typedef NS_ENUM(NSUInteger, TemplateType) {
+    TemplateType_Display=0,//default
+    TemplateType_Add=1,
+};
 
+@class QXGoodsModel;
+typedef void(^SaveGoodsBlock)(QXGoodsModel *goodsModel);
+@interface QXGoodsDetailViewController : UITableViewController
+@property (copy, nonatomic) SaveGoodsBlock saveGoodsBlock;
+@property (assign, nonatomic) TemplateType templateType;
+- (instancetype)initWithGid:(NSString*)gid;
 @end

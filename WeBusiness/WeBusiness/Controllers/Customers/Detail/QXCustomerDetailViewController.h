@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, TemplateType) {
 };
 typedef void(^SaveCustomerBlock)(QXCustomerModel *customerModel);
 @interface QXCustomerDetailViewController : UITableViewController
-@property (assign, nonatomic) NSInteger uid;
+@property (copy, nonatomic) NSString *uid;
 @property (assign, nonatomic) TemplateType templateType;
 @property (copy, nonatomic) SaveCustomerBlock saveCustomerBlock;
 @end

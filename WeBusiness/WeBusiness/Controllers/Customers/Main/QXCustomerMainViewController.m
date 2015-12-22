@@ -23,11 +23,6 @@ static NSString *identifier = @"QXCustomerMainCell";
 @implementation QXCustomerMainViewController
 
 
-- (void)customerModelRefresh:(NSNotification*)sender
-{
-    [self loadData];
-    [self.tableView reloadData];
-}
 
 
 - (void)onEditClick:(UIBarButtonItem*)sender
@@ -43,26 +38,10 @@ static NSString *identifier = @"QXCustomerMainCell";
     [self presentViewController:navigationController animated:YES completion:NULL];
     [customerDetailViewController setSaveCustomerBlock:^(QXCustomerModel *customerModel){
         //保存
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            @autoreleasepool
-            {
-                [customerModel store];
-            }
-        });
-        [self.dataArray insertObject:customerModel atIndex:0];
-        //刷新UI
-        [self.tableView beginUpdates];
-        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
-        [self.tableView endUpdates];
+        ([customerModel fetchModel])?[customerModel refresh]:[customerModel store];
+        [self loadData];
+        [self.tableView reloadData];
     }];
-    /*
-    QXCustomerModel *model = [[QXCustomerModel alloc] init];
-    model.name = @"神秘人";
-    model.tel = @"18612341234";
-    model.address = @"宇宙太阳系地球亚洲中国北京宇宙太阳系地球亚洲中国北京宇宙太阳系地球亚洲中国北京";
-    model.wechatID = @"helloworld";
-    model.type = 0;
-    */
 }
 
 
@@ -91,15 +70,10 @@ static NSString *identifier = @"QXCustomerMainCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(customerModelRefresh:) name:kCustomRefresh object:nil];
     [self loadData];
     [self loadUI];
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kCustomRefresh object:nil];
-}
 
 
 
@@ -135,12 +109,7 @@ static NSString *identifier = @"QXCustomerMainCell";
     if (editingStyle==UITableViewCellEditingStyleDelete)
     {
         QXCustomerModel *model = self.dataArray[indexPath.row];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            @autoreleasepool
-            {
-                [model remove];
-            }
-        });
+        [model remove];
         [self.dataArray removeObject:model];
         
         [self.tableView beginUpdates];
@@ -152,10 +121,17 @@ static NSString *identifier = @"QXCustomerMainCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    QXCustomerDetailViewController *customerDetailViewController = [[QXCustomerDetailViewController alloc] init];
-    customerDetailViewController.hidesBottomBarWhenPushed = YES;
     QXCustomerModel *model = self.dataArray[indexPath.row];
-    customerDetailViewController.uid = model.uid;
+
+    QXCustomerDetailViewController *customerDetailViewController = [[QXCustomerDetailViewController alloc] init];
+    customerDetailViewController.templateType = TemplateType_Display;
+    customerDetailViewController.uid = model.ID;
+    [customerDetailViewController setSaveCustomerBlock:^(QXCustomerModel *customerModel){
+        //保存
+        ([customerModel fetchModel])?[customerModel refresh]:[customerModel store];
+        [self loadData];
+        [self.tableView reloadData];
+    }];
     [self.navigationController pushViewController:customerDetailViewController animated:YES];
 }
 

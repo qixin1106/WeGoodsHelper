@@ -15,7 +15,7 @@
 {
     if (![self isExistTable:@"GOODS" db:db])
     {
-        NSString *SQLString = @"CREATE TABLE GOODS (GID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, NAME VARCHAR, COST FLOAT, DELEGATE FLOAT, FRIEND FLOAT, RETAIL FLOAT, COUNT INTEGER, DESCS VARCHAR, PICID VARCHAR, REMARK VARCHAR, TS DOUBLE)";
+        NSString *SQLString = @"CREATE TABLE GOODS (ID VARCHAR PRIMARY KEY NOT NULL UNIQUE, NAME VARCHAR, COST FLOAT, DELEGATE FLOAT, FRIEND FLOAT, RETAIL FLOAT, COUNT INTEGER, DESCS VARCHAR, PICID VARCHAR, REMARK VARCHAR, TS DOUBLE)";
         [db executeUpdate:SQLString];
     }
 }
@@ -23,33 +23,33 @@
 
 - (void)insert:(FMDatabase*)db
 {
-    NSString *SQLString = @"INSERT INTO GOODS (NAME, COST, DELEGATE, FRIEND, RETAIL, COUNT, DESCS, PICID, REMARK, TS) VALUES (?,?,?,?,?,?,?,?,?,?)";
-    [db executeUpdate:SQLString,self.name,@(self.costPrice),@(self.delegatePrice),@(self.friendPrice),@(self.retailPrice),@(self.count),self.descs,self.picID,self.remark,@(self.ts)];
+    NSString *SQLString = @"INSERT INTO GOODS (ID, NAME, COST, DELEGATE, FRIEND, RETAIL, COUNT, DESCS, PICID, REMARK, TS) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    [db executeUpdate:SQLString,self.ID,self.name,@(self.costPrice),@(self.delegatePrice),@(self.friendPrice),@(self.retailPrice),@(self.count),self.descs,self.picID,self.remark,@(self.ts)];
 }
 
 
 - (void)update:(FMDatabase*)db
 {
-    NSString *SQLString = @"UPDATE GOODS SET NAME=?, COST=?, DELEGATE=?, FRIEND=?, RETAIL=?, COUNT=?, DESCS=?, PICID=?, REMARK=? WHERE GID=?";
-    [db executeUpdate:SQLString,self.name,@(self.costPrice),@(self.delegatePrice),@(self.friendPrice),@(self.retailPrice),@(self.count),self.descs,self.picID,self.remark,@(self.gid)];
+    NSString *SQLString = @"UPDATE GOODS SET NAME=?, COST=?, DELEGATE=?, FRIEND=?, RETAIL=?, COUNT=?, DESCS=?, PICID=?, REMARK=? WHERE ID=?";
+    [db executeUpdate:SQLString,self.name,@(self.costPrice),@(self.delegatePrice),@(self.friendPrice),@(self.retailPrice),@(self.count),self.descs,self.picID,self.remark,self.ID];
 }
 
 - (void)delete:(FMDatabase*)db
 {
-    NSString *SQLString = @"DELETE FROM GOODS WHERE GID=?";
-    [db executeUpdate:SQLString,@(self.gid)];
+    NSString *SQLString = @"DELETE FROM GOODS WHERE ID=?";
+    [db executeUpdate:SQLString,self.ID];
 }
 
 
 - (NSArray*)selectAll:(FMDatabase*)db
 {
     NSMutableArray *array = [NSMutableArray array];
-    NSString *SQLString = @"SELECT * FROM GOODS ORDER BY GID DESC";
+    NSString *SQLString = @"SELECT * FROM GOODS ORDER BY ID DESC";
     FMResultSet *rs = [db executeQuery:SQLString];
     while ([rs next])
     {
         QXGoodsModel *model = [[QXGoodsModel alloc] init];
-        model.gid = [rs longForColumn:@"GID"];
+        model.ID = [rs stringForColumn:@"ID"];
         model.name = [rs stringForColumn:@"NAME"];
         model.costPrice = [rs doubleForColumn:@"COST"];
         model.delegatePrice = [rs doubleForColumn:@"DELEGATE"];
@@ -69,12 +69,12 @@
 - (QXGoodsModel*)selectModel:(FMDatabase*)db
 {
     NSMutableArray *array = [NSMutableArray array];
-    NSString *SQLString = STR_FORMAT(@"SELECT * FROM GOODS WHERE GID=%ld",self.gid);
-    FMResultSet *rs = [db executeQuery:SQLString];
+    NSString *SQLString = STR_FORMAT(@"SELECT * FROM GOODS WHERE ID=?");
+    FMResultSet *rs = [db executeQuery:SQLString,self.ID];
     while ([rs next])
     {
         QXGoodsModel *model = [[QXGoodsModel alloc] init];
-        model.gid = [rs longForColumn:@"GID"];
+        model.ID = [rs stringForColumn:@"ID"];
         model.name = [rs stringForColumn:@"NAME"];
         model.costPrice = [rs doubleForColumn:@"COST"];
         model.delegatePrice = [rs doubleForColumn:@"DELEGATE"];

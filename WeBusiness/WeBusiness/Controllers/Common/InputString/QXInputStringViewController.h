@@ -12,4 +12,5 @@ typedef void(^EditDoneBlock)(NSString * string);
 @interface QXInputStringViewController : UIViewController
 @property (copy, nonatomic) NSString *placeHolder;
 @property (copy, nonatomic) EditDoneBlock editDoneBlock;
+@property (nonatomic) UIKeyboardType keyboardType;
 @end

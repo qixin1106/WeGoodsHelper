@@ -27,8 +27,8 @@
     {
         _goodsModel = goodsModel;
         self.nameLabel.text = _goodsModel.name;
-        self.retailLabel.text = [_goodsModel retailPriceToString];
-        self.countLabel.text = [_goodsModel countToString];
+        self.retailLabel.text = STR_FORMAT(@"￥%.2f",_goodsModel.retailPrice);
+        self.countLabel.text = STR_FORMAT(@"%ld件",_goodsModel.count);
     }
 }
 
@@ -48,8 +48,8 @@
         self.goodsImageView = [[UIImageView alloc] init];
         self.goodsImageView.clipsToBounds = YES;
         self.goodsImageView.translatesAutoresizingMaskIntoConstraints = NO;
-        self.goodsImageView.image = [UIImage imageNamed:@"TestGoodsIcon"];
-        self.goodsImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.goodsImageView.image = [UIImage imageNamed:@"testtaobao"];
+        self.goodsImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.goodsImageView];
 
         
@@ -224,7 +224,7 @@
                                                                         toItem:self.goodsImageView
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1
-                                                                      constant:0]];
+                                                                      constant:10]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.line
                                                                      attribute:NSLayoutAttributeRight
                                                                      relatedBy:NSLayoutRelationEqual

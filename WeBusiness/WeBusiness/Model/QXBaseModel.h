@@ -10,6 +10,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 
 @interface QXBaseModel : NSObject
+@property (copy, nonatomic) NSString *ID;
 @property (assign, nonatomic) CFTimeInterval ts;
 
 

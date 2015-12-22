@@ -13,23 +13,23 @@
 
 - (NSString*)costPriceToString
 {
-    return STR_FORMAT(@"￥%.2f",self.costPrice);
+    return STR_FORMAT(@"%.2f",self.costPrice);
 }
 - (NSString*)delegatePriceToString
 {
-    return STR_FORMAT(@"￥%.2f",self.delegatePrice);
+    return STR_FORMAT(@"%.2f",self.delegatePrice);
 }
 - (NSString*)friendPriceToString
 {
-    return STR_FORMAT(@"￥%.2f",self.friendPrice);
+    return STR_FORMAT(@"%.2f",self.friendPrice);
 }
 - (NSString*)retailPriceToString
 {
-    return STR_FORMAT(@"￥%.2f",self.retailPrice);
+    return STR_FORMAT(@"%.2f",self.retailPrice);
 }
 - (NSString*)countToString
 {
-    return STR_FORMAT(@"%ld件",self.count);
+    return STR_FORMAT(@"%ld",self.count);
 }
 
 

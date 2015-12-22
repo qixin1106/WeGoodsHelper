@@ -11,11 +11,13 @@
 @implementation QXCustomerModel
 
 
+
+
 - (void)createTable:(FMDatabase*)db
 {
     if (![self isExistTable:@"CUSTOMER" db:db])
     {
-        NSString *SQLString = @"CREATE TABLE CUSTOMER (UID integer NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,NAME varchar,TEL varchar,ADDRESS varchar,WECHATID varchar,TYPE integer,PICID varchar,TS double)";
+        NSString *SQLString = @"CREATE TABLE CUSTOMER (ID varchar NOT NULL PRIMARY KEY UNIQUE,NAME varchar,TEL varchar,ADDRESS varchar,WECHATID varchar,TYPE integer,PICID varchar,TS double)";
         [db executeUpdate:SQLString];
     }
 }
@@ -23,33 +25,33 @@
 
 - (void)insert:(FMDatabase*)db
 {
-    NSString *SQLString = @"INSERT INTO CUSTOMER (NAME,TEL,ADDRESS,WECHATID,TYPE,PICID,TS) VALUES (?,?,?,?,?,?,?)";
-    [db executeUpdate:SQLString,self.name,self.tel,self.address,self.wechatID,@(self.type),self.picID,@(self.ts)];
+    NSString *SQLString = @"INSERT INTO CUSTOMER (ID,NAME,TEL,ADDRESS,WECHATID,TYPE,PICID,TS) VALUES (?,?,?,?,?,?,?,?)";
+    [db executeUpdate:SQLString,self.ID,self.name,self.tel,self.address,self.wechatID,@(self.type),self.picID,@(self.ts)];
 }
 
 
 - (void)update:(FMDatabase*)db
 {
-    NSString *SQLString = @"UPDATE CUSTOMER SET NAME=?,TEL=?,ADDRESS=?,WECHATID=?,TYPE=?,PICID=? WHERE UID=?";
-    [db executeUpdate:SQLString,self.name,self.tel,self.address,self.wechatID,@(self.type),self.picID,@(self.uid)];
+    NSString *SQLString = @"UPDATE CUSTOMER SET NAME=?,TEL=?,ADDRESS=?,WECHATID=?,TYPE=?,PICID=? WHERE ID=?";
+    [db executeUpdate:SQLString,self.name,self.tel,self.address,self.wechatID,@(self.type),self.picID,self.ID];
 }
 
 - (void)delete:(FMDatabase*)db
 {
-    NSString *SQLString = @"DELETE FROM CUSTOMER WHERE UID=?";
-    [db executeUpdate:SQLString,@(self.uid)];
+    NSString *SQLString = @"DELETE FROM CUSTOMER WHERE ID=?";
+    [db executeUpdate:SQLString,self.ID];
 }
 
 
 - (NSArray*)selectAll:(FMDatabase*)db
 {
     NSMutableArray *array = [NSMutableArray array];
-    NSString *SQLString = @"SELECT * FROM CUSTOMER ORDER BY UID DESC";
+    NSString *SQLString = @"SELECT * FROM CUSTOMER ORDER BY TS DESC";
     FMResultSet *rs = [db executeQuery:SQLString];
     while ([rs next])
     {
         QXCustomerModel *model = [[QXCustomerModel alloc] init];
-        model.uid = [rs longForColumn:@"UID"];
+        model.ID = [rs stringForColumn:@"ID"];
         model.name = [rs stringForColumn:@"NAME"];
         model.tel = [rs stringForColumn:@"TEL"];
         model.address = [rs stringForColumn:@"ADDRESS"];
@@ -66,12 +68,12 @@
 - (QXCustomerModel*)selectModel:(FMDatabase*)db
 {
     NSMutableArray *array = [NSMutableArray array];
-    NSString *SQLString = STR_FORMAT(@"SELECT * FROM CUSTOMER WHERE UID=%ld",self.uid);
-    FMResultSet *rs = [db executeQuery:SQLString];
+    NSString *SQLString = STR_FORMAT(@"SELECT * FROM CUSTOMER WHERE ID=?");
+    FMResultSet *rs = [db executeQuery:SQLString,self.ID];
     while ([rs next])
     {
         QXCustomerModel *model = [[QXCustomerModel alloc] init];
-        model.uid = [rs longForColumn:@"UID"];
+        model.ID = [rs stringForColumn:@"ID"];
         model.name = [rs stringForColumn:@"NAME"];
         model.tel = [rs stringForColumn:@"TEL"];
         model.address = [rs stringForColumn:@"ADDRESS"];

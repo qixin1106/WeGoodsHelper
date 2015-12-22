@@ -36,6 +36,7 @@
     self.textView.font = [UIFont systemFontOfSize:17];
     self.textView.translatesAutoresizingMaskIntoConstraints = NO;
     self.textView.text = self.placeHolder;
+    self.textView.keyboardType = self.keyboardType;
     [self.view addSubview:self.textView];
     
     

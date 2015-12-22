@@ -25,19 +25,6 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
 @implementation QXCustomerDetailViewController
 
 
-- (void)storeModel
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @autoreleasepool
-        {
-            if (self.customerModel)
-            {
-                (self.templateType==TemplateType_Display)?[self.customerModel refresh]:[self.customerModel store];
-            }
-        }
-    });
-}
-
 
 
 - (void)onSaveClick:(UIBarButtonItem*)sender
@@ -48,7 +35,7 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
         {
             self.saveCustomerBlock(self.customerModel);
         }
-        [self dismissViewControllerAnimated:YES completion:NULL];
+        (self.templateType==TemplateType_Display)?[self.navigationController popViewControllerAnimated:YES]:[self dismissViewControllerAnimated:YES completion:NULL];
     }
     else
     {
@@ -58,7 +45,7 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
 
 - (void)onBackClick:(UIBarButtonItem*)sender
 {
-    [self dismissViewControllerAnimated:YES completion:NULL];
+    (self.templateType==TemplateType_Display)?[self.navigationController popViewControllerAnimated:YES]:[self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 
@@ -67,16 +54,14 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
 - (void)loadUI
 {
     self.title = (self.templateType==TemplateType_Display)?@"客户详情":@"添加客户";
-    if (self.templateType==TemplateType_Display)
-    {
-    }
-    else
+    
+    if (self.templateType==TemplateType_Add)
     {
         UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(onBackClick:)];
         self.navigationItem.leftBarButtonItem = leftItem;
-        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(onSaveClick:)];
-        self.navigationItem.rightBarButtonItem = rightItem;
     }
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(onSaveClick:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
     
     self.tableView.tableFooterView = [UIView new];
     [self.tableView registerClass:[QXCustomerDetailHeadCell class] forCellReuseIdentifier:identifier];
@@ -90,7 +75,7 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
     if (self.templateType==TemplateType_Display)
     {
         QXCustomerModel *model = [[QXCustomerModel alloc] init];
-        model.uid = self.uid;
+        model.ID = self.uid;
         self.customerModel = [model fetchModel];
     }
     else
@@ -170,20 +155,18 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
         [self.navigationController pushViewController:inputStringViewController animated:YES];
         [inputStringViewController setEditDoneBlock:^(NSString*string){
             self.customerModel.name = string;
-            [self storeModel];
             [self.tableView beginUpdates];
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
             [self.tableView endUpdates];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kCustomRefresh object:nil];
         }];
     }
     else if (indexPath.section==1)
     {
+        inputStringViewController.keyboardType = UIKeyboardTypePhonePad;
         inputStringViewController.placeHolder = self.customerModel.tel;
         [self.navigationController pushViewController:inputStringViewController animated:YES];
         [inputStringViewController setEditDoneBlock:^(NSString*string){
             self.customerModel.tel = string;
-            [self storeModel];
             [self.tableView beginUpdates];
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
             [self.tableView endUpdates];
@@ -195,11 +178,9 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
         [self.navigationController pushViewController:inputStringViewController animated:YES];
         [inputStringViewController setEditDoneBlock:^(NSString*string){
             self.customerModel.address = string;
-            [self storeModel];
             [self.tableView beginUpdates];
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
             [self.tableView endUpdates];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kCustomRefresh object:nil];
         }];
     }
     else if (indexPath.section==3)
@@ -208,7 +189,6 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
         [self.navigationController pushViewController:inputStringViewController animated:YES];
         [inputStringViewController setEditDoneBlock:^(NSString*string){
             self.customerModel.wechatID = string;
-            [self storeModel];
             [self.tableView beginUpdates];
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
             [self.tableView endUpdates];
@@ -221,7 +201,6 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
                                                           style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction * _Nonnull action) {
                                                             self.customerModel.type = 0;
-                                                            [self storeModel];
                                                             [self.tableView beginUpdates];
                                                             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
                                                             [self.tableView endUpdates];
@@ -231,7 +210,6 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
                                                           style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction * _Nonnull action) {
                                                             self.customerModel.type = 1;
-                                                            [self storeModel];
                                                             [self.tableView beginUpdates];
                                                             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
                                                             [self.tableView endUpdates];
@@ -241,7 +219,6 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
                                                           style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction * _Nonnull action) {
                                                             self.customerModel.type = 2;
-                                                            [self storeModel];
                                                             [self.tableView beginUpdates];
                                                             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
                                                             [self.tableView endUpdates];
