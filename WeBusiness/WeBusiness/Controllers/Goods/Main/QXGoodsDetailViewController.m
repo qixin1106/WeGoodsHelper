@@ -50,9 +50,16 @@ static NSString *identifier = @"UITableViewCell";
 
 - (void)loadData
 {
-    QXGoodsModel *goodsModel = [[QXGoodsModel alloc] init];
-    goodsModel.ID = self.gid;
-    self.goodsModel = [goodsModel fetchModel];
+    if (self.templateType==TemplateType_Display)
+    {
+        QXGoodsModel *goodsModel = [[QXGoodsModel alloc] init];
+        goodsModel.ID = self.gid;
+        self.goodsModel = [goodsModel fetchModel];
+    }
+    else
+    {
+        self.goodsModel = [[QXGoodsModel alloc] init];
+    }
 }
 
 - (void)loadUI

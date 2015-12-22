@@ -34,14 +34,14 @@ static NSString *identifier = @"QXCustomerMainCell";
 {
     QXCustomerDetailViewController *customerDetailViewController = [[QXCustomerDetailViewController alloc] init];
     customerDetailViewController.templateType = TemplateType_Add;
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:customerDetailViewController];
-    [self presentViewController:navigationController animated:YES completion:NULL];
     [customerDetailViewController setSaveCustomerBlock:^(QXCustomerModel *customerModel){
         //保存
         ([customerModel fetchModel])?[customerModel refresh]:[customerModel store];
         [self loadData];
         [self.tableView reloadData];
     }];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:customerDetailViewController];
+    [self presentViewController:navigationController animated:YES completion:NULL];
 }
 
 
@@ -50,7 +50,6 @@ static NSString *identifier = @"QXCustomerMainCell";
     self.title = @"客户";
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAddClick:)];
-//    UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(onEditClick:)];
     self.navigationItem.rightBarButtonItems = @[rightItem];
     
     

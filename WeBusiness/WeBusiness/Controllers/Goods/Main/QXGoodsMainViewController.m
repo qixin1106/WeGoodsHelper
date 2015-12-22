@@ -22,17 +22,25 @@ static NSString *identifier = @"QXGoodsMainCell";
 @implementation QXGoodsMainViewController
 
 
-- (void)refreshGoodsList:(NSNotification*)sender
-{
-    [self loadData];
-    [self.tableView reloadData];
-}
 
 
 
 
 - (void)onAddClick:(UIBarButtonItem*)sender
 {
+    QXGoodsDetailViewController *vc = [[QXGoodsDetailViewController alloc] initWithGid:nil];
+    vc.templateType = TemplateType_Add;
+    [vc setSaveGoodsBlock:^(QXGoodsModel *goodsModel) {
+        //保存
+        ([goodsModel fetchModel])?[goodsModel refresh]:[goodsModel store];
+        [self loadData];
+        [self.tableView reloadData];
+    }];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:NULL];
+
+    
+    /*
     QXGoodsModel *goodsModel = [[QXGoodsModel alloc] init];
     goodsModel.name = @"笨笨熊蚕丝儿童爬行护膝 宝宝圣诞礼物 宝宝防摔 夏季透气";
     goodsModel.costPrice = 100.00;
@@ -46,6 +54,7 @@ static NSString *identifier = @"QXGoodsMainCell";
     [goodsModel store];
     [self loadData];
     [self.tableView reloadData];
+     */
 }
 
 - (void)loadData
@@ -70,17 +79,12 @@ static NSString *identifier = @"QXGoodsMainCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshGoodsList:) name:kGoodsRefresh object:nil];
     [self loadData];
     [self loadUI];
 }
 
 
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kGoodsRefresh object:nil];
-}
 
 
 

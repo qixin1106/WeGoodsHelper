@@ -44,7 +44,7 @@
 - (NSArray*)selectAll:(FMDatabase*)db
 {
     NSMutableArray *array = [NSMutableArray array];
-    NSString *SQLString = @"SELECT * FROM GOODS ORDER BY ID DESC";
+    NSString *SQLString = @"SELECT * FROM GOODS ORDER BY TS DESC";
     FMResultSet *rs = [db executeQuery:SQLString];
     while ([rs next])
     {
