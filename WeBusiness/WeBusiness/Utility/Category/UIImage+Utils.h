@@ -15,7 +15,7 @@
 //保存图片到磁盘
 - (void)saveWithID:(NSString*)ID;
 //删除缓存内存及磁盘
-- (void)removeCacheWithID:(NSString*)ID;
++ (void)removeCacheWithID:(NSString*)ID;
 
 
 //区域截屏

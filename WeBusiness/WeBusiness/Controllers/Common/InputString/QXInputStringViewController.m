@@ -28,7 +28,7 @@
 {
     self.title = @"编辑";
     
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onDoneClick:)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(onDoneClick:)];
     self.navigationItem.rightBarButtonItem = rightItem;
     
     

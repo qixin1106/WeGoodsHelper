@@ -7,6 +7,8 @@
 //
 
 #import "QXGoodsModel.h"
+#import "QXGoodsModel+Utils.h"
+#import "UIImage+Utils.h"
 
 @implementation QXGoodsModel
 
@@ -41,7 +43,7 @@
 }
 
 
-- (NSArray*)selectAll:(FMDatabase*)db
+- (NSArray*)selectAllModel:(FMDatabase*)db
 {
     NSMutableArray *array = [NSMutableArray array];
     NSString *SQLString = @"SELECT * FROM GOODS ORDER BY TS DESC";
@@ -115,6 +117,14 @@
         [self createTable:db];
         [self delete:db];
     }];
+    //删除对应的图片
+    if (VALID_STRING(self.picID))
+    {
+        NSArray *picIDArray = [self.picID componentsSeparatedByString:@";"];
+        [picIDArray enumerateObjectsUsingBlock:^(NSString * _Nonnull picID, NSUInteger idx, BOOL * _Nonnull stop) {
+            [UIImage removeCacheWithID:picID];
+        }];
+    }
 }
 
 
@@ -123,7 +133,7 @@
     __block NSArray *array;
     [[QXSQLiteHelper sharedDatabaseQueue] inDatabase:^(FMDatabase *db) {
         [self createTable:db];
-        array = [self selectAll:db];
+        array = [self selectAllModel:db];
     }];
     return array;
 }

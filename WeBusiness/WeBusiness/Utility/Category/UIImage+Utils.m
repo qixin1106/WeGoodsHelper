@@ -31,7 +31,7 @@
 
 
 
-- (void)removeCacheWithID:(NSString*)ID;
++ (void)removeCacheWithID:(NSString*)ID;
 {
     [[QXImageCache shared] removeWithPicID:ID];
 }

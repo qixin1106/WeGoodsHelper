@@ -43,7 +43,7 @@
 }
 
 
-- (NSArray*)selectAll:(FMDatabase*)db
+- (NSArray*)selectAllModel:(FMDatabase*)db
 {
     NSMutableArray *array = [NSMutableArray array];
     NSString *SQLString = @"SELECT * FROM CUSTOMER ORDER BY TS DESC";
@@ -119,7 +119,7 @@
     __block NSArray *array;
     [[QXSQLiteHelper sharedDatabaseQueue] inDatabase:^(FMDatabase *db) {
         [self createTable:db];
-        array = [self selectAll:db];
+        array = [self selectAllModel:db];
     }];
     return array;
 }
