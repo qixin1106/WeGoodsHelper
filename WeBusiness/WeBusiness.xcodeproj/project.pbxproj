@@ -32,6 +32,7 @@
 		99A56AAC1C271B0F00D757ED /* QXCustomerModel+TypeTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56AA91C271B0F00D757ED /* QXCustomerModel+TypeTranslation.m */; };
 		99A56AAD1C271B0F00D757ED /* QXCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56AAB1C271B0F00D757ED /* QXCustomerModel.m */; };
 		99A56AB21C271EE400D757ED /* QXInputStringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56AB11C271EE400D757ED /* QXInputStringViewController.m */; };
+		99E78A6B1C2B076700D64A46 /* QXGoodsMainMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E78A6A1C2B076700D64A46 /* QXGoodsMainMoreView.m */; };
 		99F26B5A1C267CA400C66DE1 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B501C267CA400C66DE1 /* FMDatabase.m */; };
 		99F26B5B1C267CA400C66DE1 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B521C267CA400C66DE1 /* FMDatabaseAdditions.m */; };
 		99F26B5C1C267CA400C66DE1 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B541C267CA400C66DE1 /* FMDatabasePool.m */; };
@@ -119,6 +120,8 @@
 		99A56AAB1C271B0F00D757ED /* QXCustomerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXCustomerModel.m; sourceTree = "<group>"; };
 		99A56AB01C271EE400D757ED /* QXInputStringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXInputStringViewController.h; sourceTree = "<group>"; };
 		99A56AB11C271EE400D757ED /* QXInputStringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXInputStringViewController.m; sourceTree = "<group>"; };
+		99E78A691C2B076700D64A46 /* QXGoodsMainMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXGoodsMainMoreView.h; sourceTree = "<group>"; };
+		99E78A6A1C2B076700D64A46 /* QXGoodsMainMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXGoodsMainMoreView.m; sourceTree = "<group>"; };
 		99F26B4F1C267CA400C66DE1 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		99F26B501C267CA400C66DE1 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		99F26B511C267CA400C66DE1 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -496,6 +499,8 @@
 				99F34EA11C28064D00ED54F2 /* QXGoodsMainViewController.m */,
 				997D330E1C286DD500C7EABB /* QXGoodsMainCell.h */,
 				9913381A1C2A56FA005483F4 /* QXGoodsMainCell.m */,
+				99E78A691C2B076700D64A46 /* QXGoodsMainMoreView.h */,
+				99E78A6A1C2B076700D64A46 /* QXGoodsMainMoreView.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -670,6 +675,7 @@
 				99A56AA31C27161700D757ED /* QXCustomerDetailHeadCell.m in Sources */,
 				99F79F721C29BB8C00B1492F /* QXGoodsDetailTextCell.m in Sources */,
 				99594DD41C2406A9002660E6 /* QXSetupMainViewController.m in Sources */,
+				99E78A6B1C2B076700D64A46 /* QXGoodsMainMoreView.m in Sources */,
 				99F26B5C1C267CA400C66DE1 /* FMDatabasePool.m in Sources */,
 				99F26B5D1C267CA400C66DE1 /* FMDatabaseQueue.m in Sources */,
 				99F26B5A1C267CA400C66DE1 /* FMDatabase.m in Sources */,

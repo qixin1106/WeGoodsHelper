@@ -14,8 +14,6 @@
 @interface QXShareViewController ()
 @property (strong, nonatomic) QXGoodsModel *goodsModel;
 @property (strong, nonatomic) UIScrollView *scrollView;
-//@property (strong, nonatomic) UILabel *nameLabel;
-//@property (strong, nonatomic) UILabel *descsLabel;
 @end
 
 @implementation QXShareViewController
@@ -31,7 +29,6 @@
     {
         ALERT(@"保存失败", nil);
     }
-    self.scrollView.bounds = self.view.bounds;
 }
 
 - (void)onShareClick:(UIBarButtonItem*)sender
@@ -60,7 +57,6 @@
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     self.scrollView.backgroundColor = [UIColor whiteColor];
-//    self.scrollView.translatesAutoresizingMaskIntoConstraints = NO;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.scrollView];
@@ -93,38 +89,7 @@
     
 
     
-//    /************************************************************************************/
-//    
-//    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.scrollView
-//                                                          attribute:NSLayoutAttributeTop
-//                                                          relatedBy:NSLayoutRelationEqual
-//                                                             toItem:self.view
-//                                                          attribute:NSLayoutAttributeTop
-//                                                         multiplier:1
-//                                                           constant:0]];
-//    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.scrollView
-//                                                          attribute:NSLayoutAttributeLeft
-//                                                          relatedBy:NSLayoutRelationEqual
-//                                                             toItem:self.view
-//                                                          attribute:NSLayoutAttributeLeft
-//                                                         multiplier:1
-//                                                           constant:0]];
-//    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.scrollView
-//                                                          attribute:NSLayoutAttributeBottom
-//                                                          relatedBy:NSLayoutRelationEqual
-//                                                             toItem:self.view
-//                                                          attribute:NSLayoutAttributeBottom
-//                                                         multiplier:1
-//                                                           constant:0]];
-//    [self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.scrollView
-//                                                          attribute:NSLayoutAttributeWidth
-//                                                          relatedBy:NSLayoutRelationEqual
-//                                                             toItem:nil
-//                                                          attribute:NSLayoutAttributeNotAnAttribute
-//                                                         multiplier:1
-//                                                           constant:self.view.bounds.size.width]];
-//    
-//    /************************************************************************************/
+    /************************************************************************************/
     
     [self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:nameLabel
                                                                 attribute:NSLayoutAttributeTop
@@ -214,41 +179,7 @@
         
         self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, imageView.frame.origin.y+imageView.frame.size.height);
         /************************************************************************************/
-        /*
-        [self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:imageView
-                                                                    attribute:NSLayoutAttributeTop
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.scrollView
-                                                                    attribute:NSLayoutAttributeTop
-                                                                   multiplier:1
-                                                                     constant:10]];
-        [self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:nameLabel
-                                                                    attribute:NSLayoutAttributeLeft
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.scrollView
-                                                                    attribute:NSLayoutAttributeLeft
-                                                                   multiplier:1
-                                                                     constant:10]];
-        [nameLabel addConstraint:[NSLayoutConstraint constraintWithItem:nameLabel
-                                                              attribute:NSLayoutAttributeWidth
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:nil
-                                                              attribute:NSLayoutAttributeNotAnAttribute
-                                                             multiplier:1
-                                                               constant:self.view.bounds.size.width-20]];
-        [nameLabel addConstraint:[NSLayoutConstraint constraintWithItem:nameLabel
-                                                              attribute:NSLayoutAttributeHeight
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:nil
-                                                              attribute:NSLayoutAttributeNotAnAttribute
-                                                             multiplier:1
-                                                               constant:[nameLabel systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height]];
-*/
-        
     }];
-
-    
-
 }
 
 

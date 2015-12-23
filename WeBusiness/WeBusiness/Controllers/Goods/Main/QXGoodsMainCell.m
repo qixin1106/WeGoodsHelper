@@ -11,15 +11,31 @@
 #import "QXGoodsModel+Utils.h"
 #import "UIImage+Utils.h"
 
+
+#define MARGIN_SPACE 10
+#define GOODS_IMAGE_WIDTH 125
+
 @interface QXGoodsMainCell ()
 @property (strong, nonatomic) UIImageView *goodsImageView;
 @property (strong, nonatomic) UILabel *nameLabel;
 @property (strong, nonatomic) UILabel *retailLabel;
 @property (strong, nonatomic) UILabel *countLabel;
-@property (strong, nonatomic) UIView *line;
+@property (strong, nonatomic) UIButton *moreButton;
 @end
 
 @implementation QXGoodsMainCell
+
+
+- (void)onClickMore:(UIButton*)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onClickMoreCallBack:)])
+    {
+        [self.delegate onClickMoreCallBack:self];
+    }
+}
+
+
+
 
 - (void)setGoodsModel:(QXGoodsModel *)goodsModel
 {
@@ -89,14 +105,21 @@
         self.countLabel.textColor = RGBA(156, 156, 156, 1);
         self.countLabel.numberOfLines = 1;
         [self.contentView addSubview:self.countLabel];
-
+        
+        
+        //更多操作按钮
+        self.moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.moreButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.moreButton addTarget:self action:@selector(onClickMore:) forControlEvents:UIControlEventTouchUpInside];
+        [self.moreButton setImage:[UIImage imageNamed:@"search_item_shop_info_button"] forState:UIControlStateNormal];
+        [self.contentView addSubview:self.moreButton];
         
         
         //分割线
-        self.line = [[UIView alloc] init];
-        self.line.translatesAutoresizingMaskIntoConstraints = NO;
-        self.line.backgroundColor = CELL_SEPARATOR_COLOR;
-        [self.contentView addSubview:self.line];
+        _line = [[UIView alloc] init];
+        _line.translatesAutoresizingMaskIntoConstraints = NO;
+        _line.backgroundColor = CELL_SEPARATOR_COLOR;
+        [self.contentView addSubview:_line];
         
         
         
@@ -124,15 +147,16 @@
                                                                            toItem:nil
                                                                         attribute:NSLayoutAttributeNotAnAttribute
                                                                        multiplier:1
-                                                                         constant:125]];
+                                                                         constant:GOODS_IMAGE_WIDTH]];
         [self.goodsImageView addConstraint:[NSLayoutConstraint constraintWithItem:self.goodsImageView
                                                                         attribute:NSLayoutAttributeHeight
                                                                         relatedBy:NSLayoutRelationEqual
                                                                            toItem:nil
                                                                         attribute:NSLayoutAttributeNotAnAttribute
                                                                        multiplier:1
-                                                                         constant:125]];
+                                                                         constant:GOODS_IMAGE_WIDTH]];
 
+        
         
         //名字
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.nameLabel
@@ -141,21 +165,21 @@
                                                                         toItem:self.contentView
                                                                      attribute:NSLayoutAttributeTop
                                                                     multiplier:1
-                                                                      constant:10]];
+                                                                      constant:MARGIN_SPACE]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.nameLabel
                                                                      attribute:NSLayoutAttributeLeft
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:self.goodsImageView
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1
-                                                                      constant:10]];
+                                                                      constant:MARGIN_SPACE]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.nameLabel
                                                                      attribute:NSLayoutAttributeRight
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:self.contentView
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1
-                                                                      constant:-10]];
+                                                                      constant:-MARGIN_SPACE]];
         [self.nameLabel addConstraint:[NSLayoutConstraint constraintWithItem:self.nameLabel
                                                                    attribute:NSLayoutAttributeHeight
                                                                    relatedBy:NSLayoutRelationEqual
@@ -171,14 +195,14 @@
                                                                         toItem:self.contentView
                                                                      attribute:NSLayoutAttributeBottom
                                                                     multiplier:1
-                                                                      constant:-10]];
+                                                                      constant:-MARGIN_SPACE]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.retailLabel
                                                                      attribute:NSLayoutAttributeLeft
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:self.goodsImageView
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1
-                                                                      constant:10]];
+                                                                      constant:MARGIN_SPACE]];
         [self.retailLabel addConstraint:[NSLayoutConstraint constraintWithItem:self.retailLabel
                                                                      attribute:NSLayoutAttributeHeight
                                                                      relatedBy:NSLayoutRelationEqual
@@ -202,7 +226,7 @@
                                                                         toItem:self.contentView
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1
-                                                                      constant:-10]];
+                                                                      constant:-MARGIN_SPACE]];
         [self.countLabel addConstraint:[NSLayoutConstraint constraintWithItem:self.countLabel
                                                                      attribute:NSLayoutAttributeHeight
                                                                      relatedBy:NSLayoutRelationEqual
@@ -216,42 +240,73 @@
                                                                         toItem:self.retailLabel
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1
-                                                                      constant:10]];
+                                                                      constant:MARGIN_SPACE]];
+        
+        
+        
+        //更多
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.moreButton
+                                                                     attribute:NSLayoutAttributeRight
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.contentView
+                                                                     attribute:NSLayoutAttributeRight
+                                                                    multiplier:1
+                                                                      constant:-MARGIN_SPACE]];
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.moreButton
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.countLabel
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                    multiplier:1
+                                                                      constant:0]];
+        [self.moreButton addConstraint:[NSLayoutConstraint constraintWithItem:self.moreButton
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:1
+                                                                         constant:48]];
+        [self.moreButton addConstraint:[NSLayoutConstraint constraintWithItem:self.moreButton
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:1
+                                                                         constant:30]];
+
 
 
         
         
         //分割线
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.line
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_line
                                                                      attribute:NSLayoutAttributeBottom
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:self.contentView
                                                                      attribute:NSLayoutAttributeBottom
                                                                     multiplier:1
                                                                       constant:-ONE_PIXEL_VALUE]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.line
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_line
                                                                      attribute:NSLayoutAttributeLeft
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:self.goodsImageView
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1
                                                                       constant:10]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.line
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_line
                                                                      attribute:NSLayoutAttributeRight
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:self.contentView
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1
                                                                       constant:0]];
-        [self.line addConstraint:[NSLayoutConstraint constraintWithItem:self.line
+        [_line addConstraint:[NSLayoutConstraint constraintWithItem:_line
                                                               attribute:NSLayoutAttributeHeight
                                                               relatedBy:NSLayoutRelationEqual
                                                                  toItem:nil
                                                               attribute:NSLayoutAttributeNotAnAttribute
                                                              multiplier:1
                                                                constant:ONE_PIXEL_VALUE]];
-
-        
     }
     return self;
 }

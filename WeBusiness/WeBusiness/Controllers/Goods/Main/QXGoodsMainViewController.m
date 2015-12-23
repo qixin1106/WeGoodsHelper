@@ -13,10 +13,14 @@
 
 #import "QXGoodsDetailViewController.h"
 
+#import "QXGoodsMainMoreView.h"
+
 static NSString *identifier = @"QXGoodsMainCell";
 
-@interface QXGoodsMainViewController () <UITableViewDataSource,UITableViewDelegate>
+@interface QXGoodsMainViewController ()
+<UITableViewDataSource,UITableViewDelegate,QXGoodsMainCellDelegate>
 @property (strong, nonatomic, nonnull) NSMutableArray *dataArray;
+@property (strong, nonatomic, nullable) QXGoodsMainMoreView *moreView;
 @end
 
 @implementation QXGoodsMainViewController
@@ -57,6 +61,7 @@ static NSString *identifier = @"QXGoodsMainCell";
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[QXGoodsMainCell class] forCellReuseIdentifier:identifier];
+    
 }
 
 - (void)viewDidLoad
@@ -82,6 +87,8 @@ static NSString *identifier = @"QXGoodsMainCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     QXGoodsMainCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    cell.delegate = self;
+    cell.indexPath = indexPath;
     cell.goodsModel = self.dataArray[indexPath.row];
     return cell;
 }
@@ -127,6 +134,45 @@ static NSString *identifier = @"QXGoodsMainCell";
         [self.tableView reloadData];
     }];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+
+
+
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (self.moreView)
+    {
+        [self.moreView removeFromSuperview];
+        self.moreView = nil;
+    }
+}
+
+
+
+
+
+
+#pragma mark - QXGoodsMainCellDelegate
+- (void)onClickMoreCallBack:(QXGoodsMainCell*)cell
+{
+    CGRect cellFrame = [self.tableView rectForRowAtIndexPath:cell.indexPath];
+    
+    if (self.moreView)
+    {
+        [self.moreView removeFromSuperview];
+        self.moreView = nil;
+    }
+    self.moreView = [[QXGoodsMainMoreView alloc] init];
+    self.moreView.frame = CGRectMake(self.view.bounds.size.width, cellFrame.origin.y, cell.line.frame.size.width, cellFrame.size.height-1);
+    [self.tableView addSubview:self.moreView];
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        self.moreView.frame = FRAME_ORIGINX(self.moreView, cell.line.frame.origin.x);
+    }];
 }
 
 

@@ -137,7 +137,7 @@ UINavigationControllerDelegate>
     }
     else
     {
-        UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(onShareClick:)];
+        UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tb_icon_Search_tmall_More_48"] style:UIBarButtonItemStylePlain target:self action:@selector(onShareClick:)];
         self.navigationItem.rightBarButtonItem = shareItem;
     }
     
@@ -349,7 +349,6 @@ UINavigationControllerDelegate>
         }];
     }
 }
-
 
 
 

@@ -68,7 +68,6 @@
                                                           attribute:NSLayoutAttributeRight
                                                          multiplier:1
                                                            constant:0]];
-    [self.textView becomeFirstResponder];
 }
 
 - (void)viewDidLoad
