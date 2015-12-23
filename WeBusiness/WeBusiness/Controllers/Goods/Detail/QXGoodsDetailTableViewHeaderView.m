@@ -151,12 +151,9 @@ static NSString *itemID = @"QXGoodsDetailImageItemCell";
     if (indexPath.row==self.imgs.count)
     {
         cell.imageView.image = [UIImage imageNamed:@"add"];
-        cell.imageView.frame = FRAME_SIZE(cell.imageView, 144, 144);
-        cell.imageView.center = CGPointMake(CGRectGetMidX(cell.contentView.frame), CGRectGetMidY(cell.contentView.frame));
     }
     else
     {
-        cell.imageView.frame = cell.contentView.bounds;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             @autoreleasepool {
                 UIImage *image = [UIImage imageWithPicID:self.imgs[indexPath.row]];
