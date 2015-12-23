@@ -8,18 +8,18 @@
 
 #import "QXGoodsDetailTableViewHeaderView.h"
 #import "QXGoodsDetailImageItemCell.h"
+#import "UIImage+Utils.h"
 
 static NSString *itemID = @"QXGoodsDetailImageItemCell";
 
 @interface QXGoodsDetailTableViewHeaderView ()
-<UICollectionViewDataSource,UICollectionViewDelegate>
+<UICollectionViewDataSource,UICollectionViewDelegate,QXGoodsDetailImageItemCellDelegate>
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *imgs;
 @property (strong, nonatomic) UIPageControl *pageControl;
 @end
 
 @implementation QXGoodsDetailTableViewHeaderView
-
 
 
 - (void)setPicID:(NSString *)picID
@@ -146,15 +146,22 @@ static NSString *itemID = @"QXGoodsDetailImageItemCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     QXGoodsDetailImageItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:itemID forIndexPath:indexPath];
+    cell.delegate = self;
+    cell.indexPath = indexPath;
     if (indexPath.row==self.imgs.count)
     {
         cell.imageView.image = [UIImage imageNamed:@"add"];
     }
     else
     {
-        NSString *imgName = STR_FORMAT(@"%@.png",self.imgs[indexPath.row]);
-        NSString *imgPath = [[QXFileUtil assetsPath] stringByAppendingPathComponent:imgName];
-        cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath options:NSDataReadingMapped error:nil]];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            @autoreleasepool {
+                UIImage *image = [UIImage imageWithPicID:self.imgs[indexPath.row]];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cell.imageView.image = (image)?image:[UIImage imageNamed:@"mb"];
+                });
+            }
+        });
     }
     return cell;
 }
@@ -168,11 +175,20 @@ static NSString *itemID = @"QXGoodsDetailImageItemCell";
     if (indexPath.row==self.imgs.count)
     {
         QXLog(@"增加图片!");
+        if (self.delegate && [self.delegate respondsToSelector:@selector(headerView:isAddImage:picID:)])
+        {
+            [self.delegate headerView:self isAddImage:YES picID:nil];
+        }
     }
     else
     {
         QXLog(@"点图片查看大图");
+        if (self.delegate && [self.delegate respondsToSelector:@selector(headerView:isAddImage:picID:)])
+        {
+            [self.delegate headerView:self isAddImage:NO picID:self.imgs[indexPath.row]];
+        }
     }
+    
 }
 
 
@@ -187,6 +203,32 @@ static NSString *itemID = @"QXGoodsDetailImageItemCell";
 {
     self.pageControl.currentPage = (scrollView.contentOffset.x+scrollView.bounds.size.width*0.5)/scrollView.bounds.size.width;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - QXGoodsDetailImageItemCellDelegate
+- (void)longPressCallBack:(QXGoodsDetailImageItemCell*)cell
+{
+    if (cell.indexPath.row==self.imgs.count)//最后一张是+
+    {
+        return;
+    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(headerView:longPressPicID:longPressCell:)])
+    {
+        [self.delegate headerView:self longPressPicID:self.imgs[cell.indexPath.row] longPressCell:cell];
+    }
+}
+
 
 
 

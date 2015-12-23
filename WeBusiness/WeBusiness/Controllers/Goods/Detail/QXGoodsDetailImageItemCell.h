@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol QXGoodsDetailImageItemCellDelegate;
 @interface QXGoodsDetailImageItemCell : UICollectionViewCell
+@property (weak, nonatomic) id<QXGoodsDetailImageItemCellDelegate>delegate;
 @property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) NSIndexPath *indexPath;
+@end
+
+@protocol QXGoodsDetailImageItemCellDelegate <NSObject>
+- (void)longPressCallBack:(QXGoodsDetailImageItemCell*)cell;
 @end

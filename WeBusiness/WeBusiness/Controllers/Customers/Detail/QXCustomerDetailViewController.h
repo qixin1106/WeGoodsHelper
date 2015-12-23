@@ -6,7 +6,7 @@
 //  Copyright © 2015年 亓鑫. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QXBaseTableViewController.h"
 
 
 @class QXCustomerModel;
@@ -15,7 +15,7 @@ typedef NS_ENUM(NSUInteger, TemplateType) {
     TemplateType_Add=1,
 };
 typedef void(^SaveCustomerBlock)(QXCustomerModel *customerModel);
-@interface QXCustomerDetailViewController : UITableViewController
+@interface QXCustomerDetailViewController : QXBaseTableViewController
 @property (copy, nonatomic) NSString *uid;
 @property (assign, nonatomic) TemplateType templateType;
 @property (copy, nonatomic) SaveCustomerBlock saveCustomerBlock;

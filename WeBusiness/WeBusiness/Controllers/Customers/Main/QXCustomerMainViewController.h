@@ -6,8 +6,8 @@
 //  Copyright © 2015年 亓鑫. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QXBaseTableViewController.h"
 
-@interface QXCustomerMainViewController : UITableViewController
+@interface QXCustomerMainViewController : QXBaseTableViewController
 
 @end

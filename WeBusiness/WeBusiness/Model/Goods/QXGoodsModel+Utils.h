@@ -14,4 +14,9 @@
 - (NSString*)friendPriceToString;
 - (NSString*)retailPriceToString;
 - (NSString*)countToString;
+
+//增加一个图片id
+- (void)addPicID:(NSString*)picID;
+//删除一个图片id
+- (void)removePicID:(NSString*)picID;
 @end

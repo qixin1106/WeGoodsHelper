@@ -31,6 +31,7 @@
     NSMutableArray *controllers = [NSMutableArray arrayWithCapacity:4];
     {
         QXOrderMainViewController *vc = [[QXOrderMainViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = NO;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         [controllers addObject:nav];
         
@@ -39,6 +40,7 @@
     }
     {
         QXGoodsMainViewController *vc = [[QXGoodsMainViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = NO;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         [controllers addObject:nav];
         
@@ -47,6 +49,7 @@
     }
     {
         QXCustomerMainViewController *vc = [[QXCustomerMainViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = NO;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         [controllers addObject:nav];
         
@@ -55,6 +58,7 @@
     }
     {
         QXSetupMainViewController *vc = [[QXSetupMainViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = NO;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         [controllers addObject:nav];
         

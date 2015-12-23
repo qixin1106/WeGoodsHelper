@@ -53,7 +53,7 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
 
 - (void)loadUI
 {
-    self.title = (self.templateType==TemplateType_Display)?@"客户详情":@"添加客户";
+    self.title = (self.templateType==TemplateType_Display)?@"编辑客户":@"添加客户";
     
     if (self.templateType==TemplateType_Add)
     {

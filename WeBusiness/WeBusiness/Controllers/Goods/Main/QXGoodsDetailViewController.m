@@ -15,9 +15,22 @@
 
 #import "QXGoodsDetailTableViewHeaderView.h"
 
+#import "UIImage+Utils.h"
+#import "QXImageCompressUtil.h"
+
+#import "QXGoodsDetailImageItemCell.h"
+
+#import "QXShareViewController.h"
+
 static NSString *identifier = @"QXGoodsDetailTextCell";
 
-@interface QXGoodsDetailViewController () <UITableViewDataSource,UITableViewDelegate>
+@interface QXGoodsDetailViewController ()
+<UITableViewDataSource,
+UITableViewDelegate,
+QXGoodsDetailTableViewHeaderViewDelegate,
+UIImagePickerControllerDelegate,
+UINavigationControllerDelegate>
+
 @property (copy, nonatomic) NSString *gid;
 @property (strong, nonatomic) QXGoodsModel *goodsModel;
 @property (strong, nonatomic) NSArray *headerTitles;
@@ -27,46 +40,74 @@ static NSString *identifier = @"QXGoodsDetailTextCell";
 @implementation QXGoodsDetailViewController
 
 
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (!error)
+    {
+        ALERT(@"保存成功", nil);
+    }
+    else
+    {
+        ALERT(@"保存失败", nil);
+    }
+}
 
+
+
+- (void)openImagePicker:(UIImagePickerControllerSourceType)type
+{
+    if ([UIImagePickerController isSourceTypeAvailable:type])
+    {
+        if (type == UIImagePickerControllerSourceTypePhotoLibrary)
+        {
+            UIImagePickerController *imgPicker = [[UIImagePickerController alloc] init];
+            imgPicker.sourceType = type;
+            imgPicker.delegate = self;
+            [self presentViewController:imgPicker animated:YES completion:NULL];
+        }
+        else if (type == UIImagePickerControllerSourceTypeCamera)
+        {
+            UIImagePickerController *imgPicker = [[UIImagePickerController alloc] init];
+            imgPicker.modalPresentationStyle = UIModalPresentationCurrentContext;
+            imgPicker.sourceType = type;
+            imgPicker.delegate = self;
+            imgPicker.showsCameraControls = YES;
+            imgPicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
+            [self presentViewController:imgPicker animated:YES completion:nil];
+        }
+    }
+    else
+    {
+        ALERT(@"授权失败或不可用", nil);
+    }
+}
 
 
 
 - (void)saveModel
 {
-    if (VALID_STRING(self.goodsModel.name))
+    if (!VALID_STRING(self.goodsModel.name))
     {
-        if (self.saveGoodsBlock)
-        {
-            self.saveGoodsBlock(self.goodsModel);
-        }
+        self.goodsModel.name = @"未命名";
     }
-    else
+    if (self.saveGoodsBlock)
     {
-        ALERT(@"请先写商品名称,否则无法保存", nil);
+        self.saveGoodsBlock(self.goodsModel);
     }
 }
 
 
 
-- (void)onSaveClick:(UIBarButtonItem*)sender
-{
-    if (VALID_STRING(self.goodsModel.name))
-    {
-        if (self.saveGoodsBlock)
-        {
-            self.saveGoodsBlock(self.goodsModel);
-        }
-        (self.templateType==TemplateType_Display)?[self.navigationController popViewControllerAnimated:YES]:[self dismissViewControllerAnimated:YES completion:NULL];
-    }
-    else
-    {
-        ALERT(@"没写商品名称", nil);
-    }
-}
 
 - (void)onBackClick:(UIBarButtonItem*)sender
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)onShareClick:(UIBarButtonItem*)sender
+{
+    QXShareViewController *vc = [[QXShareViewController alloc] initWithGoodsModel:self.goodsModel];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -87,17 +128,18 @@ static NSString *identifier = @"QXGoodsDetailTextCell";
 
 - (void)loadUI
 {
-    self.headerTitles = @[@"名称(必填)",@"进价",@"单价",@"代理价",@"友情价",@"数量",@"描述",@"备注"];
-    self.title = (self.templateType==TemplateType_Display)?@"商品详情":@"添加商品";
+    self.headerTitles = @[@"名称",@"进价",@"单价",@"代理价",@"友情价",@"数量",@"描述",@"备注"];
+    self.title = (self.templateType==TemplateType_Display)?@"编辑商品":@"添加商品";
     if (self.templateType==TemplateType_Add)
     {
         UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(onBackClick:)];
         self.navigationItem.leftBarButtonItem = leftItem;
     }
-//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(onSaveClick:)];
-//    self.navigationItem.rightBarButtonItems = @[rightItem];
-    
-    
+    else
+    {
+        UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(onShareClick:)];
+        self.navigationItem.rightBarButtonItem = shareItem;
+    }
     
     //Table
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -108,6 +150,7 @@ static NSString *identifier = @"QXGoodsDetailTextCell";
     
     //Header
     self.imgHeadView = [[QXGoodsDetailTableViewHeaderView alloc] init];
+    self.imgHeadView.delegate = self;
     self.imgHeadView.picID = self.goodsModel.picID;
     self.tableView.tableHeaderView = self.imgHeadView;
 
@@ -306,6 +349,114 @@ static NSString *identifier = @"QXGoodsDetailTextCell";
         }];
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - QXGoodsDetailTableViewHeaderViewDelegate
+- (void)headerView:(QXGoodsDetailTableViewHeaderView*)headerView isAddImage:(BOOL)isAdd picID:(NSString*)picID;
+{
+    if (isAdd)
+    {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"添加图片" preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction *action0 = [UIAlertAction actionWithTitle:@"照片"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * _Nonnull action) {
+                                                            [self openImagePicker:UIImagePickerControllerSourceTypePhotoLibrary];
+                                                        }];
+        [alertController addAction:action0];
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"拍照"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * _Nonnull action) {
+                                                            [self openImagePicker:UIImagePickerControllerSourceTypeCamera];
+                                                        }];
+        [alertController addAction:action1];
+        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消"
+                                                          style:UIAlertActionStyleCancel
+                                                        handler:^(UIAlertAction * _Nonnull action) {
+                                                        }];
+        [alertController addAction:action2];
+        [self presentViewController:alertController animated:YES completion:NULL];
+    }
+}
+
+
+- (void)headerView:(QXGoodsDetailTableViewHeaderView*)headerView longPressPicID:(NSString*)picID longPressCell:(QXGoodsDetailImageItemCell*)cell;
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:picID preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *action0 = [UIAlertAction actionWithTitle:@"删除"
+                                                      style:UIAlertActionStyleDestructive
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                        [cell.imageView.image removeCacheWithID:picID];
+                                                        [self.goodsModel removePicID:picID];
+                                                        self.imgHeadView.picID = self.goodsModel.picID;
+                                                        [self saveModel];
+                                                    }];
+    [alertController addAction:action0];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"保存到相册"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                        UIImage *image = [UIImage imageWithPicID:picID];
+                                                        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+                                                    }];
+    [alertController addAction:action1];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消"
+                                                      style:UIAlertActionStyleCancel
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                    }];
+    [alertController addAction:action2];
+    [self presentViewController:alertController animated:YES completion:NULL];
+}
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSString *picID = [[NSUUID UUID] UUIDString];
+    [self.goodsModel addPicID:picID];
+    self.imgHeadView.picID = self.goodsModel.picID;
+    [self saveModel];
+    
+    //原始图
+    UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    //缩略图
+    UIImage *thumbnail = [QXImageCompressUtil imageWithImageSimple:originalImage width:THUMBNAIL_WIDTH];
+    [thumbnail saveWithID:STR_FORMAT(@"%@_s",picID)];
+    //压缩图
+    UIImage *compressImage = [QXImageCompressUtil imageWithImageSimple:originalImage width:COMPRESS_WIDTH];
+    [compressImage saveWithID:picID];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController*)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 
 @end

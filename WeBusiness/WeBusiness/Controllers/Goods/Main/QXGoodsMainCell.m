@@ -9,7 +9,7 @@
 #import "QXGoodsMainCell.h"
 #import "QXGoodsModel.h"
 #import "QXGoodsModel+Utils.h"
-
+#import "UIImage+Utils.h"
 
 @interface QXGoodsMainCell ()
 @property (strong, nonatomic) UIImageView *goodsImageView;
@@ -29,14 +29,17 @@
         self.nameLabel.text = _goodsModel.name;
         self.retailLabel.text = STR_FORMAT(@"￥%.2f",_goodsModel.retailPrice);
         self.countLabel.text = STR_FORMAT(@"%ld件",_goodsModel.count);
-        NSArray *imgs = [_goodsModel.picID componentsSeparatedByString:@";"];
-        if (imgs.count)
-        {
-            NSString *picID = [imgs firstObject];
-            NSString *imgPath = [[QXFileUtil assetsPath] stringByAppendingPathComponent:STR_FORMAT(@"%@.png",picID)];
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath options:NSDataReadingMapped error:nil]];
-            self.goodsImageView.image = image;
-        }
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            @autoreleasepool {
+                NSArray *imgs = [_goodsModel.picID componentsSeparatedByString:@";"];
+                NSString *picID = [imgs firstObject];
+                UIImage *image = [UIImage imageWithPicID:picID isThumb:YES];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.goodsImageView.image = (image)?image:[UIImage imageNamed:@"mb"];
+                });
+            }
+        });
     }
 }
 

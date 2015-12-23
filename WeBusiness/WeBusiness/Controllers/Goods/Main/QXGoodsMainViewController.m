@@ -48,7 +48,7 @@ static NSString *identifier = @"QXGoodsMainCell";
 
 - (void)loadUI
 {
-    self.title = @"商品";
+    self.title = @"库存";
     self.tableView.tableFooterView = [UIView new];
     self.hidesBottomBarWhenPushed = NO;
     
@@ -57,7 +57,6 @@ static NSString *identifier = @"QXGoodsMainCell";
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[QXGoodsMainCell class] forCellReuseIdentifier:identifier];
-
 }
 
 - (void)viewDidLoad
@@ -68,17 +67,6 @@ static NSString *identifier = @"QXGoodsMainCell";
 }
 
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.hidesBottomBarWhenPushed = YES;
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    self.hidesBottomBarWhenPushed = NO;
-}
 
 
 
@@ -130,6 +118,7 @@ static NSString *identifier = @"QXGoodsMainCell";
 {
     QXGoodsModel *model = self.dataArray[indexPath.row];
     QXGoodsDetailViewController *vc = [[QXGoodsDetailViewController alloc] initWithGid:model.ID];
+    vc.hidesBottomBarWhenPushed = YES;
     vc.templateType = TemplateType_Display;
     [vc setSaveGoodsBlock:^(QXGoodsModel *goodsModel) {
         //保存

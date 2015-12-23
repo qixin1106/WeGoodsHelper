@@ -6,7 +6,7 @@
 //  Copyright © 2015年 亓鑫. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QXBaseTableViewController.h"
 
 typedef NS_ENUM(NSUInteger, TemplateType) {
     TemplateType_Display=0,//default
@@ -15,7 +15,7 @@ typedef NS_ENUM(NSUInteger, TemplateType) {
 
 @class QXGoodsModel;
 typedef void(^SaveGoodsBlock)(QXGoodsModel *goodsModel);
-@interface QXGoodsDetailViewController : UITableViewController
+@interface QXGoodsDetailViewController : QXBaseTableViewController
 @property (copy, nonatomic) SaveGoodsBlock saveGoodsBlock;
 @property (assign, nonatomic) TemplateType templateType;
 - (instancetype)initWithGid:(NSString*)gid;

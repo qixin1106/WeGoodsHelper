@@ -33,4 +33,51 @@
 }
 
 
+
+
+- (void)addPicID:(NSString*)picID
+{
+    //保护
+    if (!VALID_STRING(picID)){return;}
+    
+    if (VALID_STRING(self.picID))
+    {
+        self.picID = STR_FORMAT(@"%@;%@",self.picID,picID);
+    }
+    else
+    {
+        self.picID = picID;
+    }
+}
+
+
+
+- (void)removePicID:(NSString*)picID
+{
+    //保护
+    if (!VALID_STRING(picID)){return;}
+    
+    if (VALID_STRING(self.picID))
+    {
+        self.picID = [self.picID stringByReplacingOccurrencesOfString:picID withString:@""];
+        NSMutableArray *picIDs = [NSMutableArray arrayWithArray:[self.picID componentsSeparatedByString:@";"]];
+        NSMutableString *newPicID = [NSMutableString string];
+        [picIDs enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (VALID_STRING(obj))
+            {
+                if (newPicID.length)
+                {
+                    [newPicID appendFormat:@";%@",obj];//后续值
+                }
+                else
+                {
+                    [newPicID appendFormat:@"%@",obj];//第一个值
+                }
+            }
+        }];
+        self.picID = newPicID;
+    }
+}
+
+
 @end

@@ -13,6 +13,16 @@
 
 @implementation QXGoodsDetailImageItemCell
 
+
+- (void)onLongPress:(UILongPressGestureRecognizer*)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(longPressCallBack:)])
+    {
+        [self.delegate longPressCallBack:self];
+    }
+}
+
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -22,39 +32,10 @@
         self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         self.imageView.clipsToBounds = YES;
-//        self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:self.imageView];
         
-        /*
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView
-                                                         attribute:NSLayoutAttributeTop
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:self.contentView
-                                                         attribute:NSLayoutAttributeTop
-                                                        multiplier:1
-                                                          constant:0]];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView
-                                                         attribute:NSLayoutAttributeBottom
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:self.contentView
-                                                         attribute:NSLayoutAttributeBottom
-                                                        multiplier:1
-                                                          constant:0]];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView
-                                                         attribute:NSLayoutAttributeLeft
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:self.contentView
-                                                         attribute:NSLayoutAttributeLeft
-                                                        multiplier:1
-                                                          constant:0]];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView
-                                                         attribute:NSLayoutAttributeRight
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:self.contentView
-                                                         attribute:NSLayoutAttributeRight
-                                                        multiplier:1
-                                                          constant:0]];
-         */
+        UILongPressGestureRecognizer *longPrees = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+        [self addGestureRecognizer:longPrees];
     }
     return self;
 }
