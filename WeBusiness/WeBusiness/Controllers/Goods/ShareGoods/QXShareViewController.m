@@ -36,24 +36,16 @@
 
 - (void)onShareClick:(UIBarButtonItem*)sender
 {
-    /*
-    NSString *info = @"share test";
-    UIImage *image=[UIImage imageNamed:@"UIBarButtonItemGrid.png"];
-    NSURL *url = [NSURL URLWithString:@"http://www.google.com"];
-    NSArray *postItems=@[info, image, url];
+    self.scrollView.bounds = CGRectMake(0, 0, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
+    UIImage *image = [UIImage screenShotWithView:self.scrollView];
+    self.scrollView.bounds = self.view.bounds;
+    NSArray *postItems = @[image];
+    
     UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:postItems applicationActivities:nil];
     [self presentViewController:controller animated:YES completion:nil];
     [controller setCompletionWithItemsHandler:^(NSString * __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError){
         
     }];
-*/
-    
-    
-    
-    self.scrollView.bounds = CGRectMake(0, 0, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
-    UIImage *image = [UIImage screenShotWithView:self.scrollView];
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
-     
 }
 
 
