@@ -33,6 +33,7 @@
 
 - (void)onShareClick:(UIBarButtonItem*)sender
 {
+    /*
     self.scrollView.bounds = CGRectMake(0, 0, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
     UIImage *image = [UIImage screenShotWithView:self.scrollView];
     self.scrollView.bounds = self.view.bounds;
@@ -43,6 +44,28 @@
     [controller setCompletionWithItemsHandler:^(NSString * __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError){
         
     }];
+     */
+    
+    NSString *sharedText = STR_FORMAT(@"%@\n\n%@",self.goodsModel.name,self.goodsModel.descs);
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    [pasteboard setString:sharedText];
+
+
+    NSArray *picIDArray = [self.goodsModel.picID componentsSeparatedByString:@";"];
+    NSMutableArray *images = [NSMutableArray array];
+    [picIDArray enumerateObjectsUsingBlock:^(NSString * _Nonnull picID, NSUInteger idx, BOOL * _Nonnull stop) {
+        [images addObject:[UIImage imageWithPicID:picID]];
+        if (idx>=8)
+        {
+            *stop = YES;
+        }
+    }];
+    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:images applicationActivities:nil];
+    [self presentViewController:controller animated:YES completion:nil];
+    [controller setCompletionWithItemsHandler:^(NSString * __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError){
+        
+    }];
+
 }
 
 

@@ -12,7 +12,7 @@
 
 @implementation QXGoodsModel
 
-
+#pragma mark - Private
 - (void)createTable:(FMDatabase*)db
 {
     if (![self isExistTable:@"GOODS" db:db])
@@ -26,7 +26,7 @@
 - (void)insert:(FMDatabase*)db
 {
     NSString *SQLString = @"INSERT INTO GOODS (ID, NAME, COST, DELEGATE, FRIEND, RETAIL, COUNT, DESCS, PICID, REMARK, TS) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-    [db executeUpdate:SQLString,self.ID,self.name,@(self.costPrice),@(self.delegatePrice),@(self.friendPrice),@(self.retailPrice),@(self.count),self.descs,self.picID,self.remark,@(self.ts)];
+    [db executeUpdate:SQLString,self.ID,self.name,@(self.costPrice),@(self.delegatePrice),@(self.friendPrice),@(self.retailPrice),@(self.count),self.descs,self.picID,self.remark,@(CFAbsoluteTimeGetCurrent())];
 }
 
 
@@ -50,19 +50,7 @@
     FMResultSet *rs = [db executeQuery:SQLString];
     while ([rs next])
     {
-        QXGoodsModel *model = [[QXGoodsModel alloc] init];
-        model.ID = [rs stringForColumn:@"ID"];
-        model.name = [rs stringForColumn:@"NAME"];
-        model.costPrice = [rs doubleForColumn:@"COST"];
-        model.delegatePrice = [rs doubleForColumn:@"DELEGATE"];
-        model.friendPrice = [rs doubleForColumn:@"FRIEND"];
-        model.retailPrice = [rs doubleForColumn:@"RETAIL"];
-        model.count = [rs longForColumn:@"COUNT"];
-        model.descs = [rs stringForColumn:@"DESCS"];
-        model.picID = [rs stringForColumn:@"PICID"];
-        model.remark = [rs stringForColumn:@"REMARK"];
-        model.ts = [rs doubleForColumn:@"TS"];
-        [array addObject:model];
+        [array addObject:[self assignWithResultSet:rs]];
     }
     return array;
 }
@@ -75,25 +63,36 @@
     FMResultSet *rs = [db executeQuery:SQLString,self.ID];
     while ([rs next])
     {
-        QXGoodsModel *model = [[QXGoodsModel alloc] init];
-        model.ID = [rs stringForColumn:@"ID"];
-        model.name = [rs stringForColumn:@"NAME"];
-        model.costPrice = [rs doubleForColumn:@"COST"];
-        model.delegatePrice = [rs doubleForColumn:@"DELEGATE"];
-        model.friendPrice = [rs doubleForColumn:@"FRIEND"];
-        model.retailPrice = [rs doubleForColumn:@"RETAIL"];
-        model.count = [rs longForColumn:@"COUNT"];
-        model.descs = [rs stringForColumn:@"DESCS"];
-        model.picID = [rs stringForColumn:@"PICID"];
-        model.remark = [rs stringForColumn:@"REMARK"];
-        model.ts = [rs doubleForColumn:@"TS"];
-        [array addObject:model];
+        [array addObject:[self assignWithResultSet:rs]];
     }
     return [array firstObject];
 }
 
 
 
+
+- (QXGoodsModel*)assignWithResultSet:(FMResultSet*)rs
+{
+    QXGoodsModel *model = [[QXGoodsModel alloc] init];
+    model.ID = [rs stringForColumn:@"ID"];
+    model.name = [rs stringForColumn:@"NAME"];
+    model.costPrice = [rs doubleForColumn:@"COST"];
+    model.delegatePrice = [rs doubleForColumn:@"DELEGATE"];
+    model.friendPrice = [rs doubleForColumn:@"FRIEND"];
+    model.retailPrice = [rs doubleForColumn:@"RETAIL"];
+    model.count = [rs longForColumn:@"COUNT"];
+    model.descs = [rs stringForColumn:@"DESCS"];
+    model.picID = [rs stringForColumn:@"PICID"];
+    model.remark = [rs stringForColumn:@"REMARK"];
+    model.ts = [rs doubleForColumn:@"TS"];
+    return model;
+}
+
+
+
+
+
+#pragma mark - Public
 - (void)store
 {
     [[QXSQLiteHelper sharedDatabaseQueue] inTransaction:^(FMDatabase *db, BOOL *rollback) {

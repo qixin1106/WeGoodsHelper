@@ -16,7 +16,7 @@
     if (self)
     {
         self.ID = [[NSUUID UUID] UUIDString];
-        self.ts = CFAbsoluteTimeGetCurrent();
+//        self.ts = CFAbsoluteTimeGetCurrent();
     }
     return self;
 }
@@ -28,8 +28,8 @@
     FMResultSet *rs = [db executeQuery:@"select count(*) as 'count' from sqlite_master where type ='table' and name = ?", tableName];
     while ([rs next])
     {
-        NSInteger count = [rs intForColumn:@"count"];
-        QXLog(@"[%@]表是否存在 %ld",tableName, count);
+        NSInteger count = [rs longForColumn:@"count"];
+        QXLog(@"[%@]表是否存在 %ld",tableName, (long)count);
         if (count)
         {
             isExist = YES;

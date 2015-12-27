@@ -14,6 +14,11 @@
 		991338241C2A78DD005483F4 /* QXImageCompressUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 991338231C2A78DD005483F4 /* QXImageCompressUtil.m */; };
 		9913384B1C2A9D1F005483F4 /* QXBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9913384A1C2A9D1F005483F4 /* QXBaseViewController.m */; };
 		9913384E1C2A9E62005483F4 /* QXShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9913384D1C2A9E62005483F4 /* QXShareViewController.m */; };
+		9920FFD91C2EFAD2004AAD89 /* QXOrderMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9920FFD81C2EFAD2004AAD89 /* QXOrderMainCell.m */; };
+		9920FFDC1C2F00BC004AAD89 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9920FFDB1C2F00BC004AAD89 /* NSDate+Utils.m */; };
+		9920FFDF1C2F0612004AAD89 /* QXOrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9920FFDE1C2F0612004AAD89 /* QXOrderHeaderView.m */; };
+		9920FFE21C2F062B004AAD89 /* QXOrderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9920FFE11C2F062B004AAD89 /* QXOrderFooterView.m */; };
+		995373971C2C45D50026119A /* QXOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 995373961C2C45D50026119A /* QXOrderModel.m */; };
 		99594D741C23FCE0002660E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594D731C23FCE0002660E6 /* main.m */; };
 		99594D821C23FCE0002660E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99594D801C23FCE0002660E6 /* LaunchScreen.storyboard */; };
 		99594D8D1C23FCE0002660E6 /* WeBusinessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594D8C1C23FCE0002660E6 /* WeBusinessTests.m */; };
@@ -32,6 +37,7 @@
 		99A56AAC1C271B0F00D757ED /* QXCustomerModel+TypeTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56AA91C271B0F00D757ED /* QXCustomerModel+TypeTranslation.m */; };
 		99A56AAD1C271B0F00D757ED /* QXCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56AAB1C271B0F00D757ED /* QXCustomerModel.m */; };
 		99A56AB21C271EE400D757ED /* QXInputStringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56AB11C271EE400D757ED /* QXInputStringViewController.m */; };
+		99CF141C1C2CF3EC00CF3517 /* QXOrderGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99CF141B1C2CF3EB00CF3517 /* QXOrderGoodsModel.m */; };
 		99E78A6B1C2B076700D64A46 /* QXGoodsMainMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E78A6A1C2B076700D64A46 /* QXGoodsMainMoreView.m */; };
 		99F26B5A1C267CA400C66DE1 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B501C267CA400C66DE1 /* FMDatabase.m */; };
 		99F26B5B1C267CA400C66DE1 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B521C267CA400C66DE1 /* FMDatabaseAdditions.m */; };
@@ -81,6 +87,16 @@
 		9913384A1C2A9D1F005483F4 /* QXBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXBaseViewController.m; sourceTree = "<group>"; };
 		9913384C1C2A9E62005483F4 /* QXShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXShareViewController.h; sourceTree = "<group>"; };
 		9913384D1C2A9E62005483F4 /* QXShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXShareViewController.m; sourceTree = "<group>"; };
+		9920FFD71C2EFAD2004AAD89 /* QXOrderMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXOrderMainCell.h; sourceTree = "<group>"; };
+		9920FFD81C2EFAD2004AAD89 /* QXOrderMainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXOrderMainCell.m; sourceTree = "<group>"; };
+		9920FFDA1C2F00BC004AAD89 /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
+		9920FFDB1C2F00BC004AAD89 /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
+		9920FFDD1C2F0612004AAD89 /* QXOrderHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXOrderHeaderView.h; sourceTree = "<group>"; };
+		9920FFDE1C2F0612004AAD89 /* QXOrderHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXOrderHeaderView.m; sourceTree = "<group>"; };
+		9920FFE01C2F062B004AAD89 /* QXOrderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXOrderFooterView.h; sourceTree = "<group>"; };
+		9920FFE11C2F062B004AAD89 /* QXOrderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXOrderFooterView.m; sourceTree = "<group>"; };
+		995373951C2C45D50026119A /* QXOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXOrderModel.h; sourceTree = "<group>"; };
+		995373961C2C45D50026119A /* QXOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXOrderModel.m; sourceTree = "<group>"; };
 		99594D6F1C23FCE0002660E6 /* WeBusiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeBusiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99594D731C23FCE0002660E6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		99594D831C23FCE0002660E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -120,6 +136,8 @@
 		99A56AAB1C271B0F00D757ED /* QXCustomerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXCustomerModel.m; sourceTree = "<group>"; };
 		99A56AB01C271EE400D757ED /* QXInputStringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXInputStringViewController.h; sourceTree = "<group>"; };
 		99A56AB11C271EE400D757ED /* QXInputStringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXInputStringViewController.m; sourceTree = "<group>"; };
+		99CF141A1C2CF3EB00CF3517 /* QXOrderGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXOrderGoodsModel.h; sourceTree = "<group>"; };
+		99CF141B1C2CF3EB00CF3517 /* QXOrderGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXOrderGoodsModel.m; sourceTree = "<group>"; };
 		99E78A691C2B076700D64A46 /* QXGoodsMainMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXGoodsMainMoreView.h; sourceTree = "<group>"; };
 		99E78A6A1C2B076700D64A46 /* QXGoodsMainMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXGoodsMainMoreView.m; sourceTree = "<group>"; };
 		99F26B4F1C267CA400C66DE1 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -204,6 +222,17 @@
 				9913384D1C2A9E62005483F4 /* QXShareViewController.m */,
 			);
 			path = ShareGoods;
+			sourceTree = "<group>";
+		};
+		995373941C2C45C20026119A /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				995373951C2C45D50026119A /* QXOrderModel.h */,
+				995373961C2C45D50026119A /* QXOrderModel.m */,
+				99CF141A1C2CF3EB00CF3517 /* QXOrderGoodsModel.h */,
+				99CF141B1C2CF3EB00CF3517 /* QXOrderGoodsModel.m */,
+			);
+			path = Orders;
 			sourceTree = "<group>";
 		};
 		99594D661C23FCE0002660E6 = {
@@ -329,6 +358,12 @@
 			children = (
 				99594DC91C240621002660E6 /* QXOrderMainViewController.h */,
 				99594DCA1C240621002660E6 /* QXOrderMainViewController.m */,
+				9920FFD71C2EFAD2004AAD89 /* QXOrderMainCell.h */,
+				9920FFD81C2EFAD2004AAD89 /* QXOrderMainCell.m */,
+				9920FFDD1C2F0612004AAD89 /* QXOrderHeaderView.h */,
+				9920FFDE1C2F0612004AAD89 /* QXOrderHeaderView.m */,
+				9920FFE01C2F062B004AAD89 /* QXOrderFooterView.h */,
+				9920FFE11C2F062B004AAD89 /* QXOrderFooterView.m */,
 			);
 			path = Orders;
 			sourceTree = "<group>";
@@ -345,6 +380,7 @@
 		99594DD51C2407A6002660E6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				995373941C2C45C20026119A /* Orders */,
 				99F34EA31C28186300ED54F2 /* Goods */,
 				99A56AA71C271B0F00D757ED /* Customer */,
 				99F26B731C26965C00C66DE1 /* QXBaseModel.h */,
@@ -408,6 +444,8 @@
 			children = (
 				991337F91C2A509B005483F4 /* UIImage+Utils.h */,
 				991337FA1C2A509B005483F4 /* UIImage+Utils.m */,
+				9920FFDA1C2F00BC004AAD89 /* NSDate+Utils.h */,
+				9920FFDB1C2F00BC004AAD89 /* NSDate+Utils.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -651,6 +689,8 @@
 				99A56A9C1C27071A00D757ED /* QXCustomerDetailViewController.m in Sources */,
 				9913384B1C2A9D1F005483F4 /* QXBaseViewController.m in Sources */,
 				99F34EA61C28189500ED54F2 /* QXGoodsModel.m in Sources */,
+				9920FFE21C2F062B004AAD89 /* QXOrderFooterView.m in Sources */,
+				995373971C2C45D50026119A /* QXOrderModel.m in Sources */,
 				991337FB1C2A509B005483F4 /* UIImage+Utils.m in Sources */,
 				991338241C2A78DD005483F4 /* QXImageCompressUtil.m in Sources */,
 				99594DC11C2403D3002660E6 /* AppDelegate.m in Sources */,
@@ -663,6 +703,7 @@
 				99F26B681C267F6500C66DE1 /* QXSQLiteHelper.m in Sources */,
 				99A56AB21C271EE400D757ED /* QXInputStringViewController.m in Sources */,
 				99F26B6C1C2680AC00C66DE1 /* QXFileUtil.m in Sources */,
+				9920FFD91C2EFAD2004AAD89 /* QXOrderMainCell.m in Sources */,
 				99F26B5B1C267CA400C66DE1 /* FMDatabaseAdditions.m in Sources */,
 				99F79F6B1C29AFC500B1492F /* QXGoodsDetailTableViewHeaderView.m in Sources */,
 				99A56AAC1C271B0F00D757ED /* QXCustomerModel+TypeTranslation.m in Sources */,
@@ -673,12 +714,15 @@
 				99A56AA01C27078D00D757ED /* QXCustomerMainCell.m in Sources */,
 				99A56A9D1C27071A00D757ED /* QXCustomerMainViewController.m in Sources */,
 				99A56AA31C27161700D757ED /* QXCustomerDetailHeadCell.m in Sources */,
+				9920FFDC1C2F00BC004AAD89 /* NSDate+Utils.m in Sources */,
 				99F79F721C29BB8C00B1492F /* QXGoodsDetailTextCell.m in Sources */,
+				99CF141C1C2CF3EC00CF3517 /* QXOrderGoodsModel.m in Sources */,
 				99594DD41C2406A9002660E6 /* QXSetupMainViewController.m in Sources */,
 				99E78A6B1C2B076700D64A46 /* QXGoodsMainMoreView.m in Sources */,
 				99F26B5C1C267CA400C66DE1 /* FMDatabasePool.m in Sources */,
 				99F26B5D1C267CA400C66DE1 /* FMDatabaseQueue.m in Sources */,
 				99F26B5A1C267CA400C66DE1 /* FMDatabase.m in Sources */,
+				9920FFDF1C2F0612004AAD89 /* QXOrderHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

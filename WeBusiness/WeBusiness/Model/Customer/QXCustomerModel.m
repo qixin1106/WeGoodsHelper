@@ -12,7 +12,7 @@
 
 
 
-
+#pragma mark - Private
 - (void)createTable:(FMDatabase*)db
 {
     if (![self isExistTable:@"CUSTOMER" db:db])
@@ -26,7 +26,7 @@
 - (void)insert:(FMDatabase*)db
 {
     NSString *SQLString = @"INSERT INTO CUSTOMER (ID,NAME,TEL,ADDRESS,WECHATID,TYPE,PICID,TS) VALUES (?,?,?,?,?,?,?,?)";
-    [db executeUpdate:SQLString,self.ID,self.name,self.tel,self.address,self.wechatID,@(self.type),self.picID,@(self.ts)];
+    [db executeUpdate:SQLString,self.ID,self.name,self.tel,self.address,self.wechatID,@(self.type),self.picID,@(CFAbsoluteTimeGetCurrent())];
 }
 
 
@@ -50,16 +50,7 @@
     FMResultSet *rs = [db executeQuery:SQLString];
     while ([rs next])
     {
-        QXCustomerModel *model = [[QXCustomerModel alloc] init];
-        model.ID = [rs stringForColumn:@"ID"];
-        model.name = [rs stringForColumn:@"NAME"];
-        model.tel = [rs stringForColumn:@"TEL"];
-        model.address = [rs stringForColumn:@"ADDRESS"];
-        model.wechatID = [rs stringForColumn:@"WECHATID"];
-        model.type = [rs longForColumn:@"TYPE"];
-        model.picID = [rs stringForColumn:@"PICID"];
-        model.ts = [rs doubleForColumn:@"TS"];
-        [array addObject:model];
+        [array addObject:[self assignWithResultSet:rs]];
     }
     return array;
 }
@@ -72,22 +63,31 @@
     FMResultSet *rs = [db executeQuery:SQLString,self.ID];
     while ([rs next])
     {
-        QXCustomerModel *model = [[QXCustomerModel alloc] init];
-        model.ID = [rs stringForColumn:@"ID"];
-        model.name = [rs stringForColumn:@"NAME"];
-        model.tel = [rs stringForColumn:@"TEL"];
-        model.address = [rs stringForColumn:@"ADDRESS"];
-        model.wechatID = [rs stringForColumn:@"WECHATID"];
-        model.type = [rs longForColumn:@"TYPE"];
-        model.picID = [rs stringForColumn:@"PICID"];
-        model.ts = [rs doubleForColumn:@"TS"];
-        [array addObject:model];
+        [array addObject:[self assignWithResultSet:rs]];
     }
     return [array firstObject];
 }
 
 
 
+- (QXCustomerModel*)assignWithResultSet:(FMResultSet*)rs
+{
+    QXCustomerModel *model = [[QXCustomerModel alloc] init];
+    model.ID = [rs stringForColumn:@"ID"];
+    model.name = [rs stringForColumn:@"NAME"];
+    model.tel = [rs stringForColumn:@"TEL"];
+    model.address = [rs stringForColumn:@"ADDRESS"];
+    model.wechatID = [rs stringForColumn:@"WECHATID"];
+    model.type = [rs longForColumn:@"TYPE"];
+    model.picID = [rs stringForColumn:@"PICID"];
+    model.ts = [rs doubleForColumn:@"TS"];
+    return model;
+}
+
+
+
+
+#pragma mark - Public
 - (void)store
 {
     [[QXSQLiteHelper sharedDatabaseQueue] inTransaction:^(FMDatabase *db, BOOL *rollback) {

@@ -44,7 +44,7 @@
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         [controllers addObject:nav];
         
-        UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"商品" image:[UIImage imageNamed:@"TestTabbarIcon"] tag:1];
+        UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"库存" image:[UIImage imageNamed:@"TestTabbarIcon"] tag:1];
         vc.tabBarItem = tabBarItem;
     }
     {
