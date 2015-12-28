@@ -27,19 +27,17 @@
     if (_orderGoodsModel != orderGoodsModel)
     {
         _orderGoodsModel = orderGoodsModel;
-        
-        
-        QXGoodsModel *model = [[QXGoodsModel alloc] init];
-        model.ID = _orderGoodsModel.goodsID;
-        model = [model fetchModel];
-        
-        NSArray *imgs = [model.picID componentsSeparatedByString:@";"];
-        NSString *picID = [imgs firstObject];
-        self.goodsImageView.image = [UIImage imageWithPicID:picID isThumb:YES];
-        self.goodsNameLabel.text = model.name;
-        self.priceLabel.text = STR_FORMAT(@"￥%.2f",(_orderGoodsModel.adjustPrice)?_orderGoodsModel.adjustPrice:model.retailPrice);
-        self.countLabel.text = STR_FORMAT(@"x%ld",_orderGoodsModel.buyCount);
     }
+    QXGoodsModel *model = [[QXGoodsModel alloc] init];
+    model.ID = _orderGoodsModel.goodsID;
+    model = [model fetchModel];
+    
+    NSArray *imgs = [model.picID componentsSeparatedByString:@";"];
+    NSString *picID = [imgs firstObject];
+    self.goodsImageView.image = [UIImage imageWithPicID:picID isThumb:YES];
+    self.goodsNameLabel.text = model.name;
+    self.priceLabel.text = STR_FORMAT(@"￥%.2f",(_orderGoodsModel.adjustPrice)?_orderGoodsModel.adjustPrice:model.retailPrice);
+    self.countLabel.text = STR_FORMAT(@"x%ld",_orderGoodsModel.buyCount);
 }
 
 
@@ -49,11 +47,12 @@
     if (self)
     {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.contentView.backgroundColor = RGBA(245, 245, 245, 1);
+        self.contentView.backgroundColor = RGBA(250, 250, 250, 1);
         
         self.goodsImageView = [[UIImageView alloc] init];
         self.goodsImageView.translatesAutoresizingMaskIntoConstraints = NO;
-        self.goodsImageView.contentMode = UIViewContentModeScaleToFill;
+        self.goodsImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.goodsImageView.clipsToBounds = YES;
         [self.contentView addSubview:self.goodsImageView];
         
         
@@ -110,6 +109,10 @@
                                                                       constant:60]];
         
         
+        
+        
+
+        
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.goodsNameLabel
                                                                      attribute:NSLayoutAttributeLeft
                                                                      relatedBy:NSLayoutRelationEqual
@@ -125,22 +128,21 @@
                                                                     multiplier:1
                                                                       constant:-100]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.goodsNameLabel
-                                                                     attribute:NSLayoutAttributeRight
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:self.priceLabel
-                                                                     attribute:NSLayoutAttributeLeft
-                                                                    multiplier:1
-                                                                      constant:10]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.goodsNameLabel
                                                                      attribute:NSLayoutAttributeTop
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:self.contentView
                                                                      attribute:NSLayoutAttributeTop
                                                                     multiplier:1
                                                                       constant:10]];
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.goodsNameLabel
+                                                                     attribute:NSLayoutAttributeRight
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.priceLabel
+                                                                     attribute:NSLayoutAttributeLeft
+                                                                    multiplier:1
+                                                                      constant:10]];
 
 
-        
         
         
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.priceLabel
@@ -157,6 +159,14 @@
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1
                                                                       constant:-10]];
+        [self.priceLabel addConstraint:[NSLayoutConstraint constraintWithItem:self.priceLabel
+                                                                     attribute:NSLayoutAttributeWidth
+                                                                     relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                        toItem:nil
+                                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                                    multiplier:1
+                                                                      constant:100]];
+
 
         
         

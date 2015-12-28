@@ -33,8 +33,7 @@
             model = [model fetchModel];
             
             count += obj.buyCount;
-            totalPrice += (obj.adjustPrice)?obj.adjustPrice:model.retailPrice;
-            totalPrice *= count;
+            totalPrice += ((obj.adjustPrice)?obj.adjustPrice:model.retailPrice)*obj.buyCount;
         }];
         totalPrice += _orderModel.freight;
         self.infoLabel.text = STR_FORMAT(@"共%ld件商品 合计:￥%.2f (含运费:￥%.2f)",count,totalPrice,_orderModel.freight);
@@ -61,7 +60,7 @@
         
         UIView *gapView = [[UIView alloc] init];
         gapView.translatesAutoresizingMaskIntoConstraints = NO;
-        gapView.backgroundColor = RGBA(245, 245, 245, 1);
+        gapView.backgroundColor = RGBA(225, 225, 225, 1);
         [self.contentView addSubview:gapView];
         
         

@@ -114,7 +114,7 @@ UINavigationControllerDelegate>
 
 - (void)loadData
 {
-    if (self.templateType==TemplateType_Display)
+    if (self.templateType==TemplateType_Edit)
     {
         QXGoodsModel *goodsModel = [[QXGoodsModel alloc] init];
         goodsModel.ID = self.gid;
@@ -129,7 +129,7 @@ UINavigationControllerDelegate>
 - (void)loadUI
 {
     self.headerTitles = @[@"名称",@"进价",@"单价",@"代理价",@"友情价",@"数量",@"描述",@"备注"];
-    self.title = (self.templateType==TemplateType_Display)?@"编辑商品":@"添加商品";
+    self.title = (self.templateType==TemplateType_Edit)?@"编辑商品":@"添加商品";
     if (self.templateType==TemplateType_Add)
     {
         UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(onBackClick:)];

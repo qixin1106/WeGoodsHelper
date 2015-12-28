@@ -8,6 +8,18 @@
 
 #import "QXBaseTableViewController.h"
 
+typedef NS_ENUM(NSUInteger, Type) {
+    Type_Display=0,
+    Type_Select=1
+};
+@class QXGoodsModel;
+@protocol QXGoodsMainViewControllerDelegate;
 @interface QXGoodsMainViewController : QXBaseTableViewController
+@property (weak, nonatomic) id<QXGoodsMainViewControllerDelegate> delegate;
+@property (assign, nonatomic) Type type;
+@end
 
+
+@protocol QXGoodsMainViewControllerDelegate <NSObject>
+- (void)selectedGoods:(QXGoodsModel*)goodsModel;
 @end

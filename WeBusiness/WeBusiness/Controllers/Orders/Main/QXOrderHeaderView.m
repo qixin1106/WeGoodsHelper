@@ -35,6 +35,7 @@
         self.telLabel.text = _orderModel.tel;
         self.orderTimeLabel.text = [NSDate dateToString:_orderModel.buyerOrderTime];
         self.stateLabel.text = (_orderModel.isFinish)?@"交易完成":@"交易中";
+        self.stateLabel.textColor = (_orderModel.isFinish)?RGBA(200, 200, 200, 1):RGBA(255, 0, 0, 1);
     }
 }
 

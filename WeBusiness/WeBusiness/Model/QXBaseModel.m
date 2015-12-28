@@ -16,7 +16,6 @@
     if (self)
     {
         self.ID = [[NSUUID UUID] UUIDString];
-//        self.ts = CFAbsoluteTimeGetCurrent();
     }
     return self;
 }

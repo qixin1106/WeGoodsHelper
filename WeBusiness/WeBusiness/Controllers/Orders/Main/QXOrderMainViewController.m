@@ -12,13 +12,14 @@
 #import "QXOrderMainCell.h"
 #import "QXOrderHeaderView.h"
 #import "QXOrderFooterView.h"
-
+#import "QXOrderDetailViewController.h"
 
 static NSString *identifier = @"QXOrderMainCell";
 static NSString *identifierHeader = @"QXOrderHeaderView";
 static NSString *identifierFooter = @"QXOrderFooterView";
 
 @interface QXOrderMainViewController ()
+<QXOrderDetailViewControllerDelegate>
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @end
 
@@ -28,32 +29,12 @@ static NSString *identifierFooter = @"QXOrderFooterView";
 
 - (void)onAddClick:(UIBarButtonItem*)sender
 {
-    QXOrderModel *model = [[QXOrderModel alloc] init];
-    model.name = @"李连杰";
-    model.tel = @"18612341234";
-    model.address = @"北京市西城区西四东大街100号4号楼3单元101室";
-    model.cn = @"1022949701";
-    model.remark = @"加急";
-    model.buyerOrderTime = CFAbsoluteTimeGetCurrent();
-    model.freight = 8.0f;
-    model.cost = 100.0f;
-    model.price = 200.0f;
-    model.profit = model.price-model.cost-model.freight;
-    model.isFinish = NO;
-    
-    
-    QXOrderGoodsModel *orderGoodsModel = [[QXOrderGoodsModel alloc] init];
-    orderGoodsModel.orderID = model.ID;
-    orderGoodsModel.goodsID = @"8CF0E569-D0A9-4021-B3B6-E4623F8C8D4F";
-    orderGoodsModel.buyCount = 3;
-    orderGoodsModel.adjustCost = 0;
-    orderGoodsModel.adjustPrice = 0;
-    [orderGoodsModel store];
-    [model.orderGoodsList addObject:orderGoodsModel];
-    
-    [model store];
-    [self.dataArray addObject:model];
-    [self.tableView reloadData];
+    QXOrderDetailViewController *vc = [[QXOrderDetailViewController alloc] init];
+    vc.delegate = self;
+    vc.templateType = TemplateType_Add;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:NULL];
+    return;
 }
 
 
@@ -80,17 +61,13 @@ static NSString *identifierFooter = @"QXOrderFooterView";
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAddClick:)];
     self.navigationItem.rightBarButtonItems = @[rightItem];
     
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = [UIColor whiteColor];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 125.0;
+    self.tableView.estimatedRowHeight = 80.0;
     self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionHeaderHeight = 60;
     self.tableView.sectionFooterHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionFooterHeight = 60;
-    
     [self.tableView registerClass:[QXOrderHeaderView class] forHeaderFooterViewReuseIdentifier:identifierHeader];
     [self.tableView registerClass:[QXOrderFooterView class] forHeaderFooterViewReuseIdentifier:identifierFooter];
     [self.tableView registerClass:[QXOrderMainCell class] forCellReuseIdentifier:identifier];
@@ -161,7 +138,7 @@ static NSString *identifierFooter = @"QXOrderFooterView";
     QXGoodsModel *model = self.dataArray[indexPath.row];
     QXGoodsDetailViewController *vc = [[QXGoodsDetailViewController alloc] initWithGid:model.ID];
     vc.hidesBottomBarWhenPushed = YES;
-    vc.templateType = TemplateType_Display;
+    vc.templateType = TemplateType_Edit;
     [vc setSaveGoodsBlock:^(QXGoodsModel *goodsModel) {
         //保存
         ([goodsModel fetchModel])?[goodsModel refresh]:[goodsModel store];
@@ -170,6 +147,24 @@ static NSString *identifierFooter = @"QXOrderFooterView";
     }];
     [self.navigationController pushViewController:vc animated:YES];
      */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+- (void)onSaveModel:(QXOrderModel*)orderModel
+{
+    [self.dataArray insertObject:orderModel atIndex:0];
+    [self.tableView reloadData];
 }
 
 

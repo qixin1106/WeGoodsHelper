@@ -13,13 +13,6 @@
 #pragma mark - Private
 - (void)createTable:(FMDatabase*)db
 {
-    /*
-     @property (copy, nonatomic, nullable) NSString *orderID;//订单ID
-     @property (copy, nonatomic, nullable) NSString *goodsID;//商品ID
-     @property (assign, nonatomic) NSInteger buyCount;//购买数量
-     @property (assign, nonatomic) CGFloat adjustCost;//调整后的成本价
-     @property (assign, nonatomic) CGFloat adjustPrice;//调整后的出售价
-     */
     if (![self isExistTable:@"ORDERGOODS" db:db])
     {
         NSString *SQLString =

@@ -1,21 +1,28 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "89624c0f-5ef2-e952-7b1d-ce57b7db7bff++505",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "167073D760A59C67CFDCF24A909AA399D43BE05C",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
     "89624c0f-5ef2-e952-7b1d-ce57b7db7bff++505" : {
 
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "89624c0f-5ef2-e952-7b1d-ce57b7db7bff++505" : 0
+    "89624c0f-5ef2-e952-7b1d-ce57b7db7bff++505" : 0,
+    "167073D760A59C67CFDCF24A909AA399D43BE05C" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "21459D65-4FDA-4F75-A4AA-9F7A49DABD92",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "89624c0f-5ef2-e952-7b1d-ce57b7db7bff++505" : "WeGoodsHelper.git\/"
+    "89624c0f-5ef2-e952-7b1d-ce57b7db7bff++505" : "WeGoodsHelper.git\/",
+    "167073D760A59C67CFDCF24A909AA399D43BE05C" : "WeGoodsHelper\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "WeBusiness",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "WeBusiness\/WeBusiness.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/qixin1106\/WeGoodsHelper.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "167073D760A59C67CFDCF24A909AA399D43BE05C"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/qixin1106\/WeGoodsHelper.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",

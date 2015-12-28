@@ -30,7 +30,7 @@
     
     NSMutableArray *controllers = [NSMutableArray arrayWithCapacity:4];
     {
-        QXOrderMainViewController *vc = [[QXOrderMainViewController alloc] init];
+        QXOrderMainViewController *vc = [[QXOrderMainViewController alloc] initWithStyle:UITableViewStyleGrouped];
         vc.hidesBottomBarWhenPushed = NO;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         [controllers addObject:nav];

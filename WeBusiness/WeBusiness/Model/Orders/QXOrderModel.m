@@ -37,7 +37,7 @@
 - (void)insert:(FMDatabase*)db
 {
     NSString *SQLString = @"INSERT INTO ORDERS (ID, NAME, TEL, ADDRESS, CN, REMARK, ORDERTIME, FREIGHT, PRICE, COST, PROFIT, ISFINISH, TS) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    [db executeUpdate:SQLString,self.ID,self.name,self.tel,self.address,self.cn,self.remark,@(self.buyerOrderTime),@(self.freight),@(self.price),@(self.cost),@(self.profit),@(self.isFinish),@(CFAbsoluteTimeGetCurrent())];
+    [db executeUpdate:SQLString,self.ID,self.name,self.tel,self.address,self.cn,self.remark,@(CFAbsoluteTimeGetCurrent()),@(self.freight),@(self.price),@(self.cost),@(self.profit),@(self.isFinish),@(CFAbsoluteTimeGetCurrent())];
 }
 
 
@@ -108,10 +108,6 @@
     [[QXSQLiteHelper sharedDatabaseQueue] inTransaction:^(FMDatabase *db, BOOL *rollback) {
         [self createTable:db];
         [self insert:db];
-        
-//        [self.orderGoodsList enumerateObjectsUsingBlock:^(QXOrderGoodsModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//            [obj store];
-//        }];
     }];
 }
 
@@ -120,9 +116,6 @@
     [[QXSQLiteHelper sharedDatabaseQueue] inTransaction:^(FMDatabase *db, BOOL *rollback) {
         [self createTable:db];
         [self update:db];
-//        [self.orderGoodsList enumerateObjectsUsingBlock:^(QXOrderGoodsModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//            [obj refresh];
-//        }];
     }];
 }
 
@@ -132,9 +125,6 @@
     [[QXSQLiteHelper sharedDatabaseQueue] inTransaction:^(FMDatabase *db, BOOL *rollback) {
         [self createTable:db];
         [self delete:db];
-//        [self.orderGoodsList enumerateObjectsUsingBlock:^(QXOrderGoodsModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//            [obj remove];
-//        }];
     }];
 }
 

@@ -35,7 +35,7 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
         {
             self.saveCustomerBlock(self.customerModel);
         }
-        (self.templateType==TemplateType_Display)?[self.navigationController popViewControllerAnimated:YES]:[self dismissViewControllerAnimated:YES completion:NULL];
+        (self.templateType==TemplateType_Edit)?[self.navigationController popViewControllerAnimated:YES]:[self dismissViewControllerAnimated:YES completion:NULL];
     }
     else
     {
@@ -45,7 +45,7 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
 
 - (void)onBackClick:(UIBarButtonItem*)sender
 {
-    (self.templateType==TemplateType_Display)?[self.navigationController popViewControllerAnimated:YES]:[self dismissViewControllerAnimated:YES completion:NULL];
+    (self.templateType==TemplateType_Edit)?[self.navigationController popViewControllerAnimated:YES]:[self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 
@@ -53,7 +53,7 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
 
 - (void)loadUI
 {
-    self.title = (self.templateType==TemplateType_Display)?@"编辑客户":@"添加客户";
+    self.title = (self.templateType==TemplateType_Edit)?@"编辑客户":@"添加客户";
     
     if (self.templateType==TemplateType_Add)
     {
@@ -72,7 +72,7 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
 - (void)loadData
 {
     self.headerTitles = @[@"姓名(必填)",@"手机(必填)",@"地址(必填)",@"微信号",@"关系"];
-    if (self.templateType==TemplateType_Display)
+    if (self.templateType==TemplateType_Edit)
     {
         QXCustomerModel *model = [[QXCustomerModel alloc] init];
         model.ID = self.uid;

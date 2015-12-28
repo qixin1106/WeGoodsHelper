@@ -122,7 +122,7 @@ static NSString *identifier = @"QXCustomerMainCell";
     QXCustomerModel *model = self.dataArray[indexPath.row];
 
     QXCustomerDetailViewController *customerDetailViewController = [[QXCustomerDetailViewController alloc] init];
-    customerDetailViewController.templateType = TemplateType_Display;
+    customerDetailViewController.templateType = TemplateType_Edit;
     customerDetailViewController.uid = model.ID;
     [customerDetailViewController setSaveCustomerBlock:^(QXCustomerModel *customerModel){
         //保存

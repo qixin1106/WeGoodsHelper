@@ -52,7 +52,7 @@ static NSString *identifier = @"QXGoodsMainCell";
 
 - (void)loadUI
 {
-    self.title = @"库存";
+    self.title = (self.type==Type_Display)?@"库存":@"选择商品";
     self.tableView.tableFooterView = [UIView new];
     self.hidesBottomBarWhenPushed = NO;
     
@@ -70,7 +70,6 @@ static NSString *identifier = @"QXGoodsMainCell";
     [self loadData];
     [self loadUI];
 }
-
 
 
 
@@ -123,17 +122,29 @@ static NSString *identifier = @"QXGoodsMainCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    QXGoodsModel *model = self.dataArray[indexPath.row];
-    QXGoodsDetailViewController *vc = [[QXGoodsDetailViewController alloc] initWithGid:model.ID];
-    vc.hidesBottomBarWhenPushed = YES;
-    vc.templateType = TemplateType_Display;
-    [vc setSaveGoodsBlock:^(QXGoodsModel *goodsModel) {
-        //保存
-        ([goodsModel fetchModel])?[goodsModel refresh]:[goodsModel store];
-        [self loadData];
-        [self.tableView reloadData];
-    }];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (self.type==Type_Display)//展示
+    {
+        QXGoodsModel *model = self.dataArray[indexPath.row];
+        QXGoodsDetailViewController *vc = [[QXGoodsDetailViewController alloc] initWithGid:model.ID];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.templateType = TemplateType_Edit;
+        [vc setSaveGoodsBlock:^(QXGoodsModel *goodsModel) {
+            //保存
+            ([goodsModel fetchModel])?[goodsModel refresh]:[goodsModel store];
+            [self loadData];
+            [self.tableView reloadData];
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (self.type==Type_Select)//选择
+    {
+        QXGoodsModel *model = self.dataArray[indexPath.row];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(selectedGoods:)])
+        {
+            [self.delegate selectedGoods:model];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 
