@@ -126,7 +126,7 @@
     FMResultSet *rs = [db executeQuery:SQLString];
     while ([rs next])
     {
-        [array addObject:[rs stringForColumn:@"PYSORT"]];
+        [array addObject:([[rs stringForColumn:@"PYSORT"] isKindOfClass:[NSString class]])?[rs stringForColumn:@"PYSORT"]:@"#"];
     }
     return array;
 }
