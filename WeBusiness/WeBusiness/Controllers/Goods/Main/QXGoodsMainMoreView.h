@@ -7,6 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface QXGoodsMainMoreView : UIView
+NS_ASSUME_NONNULL_BEGIN
+@protocol QXGoodsMainMoreViewDelegate;
+@interface QXGoodsMainMoreView : UIControl
+@property (weak, nonatomic, nullable) id<QXGoodsMainMoreViewDelegate>delegate;
 @end
+
+
+@protocol QXGoodsMainMoreViewDelegate <NSObject>
+
+@end
+NS_ASSUME_NONNULL_END

@@ -25,10 +25,10 @@ static NSString *identifier = @"QXCustomerMainCell";
 
 
 
-- (void)onEditClick:(UIBarButtonItem*)sender
-{
-    [self.tableView setEditing:YES animated:YES];
-}
+//- (void)onBackClick:(UIBarButtonItem*)sender
+//{
+//    [self dismissViewControllerAnimated:YES completion:NULL];
+//}
 
 - (void)onAddClick:(UIBarButtonItem*)sender
 {
@@ -47,8 +47,13 @@ static NSString *identifier = @"QXCustomerMainCell";
 
 - (void)loadUI
 {
-    self.title = @"客户";
-
+    self.title = (self.type==Type2_Display)?@"客户":@"选择客户";
+    
+//    if (self.type==Type2_Select)
+//    {
+//        UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(onBackClick:)];
+//        self.navigationItem.leftBarButtonItems = @[leftItem];
+//    }
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAddClick:)];
     self.navigationItem.rightBarButtonItems = @[rightItem];
     
@@ -119,18 +124,30 @@ static NSString *identifier = @"QXCustomerMainCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    QXCustomerModel *model = self.dataArray[indexPath.row];
-
-    QXCustomerDetailViewController *customerDetailViewController = [[QXCustomerDetailViewController alloc] init];
-    customerDetailViewController.templateType = TemplateType_Edit;
-    customerDetailViewController.uid = model.ID;
-    [customerDetailViewController setSaveCustomerBlock:^(QXCustomerModel *customerModel){
-        //保存
-        ([customerModel fetchModel])?[customerModel refresh]:[customerModel store];
-        [self loadData];
-        [self.tableView reloadData];
-    }];
-    [self.navigationController pushViewController:customerDetailViewController animated:YES];
+    if (self.type==Type2_Display)
+    {
+        QXCustomerModel *model = self.dataArray[indexPath.row];
+        QXCustomerDetailViewController *customerDetailViewController = [[QXCustomerDetailViewController alloc] init];
+        customerDetailViewController.templateType = TemplateType_Edit;
+        customerDetailViewController.uid = model.ID;
+        [customerDetailViewController setSaveCustomerBlock:^(QXCustomerModel *customerModel){
+            //保存
+            ([customerModel fetchModel])?[customerModel refresh]:[customerModel store];
+            [self loadData];
+            [self.tableView reloadData];
+        }];
+        [self.navigationController pushViewController:customerDetailViewController animated:YES];
+    }
+    
+    if (self.type==Type2_Select)
+    {
+        QXCustomerModel *model = self.dataArray[indexPath.row];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(vc:selectedCustomer:)])
+        {
+            [self.delegate vc:self selectedCustomer:model];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 

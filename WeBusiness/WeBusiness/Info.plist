@@ -32,6 +32,8 @@
 	<string>甜心妈妈快允许使用相册权限</string>
 	<key>NSCameraUsageDescription</key>
 	<string>甜心妈妈快允许使用相机权限</string>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

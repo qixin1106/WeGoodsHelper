@@ -8,6 +8,7 @@
 
 #import "QXOrderDetailHeadView.h"
 #import "QXOrderModel.h"
+#import "QXCustomerMainViewController.h"
 
 @interface QXOrderDetailHeadView () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
@@ -22,11 +23,18 @@
 - (IBAction)onScanClick:(UIButton *)sender
 {
     ALERT(@"还不能扫码,还没做呢", nil);
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onClickSelectCustomer:)])
+    {
+        [self.delegate onClickSelectCustomer:self];
+    }
 }
 
 - (IBAction)onAddCustomer:(UIButton *)sender
 {
-    ALERT(@"还不能选择客户,请手动输入", nil);
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onClickSelectCustomer:)])
+    {
+        [self.delegate onClickSelectCustomer:self];
+    }
 }
 
 - (void)assignModel
@@ -37,5 +45,14 @@
     self.orderModel.cn = self.cnTextField.text;
     self.orderModel.remark = self.remarkTextView.text;
 }
+
+
+- (void)refreshCustomerUI
+{
+    self.nameTextField.text = self.orderModel.name;
+    self.telTextField.text = self.orderModel.tel;
+    self.addressTextView.text = self.orderModel.address;
+}
+
 
 @end

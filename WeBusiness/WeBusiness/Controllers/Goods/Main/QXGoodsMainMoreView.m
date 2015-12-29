@@ -13,6 +13,8 @@
 
 @implementation QXGoodsMainMoreView
 
+
+
 - (instancetype)init
 {
     self = [super init];

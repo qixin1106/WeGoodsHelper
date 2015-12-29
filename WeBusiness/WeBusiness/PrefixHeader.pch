@@ -50,13 +50,13 @@
 #define CELL_SEPARATOR_COLOR RGBA(222,222,222,1)
 
 //MARK: 缩略图宽度
-#define THUMBNAIL_WIDTH 256
+#define THUMBNAIL_WIDTH 128
 
 //MARK: 压缩图大小
-#define COMPRESS_WIDTH 1024
+#define COMPRESS_WIDTH 768
 
 //MARK: 图片压缩率 jpg
-#define IMAGE_COMPRESS_RATE 0.75
+#define IMAGE_COMPRESS_RATE 0.5
 
 /*************************************************************************************************/
 

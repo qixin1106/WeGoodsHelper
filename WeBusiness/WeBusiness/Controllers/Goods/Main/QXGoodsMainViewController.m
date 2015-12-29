@@ -30,6 +30,16 @@ static NSString *identifier = @"QXGoodsMainCell";
 
 
 
+- (void)removeMoreView
+{
+    if (self.moreView)
+    {
+        [self.moreView removeFromSuperview];
+        self.moreView = nil;
+    }
+}
+
+
 - (void)onAddClick:(UIBarButtonItem*)sender
 {
     QXGoodsDetailViewController *vc = [[QXGoodsDetailViewController alloc] initWithGid:nil];
@@ -97,6 +107,7 @@ static NSString *identifier = @"QXGoodsMainCell";
 #pragma mark - UITableViewDelegate
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self removeMoreView];
     return UITableViewCellEditingStyleDelete;
 }
 
@@ -135,15 +146,23 @@ static NSString *identifier = @"QXGoodsMainCell";
             [self.tableView reloadData];
         }];
         [self.navigationController pushViewController:vc animated:YES];
+        [self removeMoreView];
     }
     if (self.type==Type_Select)//选择
     {
         QXGoodsModel *model = self.dataArray[indexPath.row];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(selectedGoods:)])
+        if (model.count)
         {
-            [self.delegate selectedGoods:model];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(selectedGoods:)])
+            {
+                [self.delegate selectedGoods:model];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
         }
-        [self.navigationController popViewControllerAnimated:YES];
+        else
+        {
+            ALERT(@"库存不足", nil);
+        }
     }
 }
 
@@ -155,11 +174,7 @@ static NSString *identifier = @"QXGoodsMainCell";
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (self.moreView)
-    {
-        [self.moreView removeFromSuperview];
-        self.moreView = nil;
-    }
+    [self removeMoreView];
 }
 
 
@@ -170,14 +185,12 @@ static NSString *identifier = @"QXGoodsMainCell";
 #pragma mark - QXGoodsMainCellDelegate
 - (void)onClickMoreCallBack:(QXGoodsMainCell*)cell
 {
-    CGRect cellFrame = [self.tableView rectForRowAtIndexPath:cell.indexPath];
+    CGRect cellFrame = [self.tableView rectForRowAtIndexPath:[self.tableView indexPathForCell:cell]];
     
-    if (self.moreView)
-    {
-        [self.moreView removeFromSuperview];
-        self.moreView = nil;
-    }
+    [self removeMoreView];
+    
     self.moreView = [[QXGoodsMainMoreView alloc] init];
+    [self.moreView addTarget:self action:@selector(removeMoreView) forControlEvents:UIControlEventTouchUpInside];
     self.moreView.frame = CGRectMake(self.view.bounds.size.width, cellFrame.origin.y, cell.line.frame.size.width, cellFrame.size.height-1);
     [self.tableView addSubview:self.moreView];
     

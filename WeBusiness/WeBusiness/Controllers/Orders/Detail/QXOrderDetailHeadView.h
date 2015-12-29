@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 @class QXOrderModel;
+@protocol QXOrderDetailHeadViewDelegate;
 @interface QXOrderDetailHeadView : UIView
+@property (weak, nonatomic) id<QXOrderDetailHeadViewDelegate>delegate;
 @property (strong, nonatomic) QXOrderModel *orderModel;
 - (void)assignModel;
+- (void)refreshCustomerUI;
+@end
+
+@protocol QXOrderDetailHeadViewDelegate <NSObject>
+- (void)onClickSelectCustomer:(QXOrderDetailHeadView*)header;
 @end

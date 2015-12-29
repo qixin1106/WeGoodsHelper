@@ -14,6 +14,8 @@
 #import "QXOrderDetailFooterView.h"
 #import "QXGoodsMainViewController.h"
 #import "QXOrderDetailCell.h"
+#import "QXCustomerModel.h"
+#import "QXCustomerMainViewController.h"
 
 static NSString *identifier = @"QXOrderDetailCell";
 static NSString *identifierHeader = @"QXOrderHeaderView";
@@ -21,7 +23,10 @@ static NSString *identifierFooter = @"QXOrderFooterView";
 
 
 @interface QXOrderDetailViewController ()
-<QXOrderDetailFooterViewDelegate,QXGoodsMainViewControllerDelegate>
+<QXOrderDetailFooterViewDelegate,
+QXGoodsMainViewControllerDelegate,
+QXOrderDetailHeadViewDelegate,
+QXCustomerMainViewControllerDelegate>
 @property (strong, nonatomic) QXOrderModel *orderModel;
 @end
 
@@ -72,6 +77,7 @@ static NSString *identifierFooter = @"QXOrderFooterView";
     
     QXOrderDetailHeadView *header = [[[NSBundle mainBundle] loadNibNamed:@"QXOrderDetailHeadView" owner:self options:nil] lastObject];
     header.orderModel = self.orderModel;
+    header.delegate = self;
     self.tableView.tableHeaderView = header;
     
     QXOrderDetailFooterView *footer = [[[NSBundle mainBundle] loadNibNamed:@"QXOrderDetailFooterView" owner:self options:nil] lastObject];
@@ -206,7 +212,44 @@ static NSString *identifierFooter = @"QXOrderFooterView";
         [self.orderModel.orderGoodsList addObject:model];
     }
     [self.tableView reloadData];
-    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - QXOrderDetailHeadViewDelegate
+- (void)onClickSelectCustomer:(QXOrderDetailHeadView*)header
+{
+    QXCustomerMainViewController *vc = [[QXCustomerMainViewController alloc] init];
+    vc.type = Type2_Select;
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+
+
+
+
+
+
+#pragma mark - QXCustomerMainViewControllerDelegate
+- (void)vc:(QXCustomerMainViewController*)vc selectedCustomer:(QXCustomerModel*)customerModel
+{
+    self.orderModel.name = customerModel.name;
+    self.orderModel.tel = customerModel.tel;
+    self.orderModel.address = customerModel.address;
+    QXOrderDetailHeadView *header = (QXOrderDetailHeadView*)self.tableView.tableHeaderView;
+    [header refreshCustomerUI];
 }
 
 

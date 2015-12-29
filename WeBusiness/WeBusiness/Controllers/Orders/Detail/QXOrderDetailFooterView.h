@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QXOrderDetailFooterView : UIView
 @property (weak, nonatomic, nullable) id<QXOrderDetailFooterViewDelegate>delegate;
 @property (strong, nonatomic, nullable) QXOrderModel *orderModel;
-- (void)assignModel;
 @end
 
 @protocol QXOrderDetailFooterViewDelegate <NSObject>
