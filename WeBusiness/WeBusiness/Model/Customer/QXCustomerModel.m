@@ -61,7 +61,6 @@
             [pyArr addObject:[self assignWithResultSet:rs]];
             [array addObject:pyArr];
         }
-        //[array addObject:[self assignWithResultSet:rs]];
     }
     return array;
 }
@@ -122,7 +121,7 @@
 - (NSArray*)selectPinYinSort:(FMDatabase*)db
 {
     NSMutableArray *array = [NSMutableArray array];
-    NSString *SQLString = STR_FORMAT(@"SELECT PYSORT FROM CUSTOMER ORDER BY PYSORT");
+    NSString *SQLString = STR_FORMAT(@"SELECT PYSORT FROM CUSTOMER GROUP BY PYSORT ORDER BY PYSORT");
     FMResultSet *rs = [db executeQuery:SQLString];
     while ([rs next])
     {

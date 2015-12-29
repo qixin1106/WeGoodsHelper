@@ -70,6 +70,7 @@ QXSearchResultViewControllerDelegate>
     self.searchController.delegate = self;
     self.searchController.searchBar.delegate = self;
     self.searchController.searchResultsUpdater = self;
+    self.searchController.searchBar.placeholder = @"搜索人名/地址/电话";
     self.searchController.dimsBackgroundDuringPresentation = YES;
     self.searchController.hidesNavigationBarDuringPresentation = YES;
     self.tableView.tableHeaderView = self.searchController.searchBar;
@@ -219,6 +220,33 @@ QXSearchResultViewControllerDelegate>
 - (void)cancelKeyboard
 {
     [self.searchController.searchBar resignFirstResponder];
+}
+
+
+- (void)selectCustomer:(QXCustomerModel*)customerModel
+{
+    self.searchController.active = NO;
+    if (self.type==Type2_Display)
+    {
+        QXCustomerDetailViewController *customerDetailViewController = [[QXCustomerDetailViewController alloc] init];
+        customerDetailViewController.templateType = TemplateType_Edit;
+        customerDetailViewController.uid = customerModel.ID;
+        [customerDetailViewController setSaveCustomerBlock:^(QXCustomerModel *customerModel){
+            //保存
+            ([customerModel fetchModel])?[customerModel refresh]:[customerModel store];
+            [self loadData];
+            [self.tableView reloadData];
+        }];
+        [self.navigationController pushViewController:customerDetailViewController animated:YES];
+    }
+    if (self.type==Type2_Select)
+    {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(vc:selectedCustomer:)])
+        {
+            [self.delegate vc:self selectedCustomer:customerModel];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 
