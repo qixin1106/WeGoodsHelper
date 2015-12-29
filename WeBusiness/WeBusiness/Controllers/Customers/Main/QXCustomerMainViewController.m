@@ -14,10 +14,15 @@
 
 #import "QXCustomerDetailViewController.h"
 
+#import "QXSearchResultViewController.h"
+
 static NSString *identifier = @"QXCustomerMainCell";
 
-@interface QXCustomerMainViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface QXCustomerMainViewController ()
+<UISearchBarDelegate,UISearchResultsUpdating,UISearchControllerDelegate>
 @property (strong, nonatomic, nonnull) NSMutableArray *dataArray;
+@property (strong, nonatomic, nonnull) UISearchController *searchController;
+@property (strong, nonatomic, nonnull) QXSearchResultViewController *srvc;
 @end
 
 @implementation QXCustomerMainViewController
@@ -25,10 +30,6 @@ static NSString *identifier = @"QXCustomerMainCell";
 
 
 
-//- (void)onBackClick:(UIBarButtonItem*)sender
-//{
-//    [self dismissViewControllerAnimated:YES completion:NULL];
-//}
 
 - (void)onAddClick:(UIBarButtonItem*)sender
 {
@@ -49,17 +50,24 @@ static NSString *identifier = @"QXCustomerMainCell";
 {
     self.title = (self.type==Type2_Display)?@"客户":@"选择客户";
     
-//    if (self.type==Type2_Select)
-//    {
-//        UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(onBackClick:)];
-//        self.navigationItem.leftBarButtonItems = @[leftItem];
-//    }
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAddClick:)];
     self.navigationItem.rightBarButtonItems = @[rightItem];
     
     
     self.tableView.tableFooterView = [UIView new];
     [self.tableView registerClass:[QXCustomerMainCell class] forCellReuseIdentifier:identifier];
+    
+    
+    
+    self.srvc = [[QXSearchResultViewController alloc] initWithStyle:UITableViewStylePlain searchType:SearchType_Customer];
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.srvc];
+    self.searchController.delegate = self;
+    self.searchController.searchBar.delegate = self;
+    self.searchController.searchResultsUpdater = self;
+    [self.searchController.searchBar sizeToFit];
+    self.searchController.dimsBackgroundDuringPresentation = YES;
+    self.searchController.hidesNavigationBarDuringPresentation = YES;
+    self.tableView.tableHeaderView = self.searchController.searchBar;
 }
 
 
@@ -148,6 +156,27 @@ static NSString *identifier = @"QXCustomerMainCell";
         }
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - UISearchResultsUpdating
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    QXLog(@"search:%@",[searchController.searchBar.text lowercaseString]);
+    QXCustomerModel *customeerModel = [[QXCustomerModel alloc] init];
+    NSArray *models = [customeerModel fetchWithKeyword:[searchController.searchBar.text lowercaseString]];
+    self.srvc.resultArray = [NSMutableArray arrayWithArray:models];
 }
 
 

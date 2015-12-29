@@ -33,4 +33,19 @@
             break;
     }
 }
+
+
+
+- (NSString*)nameToPinyin
+{
+    NSString *str =self.name;
+    NSMutableString *pinyin = [str mutableCopy];
+    //转换成拼音
+    CFStringTransform((__bridge CFMutableStringRef)pinyin, NULL, kCFStringTransformMandarinLatin, NO);
+    //去掉音标
+    CFStringTransform((__bridge CFMutableStringRef)pinyin, NULL, kCFStringTransformStripDiacritics, NO);
+    NSString *py = [pinyin stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return [py lowercaseString];
+}
+
 @end

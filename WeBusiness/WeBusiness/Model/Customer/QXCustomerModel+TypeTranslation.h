@@ -10,4 +10,5 @@
 
 @interface QXCustomerModel (TypeTranslation)
 - (NSString*)typeToString;
+- (NSString*)nameToPinyin;
 @end

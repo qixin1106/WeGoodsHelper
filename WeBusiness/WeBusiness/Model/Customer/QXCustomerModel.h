@@ -14,6 +14,7 @@ static NSString *kCustomRefresh = @"kCustomRefresh";
 
 @interface QXCustomerModel : QXBaseModel
 @property (copy, nonatomic, nullable) NSString *name;
+@property (copy, nonatomic, nullable) NSString *pinyin;
 @property (copy, nonatomic, nullable) NSString *tel;
 @property (copy, nonatomic, nullable) NSString *address;
 @property (copy, nonatomic, nullable) NSString *wechatID;
@@ -25,5 +26,6 @@ static NSString *kCustomRefresh = @"kCustomRefresh";
 - (void)remove;//delete data
 - (NSArray*)fetchAll;//select all data
 - (QXCustomerModel*)fetchModel;//select model with uid
+- (NSArray*)fetchWithKeyword:(NSString*)keyword;//select with keyword
 @end
 NS_ASSUME_NONNULL_END

@@ -55,6 +55,7 @@
 		99F26B681C267F6500C66DE1 /* QXSQLiteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B671C267F6500C66DE1 /* QXSQLiteHelper.m */; };
 		99F26B6C1C2680AC00C66DE1 /* QXFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B6B1C2680AC00C66DE1 /* QXFileUtil.m */; };
 		99F26B751C26965C00C66DE1 /* QXBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B741C26965C00C66DE1 /* QXBaseModel.m */; };
+		99F33BD21C32539F00221102 /* QXSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F33BD11C32539F00221102 /* QXSearchResultViewController.m */; };
 		99F34EA21C28064D00ED54F2 /* QXGoodsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F34EA11C28064D00ED54F2 /* QXGoodsMainViewController.m */; };
 		99F34EA61C28189500ED54F2 /* QXGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F34EA51C28189500ED54F2 /* QXGoodsModel.m */; };
 		99F79F6B1C29AFC500B1492F /* QXGoodsDetailTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F79F6A1C29AFC500B1492F /* QXGoodsDetailTableViewHeaderView.m */; };
@@ -177,6 +178,8 @@
 		99F26B6B1C2680AC00C66DE1 /* QXFileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXFileUtil.m; sourceTree = "<group>"; };
 		99F26B731C26965C00C66DE1 /* QXBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXBaseModel.h; sourceTree = "<group>"; };
 		99F26B741C26965C00C66DE1 /* QXBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXBaseModel.m; sourceTree = "<group>"; };
+		99F33BD01C32539F00221102 /* QXSearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXSearchResultViewController.h; sourceTree = "<group>"; };
+		99F33BD11C32539F00221102 /* QXSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXSearchResultViewController.m; sourceTree = "<group>"; };
 		99F34EA01C28064D00ED54F2 /* QXGoodsMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXGoodsMainViewController.h; sourceTree = "<group>"; };
 		99F34EA11C28064D00ED54F2 /* QXGoodsMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXGoodsMainViewController.m; sourceTree = "<group>"; };
 		99F34EA41C28189500ED54F2 /* QXGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXGoodsModel.h; sourceTree = "<group>"; };
@@ -472,6 +475,7 @@
 		99A56AAE1C271EA500D757ED /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				99F33BCF1C32537800221102 /* SearchResult */,
 				99A56AAF1C271EC600D757ED /* InputString */,
 			);
 			path = Common;
@@ -560,6 +564,15 @@
 				99F26B6B1C2680AC00C66DE1 /* QXFileUtil.m */,
 			);
 			path = FileUitl;
+			sourceTree = "<group>";
+		};
+		99F33BCF1C32537800221102 /* SearchResult */ = {
+			isa = PBXGroup;
+			children = (
+				99F33BD01C32539F00221102 /* QXSearchResultViewController.h */,
+				99F33BD11C32539F00221102 /* QXSearchResultViewController.m */,
+			);
+			path = SearchResult;
 			sourceTree = "<group>";
 		};
 		99F34E9E1C28064D00ED54F2 /* Detail */ = {
@@ -740,6 +753,7 @@
 				992ED6DD1C312DEA00D97A53 /* QXOrderDetailFooterView.m in Sources */,
 				9913384B1C2A9D1F005483F4 /* QXBaseViewController.m in Sources */,
 				99F34EA61C28189500ED54F2 /* QXGoodsModel.m in Sources */,
+				99F33BD21C32539F00221102 /* QXSearchResultViewController.m in Sources */,
 				995373971C2C45D50026119A /* QXOrderModel.m in Sources */,
 				991337FB1C2A509B005483F4 /* UIImage+Utils.m in Sources */,
 				991338241C2A78DD005483F4 /* QXImageCompressUtil.m in Sources */,
@@ -907,6 +921,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/WeBusiness/PrefixHeader.pch";
 				INFOPLIST_FILE = WeBusiness/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -920,6 +935,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/WeBusiness/PrefixHeader.pch";
 				INFOPLIST_FILE = WeBusiness/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

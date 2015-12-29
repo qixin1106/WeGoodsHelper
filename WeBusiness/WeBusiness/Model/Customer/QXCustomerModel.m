@@ -7,7 +7,7 @@
 //
 
 #import "QXCustomerModel.h"
-
+#import "QXCustomerModel+TypeTranslation.h"
 @implementation QXCustomerModel
 
 
@@ -17,7 +17,7 @@
 {
     if (![self isExistTable:@"CUSTOMER" db:db])
     {
-        NSString *SQLString = @"CREATE TABLE CUSTOMER (ID varchar NOT NULL PRIMARY KEY UNIQUE,NAME varchar,TEL varchar,ADDRESS varchar,WECHATID varchar,TYPE integer,PICID varchar,TS double)";
+        NSString *SQLString = @"CREATE TABLE CUSTOMER (ID varchar NOT NULL PRIMARY KEY UNIQUE,NAME varchar,PINYIN varchar,TEL varchar,ADDRESS varchar,WECHATID varchar,TYPE integer,PICID varchar,TS double)";
         [db executeUpdate:SQLString];
     }
 }
@@ -25,15 +25,15 @@
 
 - (void)insert:(FMDatabase*)db
 {
-    NSString *SQLString = @"INSERT INTO CUSTOMER (ID,NAME,TEL,ADDRESS,WECHATID,TYPE,PICID,TS) VALUES (?,?,?,?,?,?,?,?)";
-    [db executeUpdate:SQLString,self.ID,self.name,self.tel,self.address,self.wechatID,@(self.type),self.picID,@(CFAbsoluteTimeGetCurrent())];
+    NSString *SQLString = @"INSERT INTO CUSTOMER (ID,NAME,PINYIN,TEL,ADDRESS,WECHATID,TYPE,PICID,TS) VALUES (?,?,?,?,?,?,?,?,?)";
+    [db executeUpdate:SQLString,self.ID,self.name,[self nameToPinyin],self.tel,self.address,self.wechatID,@(self.type),self.picID,@(CFAbsoluteTimeGetCurrent())];
 }
 
 
 - (void)update:(FMDatabase*)db
 {
-    NSString *SQLString = @"UPDATE CUSTOMER SET NAME=?,TEL=?,ADDRESS=?,WECHATID=?,TYPE=?,PICID=? WHERE ID=?";
-    [db executeUpdate:SQLString,self.name,self.tel,self.address,self.wechatID,@(self.type),self.picID,self.ID];
+    NSString *SQLString = @"UPDATE CUSTOMER SET NAME=?,PINYIN=?,TEL=?,ADDRESS=?,WECHATID=?,TYPE=?,PICID=? WHERE ID=?";
+    [db executeUpdate:SQLString,self.name,[self nameToPinyin],self.tel,self.address,self.wechatID,@(self.type),self.picID,self.ID];
 }
 
 - (void)delete:(FMDatabase*)db
@@ -70,11 +70,51 @@
 
 
 
+- (NSArray*)selectWithKeyword:(NSString*)keyword db:(FMDatabase*)db
+{
+    NSMutableArray *array = [NSMutableArray array];
+    NSString *SQLString = @"SELECT * FROM CUSTOMER \
+    WHERE NAME LIKE ? \
+    OR NAME LIKE ? \
+    OR NAME LIKE ? \
+    OR ADDRESS LIKE ? \
+    OR ADDRESS LIKE ? \
+    OR ADDRESS LIKE ? \
+    OR TEL LIKE ? \
+    OR TEL LIKE ? \
+    OR TEL LIKE ? \
+    OR PINYIN LIKE ? \
+    OR PINYIN LIKE ? \
+    OR PINYIN LIKE ? \
+    ORDER BY TS DESC";
+    FMResultSet *rs = [db executeQuery:SQLString,
+                       STR_FORMAT(@"%@%@",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",@"%",keyword),
+                       STR_FORMAT(@"%@%@%@",@"%",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",@"%",keyword),
+                       STR_FORMAT(@"%@%@%@",@"%",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",@"%",keyword),
+                       STR_FORMAT(@"%@%@%@",@"%",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",@"%",keyword),
+                       STR_FORMAT(@"%@%@%@",@"%",keyword,@"%")];
+    while ([rs next])
+    {
+        [array addObject:[self assignWithResultSet:rs]];
+    }
+    return array;
+}
+
+
+
 - (QXCustomerModel*)assignWithResultSet:(FMResultSet*)rs
 {
     QXCustomerModel *model = [[QXCustomerModel alloc] init];
     model.ID = [rs stringForColumn:@"ID"];
     model.name = [rs stringForColumn:@"NAME"];
+    model.pinyin = [rs stringForColumn:@"PINYIN"];
     model.tel = [rs stringForColumn:@"TEL"];
     model.address = [rs stringForColumn:@"ADDRESS"];
     model.wechatID = [rs stringForColumn:@"WECHATID"];
@@ -137,6 +177,15 @@
 
 
 
+- (NSArray*)fetchWithKeyword:(NSString*)keyword
+{
+    __block NSArray *array;
+    [[QXSQLiteHelper sharedDatabaseQueue] inDatabase:^(FMDatabase *db) {
+        [self createTable:db];
+        array = [self selectWithKeyword:keyword db:db];
+    }];
+    return array;
+}
 
 
 
