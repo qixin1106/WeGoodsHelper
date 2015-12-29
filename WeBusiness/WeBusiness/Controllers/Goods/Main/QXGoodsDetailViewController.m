@@ -262,7 +262,7 @@ UINavigationControllerDelegate>
     if (indexPath.section==1)//进价
     {
         inputStringViewController.keyboardType = UIKeyboardTypeDecimalPad;
-        inputStringViewController.placeHolder = [self.goodsModel costPriceToString];
+        inputStringViewController.placeHolder = self.goodsModel.costPrice?[self.goodsModel costPriceToString]:@"";
         [self.navigationController pushViewController:inputStringViewController animated:YES];
         [inputStringViewController setEditDoneBlock:^(NSString*string){
             self.goodsModel.costPrice = [string floatValue];
@@ -275,7 +275,7 @@ UINavigationControllerDelegate>
     if (indexPath.section==2)//零售
     {
         inputStringViewController.keyboardType = UIKeyboardTypeDecimalPad;
-        inputStringViewController.placeHolder = [self.goodsModel retailPriceToString];
+        inputStringViewController.placeHolder = self.goodsModel.retailPrice?[self.goodsModel retailPriceToString]:@"";
         [self.navigationController pushViewController:inputStringViewController animated:YES];
         [inputStringViewController setEditDoneBlock:^(NSString*string){
             self.goodsModel.retailPrice = [string floatValue];
@@ -288,7 +288,7 @@ UINavigationControllerDelegate>
     if (indexPath.section==3)//代理
     {
         inputStringViewController.keyboardType = UIKeyboardTypeDecimalPad;
-        inputStringViewController.placeHolder = [self.goodsModel delegatePriceToString];
+        inputStringViewController.placeHolder = self.goodsModel.delegatePrice?[self.goodsModel delegatePriceToString]:@"";
         [self.navigationController pushViewController:inputStringViewController animated:YES];
         [inputStringViewController setEditDoneBlock:^(NSString*string){
             self.goodsModel.delegatePrice = [string floatValue];
@@ -301,7 +301,7 @@ UINavigationControllerDelegate>
     if (indexPath.section==4)//友情
     {
         inputStringViewController.keyboardType = UIKeyboardTypeDecimalPad;
-        inputStringViewController.placeHolder = [self.goodsModel friendPriceToString];
+        inputStringViewController.placeHolder = self.goodsModel.friendPrice?[self.goodsModel friendPriceToString]:@"";
         [self.navigationController pushViewController:inputStringViewController animated:YES];
         [inputStringViewController setEditDoneBlock:^(NSString*string){
             self.goodsModel.friendPrice = [string floatValue];
@@ -314,7 +314,7 @@ UINavigationControllerDelegate>
     if (indexPath.section==5)//数量
     {
         inputStringViewController.keyboardType = UIKeyboardTypeDecimalPad;
-        inputStringViewController.placeHolder = [self.goodsModel countToString];
+        inputStringViewController.placeHolder = self.goodsModel.count?[self.goodsModel countToString]:@"";
         [self.navigationController pushViewController:inputStringViewController animated:YES];
         [inputStringViewController setEditDoneBlock:^(NSString*string){
             self.goodsModel.count = [string floatValue];
