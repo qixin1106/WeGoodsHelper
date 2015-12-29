@@ -13,9 +13,15 @@ typedef NS_ENUM(NSUInteger, SearchType) {
     SearchType_Goods,
     SearchType_Customer,
 };
+@protocol QXSearchResultViewControllerDelegate;
 @interface QXSearchResultViewController : QXBaseTableViewController
+@property (weak, nonatomic) id<QXSearchResultViewControllerDelegate>delegate;
 @property (assign, nonatomic) SearchType searchType;
 @property (strong, nonatomic, nullable) NSMutableArray *resultArray;
 - (instancetype)initWithStyle:(UITableViewStyle)style searchType:(SearchType)searchType;
+@end
+
+@protocol QXSearchResultViewControllerDelegate <NSObject>
+- (void)cancelKeyboard;
 @end
 NS_ASSUME_NONNULL_END

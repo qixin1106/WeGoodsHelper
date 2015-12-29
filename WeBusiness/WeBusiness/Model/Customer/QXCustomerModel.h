@@ -15,6 +15,7 @@ static NSString *kCustomRefresh = @"kCustomRefresh";
 @interface QXCustomerModel : QXBaseModel
 @property (copy, nonatomic, nullable) NSString *name;
 @property (copy, nonatomic, nullable) NSString *pinyin;
+@property (copy, nonatomic, nullable) NSString *pySort;
 @property (copy, nonatomic, nullable) NSString *tel;
 @property (copy, nonatomic, nullable) NSString *address;
 @property (copy, nonatomic, nullable) NSString *wechatID;
@@ -27,5 +28,6 @@ static NSString *kCustomRefresh = @"kCustomRefresh";
 - (NSArray*)fetchAll;//select all data
 - (QXCustomerModel*)fetchModel;//select model with uid
 - (NSArray*)fetchWithKeyword:(NSString*)keyword;//select with keyword
+- (NSArray*)fetchPinYinSortArray;//select pinyin sort Array
 @end
 NS_ASSUME_NONNULL_END

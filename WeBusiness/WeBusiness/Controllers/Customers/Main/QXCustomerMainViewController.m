@@ -19,8 +19,12 @@
 static NSString *identifier = @"QXCustomerMainCell";
 
 @interface QXCustomerMainViewController ()
-<UISearchBarDelegate,UISearchResultsUpdating,UISearchControllerDelegate>
-@property (strong, nonatomic, nonnull) NSMutableArray *dataArray;
+<UISearchBarDelegate,
+UISearchResultsUpdating,
+UISearchControllerDelegate,
+QXSearchResultViewControllerDelegate>
+@property (strong, nonatomic, nullable) NSMutableArray *dataArray;
+@property (strong, nonatomic, nullable) NSArray *pySortArray;
 @property (strong, nonatomic, nonnull) UISearchController *searchController;
 @property (strong, nonatomic, nonnull) QXSearchResultViewController *srvc;
 @end
@@ -55,16 +59,17 @@ static NSString *identifier = @"QXCustomerMainCell";
     
     
     self.tableView.tableFooterView = [UIView new];
+    self.tableView.sectionIndexBackgroundColor = [UIColor clearColor];
     [self.tableView registerClass:[QXCustomerMainCell class] forCellReuseIdentifier:identifier];
     
     
     
-    self.srvc = [[QXSearchResultViewController alloc] initWithStyle:UITableViewStylePlain searchType:SearchType_Customer];
+    self.srvc = [[QXSearchResultViewController alloc] initWithStyle:UITableViewStyleGrouped searchType:SearchType_Customer];
+    self.srvc.delegate = self;
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.srvc];
     self.searchController.delegate = self;
     self.searchController.searchBar.delegate = self;
     self.searchController.searchResultsUpdater = self;
-    [self.searchController.searchBar sizeToFit];
     self.searchController.dimsBackgroundDuringPresentation = YES;
     self.searchController.hidesNavigationBarDuringPresentation = YES;
     self.tableView.tableHeaderView = self.searchController.searchBar;
@@ -76,6 +81,7 @@ static NSString *identifier = @"QXCustomerMainCell";
 {
     QXCustomerModel *model = [[QXCustomerModel alloc] init];
     self.dataArray = [NSMutableArray arrayWithArray:[model fetchAll]];
+    self.pySortArray = [model fetchPinYinSortArray];
 }
 
 
@@ -95,17 +101,36 @@ static NSString *identifier = @"QXCustomerMainCell";
 
 
 #pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return self.dataArray.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+{
+    return [self.dataArray[section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     QXCustomerMainCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-    cell.customerModel = self.dataArray[indexPath.row];
+    cell.customerModel = self.dataArray[indexPath.section][indexPath.row];
     return cell;
 }
+
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[self.dataArray[section] lastObject] pySort];
+}
+
+
+- (nullable NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return self.pySortArray;
+}
+
+
+
 
 
 
@@ -119,7 +144,7 @@ static NSString *identifier = @"QXCustomerMainCell";
 {
     if (editingStyle==UITableViewCellEditingStyleDelete)
     {
-        QXCustomerModel *model = self.dataArray[indexPath.row];
+        QXCustomerModel *model = self.dataArray[indexPath.section][indexPath.row];
         [model remove];
         [self.dataArray removeObject:model];
         
@@ -134,7 +159,7 @@ static NSString *identifier = @"QXCustomerMainCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.type==Type2_Display)
     {
-        QXCustomerModel *model = self.dataArray[indexPath.row];
+        QXCustomerModel *model = self.dataArray[indexPath.section][indexPath.row];
         QXCustomerDetailViewController *customerDetailViewController = [[QXCustomerDetailViewController alloc] init];
         customerDetailViewController.templateType = TemplateType_Edit;
         customerDetailViewController.uid = model.ID;
@@ -149,7 +174,7 @@ static NSString *identifier = @"QXCustomerMainCell";
     
     if (self.type==Type2_Select)
     {
-        QXCustomerModel *model = self.dataArray[indexPath.row];
+        QXCustomerModel *model = self.dataArray[indexPath.section][indexPath.row];
         if (self.delegate && [self.delegate respondsToSelector:@selector(vc:selectedCustomer:)])
         {
             [self.delegate vc:self selectedCustomer:model];
@@ -178,6 +203,24 @@ static NSString *identifier = @"QXCustomerMainCell";
     NSArray *models = [customeerModel fetchWithKeyword:[searchController.searchBar.text lowercaseString]];
     self.srvc.resultArray = [NSMutableArray arrayWithArray:models];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - QXSearchResultViewControllerDelegate
+- (void)cancelKeyboard
+{
+    [self.searchController.searchBar resignFirstResponder];
+}
+
 
 
 @end

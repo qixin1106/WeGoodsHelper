@@ -31,7 +31,6 @@ static NSString *identifier = @"QXCustomerMainCell";
 {
     [super viewDidLoad];
     self.tableView.tableFooterView = [UIView new];
-    
     [self.tableView registerClass:[QXCustomerMainCell class] forCellReuseIdentifier:identifier];
 }
 
@@ -45,6 +44,19 @@ static NSString *identifier = @"QXCustomerMainCell";
         self.resultArray = [NSMutableArray array];
     }
     return self;
+}
+
+
+
+
+
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(cancelKeyboard)])
+    {
+        [self.delegate cancelKeyboard];
+    }
 }
 
 
@@ -66,6 +78,10 @@ static NSString *identifier = @"QXCustomerMainCell";
     return nil;
 }
 
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"最佳匹配";
+}
 
 
 
@@ -76,13 +92,12 @@ static NSString *identifier = @"QXCustomerMainCell";
 //}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0;
+    return 0.0001;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0;
+    return 0.0001;
 }
-
 
 
 @end

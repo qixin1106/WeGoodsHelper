@@ -10,5 +10,8 @@
 
 @interface QXCustomerModel (TypeTranslation)
 - (NSString*)typeToString;
+//汉字转拼音
 - (NSString*)nameToPinyin;
+//拼音首字母,排序用
+- (NSString*)nameToPinyinFirstChar;
 @end

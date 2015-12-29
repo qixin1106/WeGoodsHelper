@@ -38,8 +38,7 @@
 
 - (NSString*)nameToPinyin
 {
-    NSString *str =self.name;
-    NSMutableString *pinyin = [str mutableCopy];
+    NSMutableString *pinyin = [self.name mutableCopy];
     //转换成拼音
     CFStringTransform((__bridge CFMutableStringRef)pinyin, NULL, kCFStringTransformMandarinLatin, NO);
     //去掉音标
@@ -47,5 +46,19 @@
     NSString *py = [pinyin stringByReplacingOccurrencesOfString:@" " withString:@""];
     return [py lowercaseString];
 }
+
+
+
+
+- (NSString*)nameToPinyinFirstChar
+{
+    NSString *str = [self nameToPinyin];
+    if (VALID_STRING(str))
+    {
+        return [[str substringToIndex:1] uppercaseString];
+    }
+    return nil;
+}
+
 
 @end

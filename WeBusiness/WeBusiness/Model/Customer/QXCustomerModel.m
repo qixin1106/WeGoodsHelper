@@ -17,7 +17,7 @@
 {
     if (![self isExistTable:@"CUSTOMER" db:db])
     {
-        NSString *SQLString = @"CREATE TABLE CUSTOMER (ID varchar NOT NULL PRIMARY KEY UNIQUE,NAME varchar,PINYIN varchar,TEL varchar,ADDRESS varchar,WECHATID varchar,TYPE integer,PICID varchar,TS double)";
+        NSString *SQLString = @"CREATE TABLE CUSTOMER (ID varchar NOT NULL PRIMARY KEY UNIQUE,NAME varchar,PINYIN varchar,PYSORT varchar,TEL varchar,ADDRESS varchar,WECHATID varchar,TYPE integer,PICID varchar,TS double)";
         [db executeUpdate:SQLString];
     }
 }
@@ -25,15 +25,15 @@
 
 - (void)insert:(FMDatabase*)db
 {
-    NSString *SQLString = @"INSERT INTO CUSTOMER (ID,NAME,PINYIN,TEL,ADDRESS,WECHATID,TYPE,PICID,TS) VALUES (?,?,?,?,?,?,?,?,?)";
-    [db executeUpdate:SQLString,self.ID,self.name,[self nameToPinyin],self.tel,self.address,self.wechatID,@(self.type),self.picID,@(CFAbsoluteTimeGetCurrent())];
+    NSString *SQLString = @"INSERT INTO CUSTOMER (ID,NAME,PINYIN,PYSORT,TEL,ADDRESS,WECHATID,TYPE,PICID,TS) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    [db executeUpdate:SQLString,self.ID,self.name,[self nameToPinyin],[self nameToPinyinFirstChar],self.tel,self.address,self.wechatID,@(self.type),self.picID,@(CFAbsoluteTimeGetCurrent())];
 }
 
 
 - (void)update:(FMDatabase*)db
 {
-    NSString *SQLString = @"UPDATE CUSTOMER SET NAME=?,PINYIN=?,TEL=?,ADDRESS=?,WECHATID=?,TYPE=?,PICID=? WHERE ID=?";
-    [db executeUpdate:SQLString,self.name,[self nameToPinyin],self.tel,self.address,self.wechatID,@(self.type),self.picID,self.ID];
+    NSString *SQLString = @"UPDATE CUSTOMER SET NAME=?,PINYIN=?,PYSORT=?,TEL=?,ADDRESS=?,WECHATID=?,TYPE=?,PICID=? WHERE ID=?";
+    [db executeUpdate:SQLString,self.name,[self nameToPinyin],[self nameToPinyinFirstChar],self.tel,self.address,self.wechatID,@(self.type),self.picID,self.ID];
 }
 
 - (void)delete:(FMDatabase*)db
@@ -46,11 +46,22 @@
 - (NSArray*)selectAllModel:(FMDatabase*)db
 {
     NSMutableArray *array = [NSMutableArray array];
-    NSString *SQLString = @"SELECT * FROM CUSTOMER ORDER BY TS DESC";
+    NSString *SQLString = @"SELECT * FROM CUSTOMER ORDER BY PYSORT";
     FMResultSet *rs = [db executeQuery:SQLString];
     while ([rs next])
     {
-        [array addObject:[self assignWithResultSet:rs]];
+        QXCustomerModel *model = [[array lastObject] firstObject];
+        if (model && [model.pySort isEqualToString:[[self assignWithResultSet:rs] pySort]])
+        {
+            [[array lastObject] addObject:[self assignWithResultSet:rs]];
+        }
+        else
+        {
+            NSMutableArray *pyArr = [NSMutableArray array];
+            [pyArr addObject:[self assignWithResultSet:rs]];
+            [array addObject:pyArr];
+        }
+        //[array addObject:[self assignWithResultSet:rs]];
     }
     return array;
 }
@@ -108,6 +119,19 @@
 }
 
 
+- (NSArray*)selectPinYinSort:(FMDatabase*)db
+{
+    NSMutableArray *array = [NSMutableArray array];
+    NSString *SQLString = STR_FORMAT(@"SELECT PYSORT FROM CUSTOMER ORDER BY PYSORT");
+    FMResultSet *rs = [db executeQuery:SQLString];
+    while ([rs next])
+    {
+        [array addObject:[rs stringForColumn:@"PYSORT"]];
+    }
+    return array;
+}
+
+
 
 - (QXCustomerModel*)assignWithResultSet:(FMResultSet*)rs
 {
@@ -115,6 +139,7 @@
     model.ID = [rs stringForColumn:@"ID"];
     model.name = [rs stringForColumn:@"NAME"];
     model.pinyin = [rs stringForColumn:@"PINYIN"];
+    model.pySort = [rs stringForColumn:@"PYSORT"];
     model.tel = [rs stringForColumn:@"TEL"];
     model.address = [rs stringForColumn:@"ADDRESS"];
     model.wechatID = [rs stringForColumn:@"WECHATID"];
@@ -188,6 +213,14 @@
 }
 
 
-
+- (NSArray*)fetchPinYinSortArray
+{
+    __block NSArray *array;
+    [[QXSQLiteHelper sharedDatabaseQueue] inDatabase:^(FMDatabase *db) {
+        [self createTable:db];
+        array = [self selectPinYinSort:db];
+    }];
+    return array;
+}
 
 @end
