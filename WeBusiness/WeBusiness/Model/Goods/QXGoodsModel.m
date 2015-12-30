@@ -70,6 +70,37 @@
 
 
 
+- (NSArray*)selectWithKeyword:(NSString*)keyword db:(FMDatabase*)db
+{
+    NSMutableArray *array = [NSMutableArray array];
+    NSString *SQLString = @"SELECT * FROM GOODS \
+    WHERE NAME LIKE ? \
+    OR NAME LIKE ? \
+    OR NAME LIKE ? \
+    OR DESCS LIKE ? \
+    OR DESCS LIKE ? \
+    OR DESCS LIKE ? \
+    OR REMARK LIKE ? \
+    OR REMARK LIKE ? \
+    OR REMARK LIKE ? \
+    ORDER BY TS DESC";
+    FMResultSet *rs = [db executeQuery:SQLString,
+                       STR_FORMAT(@"%@%@",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",@"%",keyword),
+                       STR_FORMAT(@"%@%@%@",@"%",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",@"%",keyword),
+                       STR_FORMAT(@"%@%@%@",@"%",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",@"%",keyword),
+                       STR_FORMAT(@"%@%@%@",@"%",keyword,@"%")];
+    while ([rs next])
+    {
+        [array addObject:[self assignWithResultSet:rs]];
+    }
+    return array;
+}
+
 
 - (QXGoodsModel*)assignWithResultSet:(FMResultSet*)rs
 {
@@ -147,5 +178,20 @@
     }];
     return model;
 }
+
+
+
+- (NSArray*)fetchWithKeyword:(NSString*)keyword
+{
+    __block NSArray *array;
+    [[QXSQLiteHelper sharedDatabaseQueue] inDatabase:^(FMDatabase *db) {
+        [self createTable:db];
+        array = [self selectWithKeyword:keyword db:db];
+    }];
+    return array;
+}
+
+
+
 
 @end

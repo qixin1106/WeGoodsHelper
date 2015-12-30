@@ -9,10 +9,12 @@
 #import "QXCustomerMainCell.h"
 #import "QXCustomerModel.h"
 
+
+
 @interface QXCustomerMainCell ()
-@property (strong, nonatomic) UIImageView *headImageView;
-@property (strong, nonatomic) UILabel *nameLabel;
-@property (strong, nonatomic) UILabel *addressLabel;
+@property (strong, nonatomic, nonnull) UILabel *nameLabel;
+@property (strong, nonatomic, nonnull) UILabel *addressLabel;
+@property (strong, nonatomic, nonnull) UILabel *telLabel;
 @end
 
 @implementation QXCustomerMainCell
@@ -23,13 +25,9 @@
     {
         _customerModel = customerModel;
         
-        /*
         self.nameLabel.text = _customerModel.name;
+        self.telLabel.text = _customerModel.tel;
         self.addressLabel.text = _customerModel.address;
-        self.headImageView.image = [UIImage imageNamed:@"testTabbarIcon"];
-         */
-        self.textLabel.text = _customerModel.name;
-        self.detailTextLabel.text = _customerModel.address;
     }
 }
 
@@ -39,53 +37,26 @@
     self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
     if (self)
     {
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
-        self.textLabel.font = [UIFont systemFontOfSize:16];
-        self.detailTextLabel.font = [UIFont systemFontOfSize:12];
-        /*
-        self.headImageView = [[UIImageView alloc] init];
-        self.headImageView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.contentView addSubview:self.headImageView];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.headImageView
-                                                                     attribute:NSLayoutAttributeTop
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:self.contentView
-                                                                     attribute:NSLayoutAttributeTop
-                                                                    multiplier:1
-                                                                      constant:5]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.headImageView
-                                                                     attribute:NSLayoutAttributeLeft
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:self.contentView
-                                                                     attribute:NSLayoutAttributeLeft
-                                                                    multiplier:1
-                                                                      constant:5]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.headImageView
-                                                                     attribute:NSLayoutAttributeWidth
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:nil
-                                                                     attribute:NSLayoutAttributeNotAnAttribute
-                                                                    multiplier:1
-                                                                      constant:50]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.headImageView
-                                                                     attribute:NSLayoutAttributeHeight
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:nil
-                                                                     attribute:NSLayoutAttributeNotAnAttribute
-                                                                    multiplier:1
-                                                                      constant:50]];
-
-
-
-        
-        
-        
         self.nameLabel = [[UILabel alloc] init];
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.nameLabel.font = [UIFont systemFontOfSize:17];
+        self.nameLabel.font = [UIFont systemFontOfSize:16];
         self.nameLabel.textColor = RGBA(55, 55, 55, 1);
         [self.contentView addSubview:self.nameLabel];
+        
+        self.telLabel = [[UILabel alloc] init];
+        self.telLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        self.telLabel.font = [UIFont systemFontOfSize:15];
+        self.telLabel.textColor = RGBA(55, 55, 55, 1);
+        [self.contentView addSubview:self.telLabel];
+
+        
+        self.addressLabel = [[UILabel alloc] init];
+        self.addressLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        self.addressLabel.font = [UIFont systemFontOfSize:12];
+        self.addressLabel.textColor = RGBA(128, 128, 128, 1);
+        self.addressLabel.numberOfLines = 0;
+        [self.contentView addSubview:self.addressLabel];
+        
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.nameLabel
                                                                      attribute:NSLayoutAttributeTop
                                                                      relatedBy:NSLayoutRelationEqual
@@ -96,18 +67,11 @@
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.nameLabel
                                                                      attribute:NSLayoutAttributeLeft
                                                                      relatedBy:NSLayoutRelationEqual
-                                                                        toItem:self.headImageView
-                                                                     attribute:NSLayoutAttributeRight
+                                                                        toItem:self.contentView
+                                                                     attribute:NSLayoutAttributeLeft
                                                                     multiplier:1
                                                                       constant:5]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.nameLabel
-                                                                     attribute:NSLayoutAttributeWidth
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:nil
-                                                                     attribute:NSLayoutAttributeNotAnAttribute
-                                                                    multiplier:1
-                                                                      constant:100]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.nameLabel
+        [self.nameLabel addConstraint:[NSLayoutConstraint constraintWithItem:self.nameLabel
                                                                      attribute:NSLayoutAttributeHeight
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:nil
@@ -116,13 +80,28 @@
                                                                       constant:20]];
         
         
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.telLabel
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.nameLabel
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                    multiplier:1
+                                                                      constant:0]];
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.telLabel
+                                                                     attribute:NSLayoutAttributeRight
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.contentView
+                                                                     attribute:NSLayoutAttributeRight
+                                                                    multiplier:1
+                                                                      constant:-5]];
+        [self.telLabel addConstraint:[NSLayoutConstraint constraintWithItem:self.telLabel
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                     multiplier:1
+                                                                       constant:20]];
         
-        self.addressLabel = [[UILabel alloc] init];
-        self.addressLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.addressLabel.font = [UIFont systemFontOfSize:12];
-        self.addressLabel.textColor = RGBA(128, 128, 128, 1);
-        self.addressLabel.numberOfLines = 0;
-        [self.contentView addSubview:self.addressLabel];
         
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.addressLabel
                                                                      attribute:NSLayoutAttributeTop
@@ -134,8 +113,8 @@
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.addressLabel
                                                                      attribute:NSLayoutAttributeLeft
                                                                      relatedBy:NSLayoutRelationEqual
-                                                                        toItem:self.headImageView
-                                                                     attribute:NSLayoutAttributeRight
+                                                                        toItem:self.contentView
+                                                                     attribute:NSLayoutAttributeLeft
                                                                     multiplier:1
                                                                       constant:5]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.addressLabel
@@ -152,7 +131,8 @@
                                                                      attribute:NSLayoutAttributeBottom
                                                                     multiplier:1
                                                                       constant:-5]];
-*/
+
+
     }
     return self;
 }

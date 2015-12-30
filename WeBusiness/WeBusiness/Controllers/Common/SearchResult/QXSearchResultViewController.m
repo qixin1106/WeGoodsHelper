@@ -8,8 +8,12 @@
 
 #import "QXSearchResultViewController.h"
 #import "QXCustomerMainCell.h"
+#import "QXGoodsMainCell.h"
+#import "QXOrderMainCell.h"
 
 static NSString *identifier = @"QXCustomerMainCell";
+static NSString *identifier2 = @"QXGoodsMainCell";
+static NSString *identifier3 = @"QXOrderMainCell";
 
 @interface QXSearchResultViewController ()
 @end
@@ -31,7 +35,20 @@ static NSString *identifier = @"QXCustomerMainCell";
 {
     [super viewDidLoad];
     self.tableView.tableFooterView = [UIView new];
-    [self.tableView registerClass:[QXCustomerMainCell class] forCellReuseIdentifier:identifier];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 60;
+    if (self.searchType==SearchType_Customer)
+    {
+        [self.tableView registerClass:[QXCustomerMainCell class] forCellReuseIdentifier:identifier];
+    }
+    else if (self.searchType==SearchType_Goods)
+    {
+        [self.tableView registerClass:[QXGoodsMainCell class] forCellReuseIdentifier:identifier2];
+    }
+    else if (self.searchType==SearchType_Order)
+    {
+        [self.tableView registerClass:[QXOrderMainCell class] forCellReuseIdentifier:identifier3];
+    }
 }
 
 
@@ -75,6 +92,14 @@ static NSString *identifier = @"QXCustomerMainCell";
         cell.customerModel = self.resultArray[indexPath.row];
         return cell;
     }
+    else if (self.searchType==SearchType_Goods)
+    {
+        QXGoodsMainCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier2 forIndexPath:indexPath];
+//        cell.delegate = self;
+        cell.indexPath = indexPath;
+        cell.goodsModel = self.resultArray[indexPath.row];
+        return cell;
+    }
     return nil;
 }
 
@@ -86,6 +111,21 @@ static NSString *identifier = @"QXCustomerMainCell";
 
 
 #pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.searchType==SearchType_Customer)
+    {
+        return UITableViewAutomaticDimension;
+    }
+    else if (self.searchType==SearchType_Goods)
+    {
+        return 125;
+    }
+    return UITableViewAutomaticDimension;
+}
+
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 0.0001;
@@ -98,9 +138,9 @@ static NSString *identifier = @"QXCustomerMainCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(selectCustomer:)])
+    if (self.delegate && [self.delegate respondsToSelector:@selector(selectModel:)])
     {
-        [self.delegate selectCustomer:self.resultArray[indexPath.row]];
+        [self.delegate selectModel:self.resultArray[indexPath.row]];
     }
 }
 

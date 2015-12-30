@@ -15,12 +15,23 @@
 
 #import "QXGoodsMainMoreView.h"
 
+#import "QXSearchResultViewController.h"
+
 static NSString *identifier = @"QXGoodsMainCell";
 
 @interface QXGoodsMainViewController ()
-<UITableViewDataSource,UITableViewDelegate,QXGoodsMainCellDelegate>
+<UITableViewDataSource,
+UITableViewDelegate,
+QXGoodsMainCellDelegate,
+UISearchBarDelegate,
+UISearchResultsUpdating,
+UISearchControllerDelegate,
+QXSearchResultViewControllerDelegate>
 @property (strong, nonatomic, nonnull) NSMutableArray *dataArray;
 @property (strong, nonatomic, nullable) QXGoodsMainMoreView *moreView;
+@property (strong, nonatomic, nullable) NSArray *pySortArray;
+@property (strong, nonatomic, nonnull) UISearchController *searchController;
+@property (strong, nonatomic, nonnull) QXSearchResultViewController *srvc;
 @end
 
 @implementation QXGoodsMainViewController
@@ -72,6 +83,17 @@ static NSString *identifier = @"QXGoodsMainCell";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[QXGoodsMainCell class] forCellReuseIdentifier:identifier];
     
+    self.srvc = [[QXSearchResultViewController alloc] initWithStyle:UITableViewStyleGrouped searchType:SearchType_Goods];
+    self.srvc.delegate = self;
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.srvc];
+    self.searchController.delegate = self;
+    self.searchController.searchBar.delegate = self;
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.searchBar.placeholder = @"搜索商品名/商品描述/备注";
+    self.searchController.dimsBackgroundDuringPresentation = YES;
+    self.searchController.hidesNavigationBarDuringPresentation = YES;
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+
 }
 
 - (void)viewDidLoad
@@ -197,6 +219,75 @@ static NSString *identifier = @"QXGoodsMainCell";
     [UIView animateWithDuration:0.25f animations:^{
         self.moreView.frame = FRAME_ORIGINX(self.moreView, cell.line.frame.origin.x);
     }];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - UISearchResultsUpdating
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    QXLog(@"search:%@",[searchController.searchBar.text lowercaseString]);
+    QXGoodsModel *model = [[QXGoodsModel alloc] init];
+    NSArray *models = [model fetchWithKeyword:[searchController.searchBar.text lowercaseString]];
+    self.srvc.resultArray = [NSMutableArray arrayWithArray:models];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - QXSearchResultViewControllerDelegate
+- (void)cancelKeyboard
+{
+    [self.searchController.searchBar resignFirstResponder];
+}
+
+
+- (void)selectModel:(id)model
+{
+    QXGoodsModel *goodsModel = (QXGoodsModel*)model;
+    self.searchController.active = NO;
+    if (self.type==Type_Display)
+    {
+        QXGoodsDetailViewController *vc = [[QXGoodsDetailViewController alloc] initWithGid:goodsModel.ID];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.templateType = TemplateType_Edit;
+        [vc setSaveGoodsBlock:^(QXGoodsModel *goodsModel) {
+            //保存
+            ([goodsModel fetchModel])?[goodsModel refresh]:[goodsModel store];
+            [self loadData];
+            [self.tableView reloadData];
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (self.type==Type_Select)
+    {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(selectedGoods:)])
+        {
+            [self.delegate selectedGoods:goodsModel];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 

@@ -59,6 +59,8 @@ QXSearchResultViewControllerDelegate>
     
     
     self.tableView.tableFooterView = [UIView new];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 60;
     self.tableView.sectionIndexBackgroundColor = [UIColor clearColor];
     [self.tableView registerClass:[QXCustomerMainCell class] forCellReuseIdentifier:identifier];
     
@@ -223,8 +225,9 @@ QXSearchResultViewControllerDelegate>
 }
 
 
-- (void)selectCustomer:(QXCustomerModel*)customerModel
+- (void)selectModel:(id)model
 {
+    QXCustomerModel *customerModel = (QXCustomerModel*)model;
     self.searchController.active = NO;
     if (self.type==Type2_Display)
     {

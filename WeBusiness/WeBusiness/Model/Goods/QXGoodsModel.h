@@ -30,6 +30,6 @@ static NSString *kGoodsRefresh = @"kGoodsRefresh";
 - (void)remove;//delete data
 - (NSArray*)fetchAll;//select all data
 - (QXGoodsModel*)fetchModel;//select model with uid
-
+- (NSArray*)fetchWithKeyword:(NSString*)keyword;//select models with keyword
 @end
 NS_ASSUME_NONNULL_END

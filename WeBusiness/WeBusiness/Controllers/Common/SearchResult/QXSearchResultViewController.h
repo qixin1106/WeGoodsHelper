@@ -13,7 +13,6 @@ typedef NS_ENUM(NSUInteger, SearchType) {
     SearchType_Goods,
     SearchType_Customer,
 };
-@class QXCustomerModel;
 @protocol QXSearchResultViewControllerDelegate;
 @interface QXSearchResultViewController : QXBaseTableViewController
 @property (weak, nonatomic) id<QXSearchResultViewControllerDelegate>delegate;
@@ -24,6 +23,6 @@ typedef NS_ENUM(NSUInteger, SearchType) {
 
 @protocol QXSearchResultViewControllerDelegate <NSObject>
 - (void)cancelKeyboard;
-- (void)selectCustomer:(QXCustomerModel*)customerModel;
+- (void)selectModel:(id)model;
 @end
 NS_ASSUME_NONNULL_END
