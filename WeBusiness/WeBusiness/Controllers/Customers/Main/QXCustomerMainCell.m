@@ -9,8 +9,8 @@
 #import "QXCustomerMainCell.h"
 #import "QXCustomerModel.h"
 
-
-
+#define EDGE_WIDTH 10
+#define LABEL_HEIGHT 20
 @interface QXCustomerMainCell ()
 @property (strong, nonatomic, nonnull) UILabel *nameLabel;
 @property (strong, nonatomic, nonnull) UILabel *addressLabel;
@@ -39,13 +39,13 @@
     {
         self.nameLabel = [[UILabel alloc] init];
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.nameLabel.font = [UIFont systemFontOfSize:16];
+        self.nameLabel.font = [UIFont systemFontOfSize:17];
         self.nameLabel.textColor = RGBA(55, 55, 55, 1);
         [self.contentView addSubview:self.nameLabel];
         
         self.telLabel = [[UILabel alloc] init];
         self.telLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.telLabel.font = [UIFont systemFontOfSize:15];
+        self.telLabel.font = [UIFont systemFontOfSize:17];
         self.telLabel.textColor = RGBA(55, 55, 55, 1);
         [self.contentView addSubview:self.telLabel];
 
@@ -63,21 +63,21 @@
                                                                         toItem:self.contentView
                                                                      attribute:NSLayoutAttributeTop
                                                                     multiplier:1
-                                                                      constant:5]];
+                                                                      constant:EDGE_WIDTH]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.nameLabel
                                                                      attribute:NSLayoutAttributeLeft
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:self.contentView
                                                                      attribute:NSLayoutAttributeLeft
                                                                     multiplier:1
-                                                                      constant:5]];
+                                                                      constant:EDGE_WIDTH]];
         [self.nameLabel addConstraint:[NSLayoutConstraint constraintWithItem:self.nameLabel
                                                                      attribute:NSLayoutAttributeHeight
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:nil
                                                                      attribute:NSLayoutAttributeNotAnAttribute
                                                                     multiplier:1
-                                                                      constant:20]];
+                                                                      constant:LABEL_HEIGHT]];
         
         
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.telLabel
@@ -93,14 +93,14 @@
                                                                         toItem:self.contentView
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1
-                                                                      constant:-5]];
+                                                                      constant:-EDGE_WIDTH]];
         [self.telLabel addConstraint:[NSLayoutConstraint constraintWithItem:self.telLabel
                                                                       attribute:NSLayoutAttributeHeight
                                                                       relatedBy:NSLayoutRelationEqual
                                                                          toItem:nil
                                                                       attribute:NSLayoutAttributeNotAnAttribute
                                                                      multiplier:1
-                                                                       constant:20]];
+                                                                       constant:LABEL_HEIGHT]];
         
         
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.addressLabel
@@ -109,28 +109,28 @@
                                                                         toItem:self.nameLabel
                                                                      attribute:NSLayoutAttributeBottom
                                                                     multiplier:1
-                                                                      constant:5]];
+                                                                      constant:EDGE_WIDTH]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.addressLabel
                                                                      attribute:NSLayoutAttributeLeft
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:self.contentView
                                                                      attribute:NSLayoutAttributeLeft
                                                                     multiplier:1
-                                                                      constant:5]];
+                                                                      constant:EDGE_WIDTH]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.addressLabel
                                                                      attribute:NSLayoutAttributeRight
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:self.contentView
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1
-                                                                      constant:-5]];
+                                                                      constant:-EDGE_WIDTH]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.addressLabel
                                                                      attribute:NSLayoutAttributeBottom
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:self.contentView
                                                                      attribute:NSLayoutAttributeBottom
                                                                     multiplier:1
-                                                                      constant:-5]];
+                                                                      constant:-EDGE_WIDTH]];
 
 
     }
