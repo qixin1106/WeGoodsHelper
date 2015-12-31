@@ -16,6 +16,8 @@
 #import "QXOrderDetailCell.h"
 #import "QXCustomerModel.h"
 #import "QXCustomerMainViewController.h"
+#import "QXOrderDetailMoreView.h"
+
 
 static NSString *identifier = @"QXOrderDetailCell";
 static NSString *identifierHeader = @"QXOrderHeaderView";
@@ -26,12 +28,22 @@ static NSString *identifierFooter = @"QXOrderFooterView";
 <QXOrderDetailFooterViewDelegate,
 QXGoodsMainViewControllerDelegate,
 QXOrderDetailHeadViewDelegate,
-QXCustomerMainViewControllerDelegate>
+QXCustomerMainViewControllerDelegate,
+QXOrderDetailCellDelegate>
 @property (strong, nonatomic) QXOrderModel *orderModel;
+@property (strong, nonatomic) QXOrderDetailMoreView *moreView;
 @end
 
 @implementation QXOrderDetailViewController
 
+- (void)removeMoreView
+{
+    if (self.moreView)
+    {
+        [self.moreView removeFromSuperview];
+        self.moreView = nil;
+    }
+}
 
 
 
@@ -84,6 +96,7 @@ QXCustomerMainViewControllerDelegate>
     footer.orderModel = self.orderModel;
     footer.delegate = self;
     self.tableView.tableFooterView = footer;
+    
 }
 
 
@@ -129,6 +142,8 @@ QXCustomerMainViewControllerDelegate>
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     QXOrderDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    cell.delegate = self;
+    cell.indexPath = indexPath;
     QXOrderGoodsModel *orderGoodsModel = self.orderModel.orderGoodsList[indexPath.row];
     cell.orderGoodsModel = orderGoodsModel;
     return cell;
@@ -149,13 +164,6 @@ QXCustomerMainViewControllerDelegate>
 
 
 
-
-
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    [self.tableView endEditing:NO];
-}
 
 
 
@@ -250,6 +258,33 @@ QXCustomerMainViewControllerDelegate>
     self.orderModel.address = customerModel.address;
     QXOrderDetailHeadView *header = (QXOrderDetailHeadView*)self.tableView.tableHeaderView;
     [header refreshCustomerUI];
+}
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - QXOrderDetailCellDelegate
+- (void)cell:(QXOrderDetailCell*)cell onClickMoreButton:(QXOrderGoodsModel*)orderGoodsModel
+{
+    CGRect cellFrame = [self.tableView rectForRowAtIndexPath:[self.tableView indexPathForCell:cell]];
+    [self removeMoreView];
+    
+    self.moreView = [[[NSBundle mainBundle] loadNibNamed:@"QXOrderDetailMoreView" owner:self options:nil] lastObject];
+    self.moreView.model = orderGoodsModel;
+    [self.moreView addTarget:self action:@selector(removeMoreView) forControlEvents:UIControlEventTouchUpInside];
+    self.moreView.frame = CGRectMake(self.view.bounds.size.width, cellFrame.origin.y, self.view.bounds.size.width-80, cellFrame.size.height-1);
+    [self.tableView addSubview:self.moreView];
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        self.moreView.frame = FRAME_ORIGINX(self.moreView, 80);
+    }];
 }
 
 

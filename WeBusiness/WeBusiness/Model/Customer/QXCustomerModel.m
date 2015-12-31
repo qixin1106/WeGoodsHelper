@@ -15,7 +15,7 @@
 #pragma mark - Private
 - (void)createTable:(FMDatabase*)db
 {
-    if (![self isExistTable:@"CUSTOMER" db:db])
+    if (![db tableExists:@"CUSTOMER"])
     {
         NSString *SQLString = @"CREATE TABLE CUSTOMER (ID varchar NOT NULL PRIMARY KEY UNIQUE,NAME varchar,PINYIN varchar,PYSORT varchar,TEL varchar,ADDRESS varchar,WECHATID varchar,TYPE integer,PICID varchar,TS double)";
         [db executeUpdate:SQLString];

@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) CGFloat price;//总价
 @property (assign, nonatomic) CGFloat cost;//总成本
 @property (assign, nonatomic) CGFloat profit;//利润
+@property (assign, nonatomic) CGFloat discount;//折扣(利润=总价-成本-运费-折扣)
 @property (assign, nonatomic) BOOL isFinish;//是否完成交易
 @property (strong, nonatomic, nullable) NSMutableArray *orderGoodsList;//QXOrderGoodsModel元素的数组
 - (void)store;//insert data

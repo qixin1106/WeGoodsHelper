@@ -16,7 +16,10 @@
 
 - (void)onClickMore:(UIButton*)sender
 {
-    NSLog(@"11111");
+    if (self.delegate && [self.delegate respondsToSelector:@selector(cell:onClickMoreButton:)])
+    {
+        [self.delegate cell:self onClickMoreButton:self.orderGoodsModel];
+    }
 }
 
 

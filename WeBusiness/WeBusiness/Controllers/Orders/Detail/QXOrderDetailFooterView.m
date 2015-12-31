@@ -8,7 +8,27 @@
 
 #import "QXOrderDetailFooterView.h"
 #import "QXOrderModel.h"
+
+
+@interface QXOrderDetailFooterView ()
+@property (weak, nonatomic) IBOutlet UISegmentedControl *stateSegmented;
+@end
+
 @implementation QXOrderDetailFooterView
+
+
+
+
+- (void)setOrderModel:(QXOrderModel *)orderModel
+{
+    if (_orderModel!=orderModel)
+    {
+        _orderModel=orderModel;
+        _stateSegmented.selectedSegmentIndex = _orderModel.isFinish;
+    }
+}
+
+
 
 - (IBAction)addGoodsButton:(UIButton *)sender
 {
@@ -18,14 +38,14 @@
     }
 }
 
-- (IBAction)isFinishSwicth:(UISwitch *)sender
+
+- (IBAction)changeOrderState:(UISegmentedControl *)sender
 {
-    self.orderModel.isFinish = sender.on;
+    self.orderModel.isFinish = sender.selectedSegmentIndex;
     if (self.delegate && [self.delegate respondsToSelector:@selector(changeState:)])
     {
-        [self.delegate changeState:sender.on];
+        [self.delegate changeState:sender.selectedSegmentIndex];
     }
 }
-
 
 @end

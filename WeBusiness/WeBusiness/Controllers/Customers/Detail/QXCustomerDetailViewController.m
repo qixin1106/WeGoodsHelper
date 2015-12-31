@@ -64,6 +64,8 @@ static NSString *identifier = @"QXCustomerDetailHeadCell";
     self.navigationItem.rightBarButtonItem = rightItem;
     
     self.tableView.tableFooterView = [UIView new];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 44;
     [self.tableView registerClass:[QXCustomerDetailHeadCell class] forCellReuseIdentifier:identifier];
 }
 

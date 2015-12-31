@@ -26,9 +26,9 @@
 #pragma mark - Private
 - (void)createTable:(FMDatabase*)db
 {
-    if (![self isExistTable:@"ORDERS" db:db])
+    if (![db tableExists:@"ORDERS"])
     {
-        NSString *SQLString = @"CREATE TABLE ORDERS (ID varchar NOT NULL PRIMARY KEY UNIQUE,NAME varchar,TEL varchar,ADDRESS varchar,CN varchar,REMARK varchar,ORDERTIME double,FREIGHT double,PRICE double,COST double,PROFIT double,ISFINISH boolean,TS double)";
+        NSString *SQLString = @"CREATE TABLE ORDERS (ID varchar NOT NULL PRIMARY KEY UNIQUE,NAME varchar,TEL varchar,ADDRESS varchar,CN varchar,REMARK varchar,ORDERTIME double,FREIGHT double,PRICE double,COST double,PROFIT double,DISCOUNT double,ISFINISH boolean,TS double)";
         [db executeUpdate:SQLString];
     }
 }
@@ -36,15 +36,15 @@
 
 - (void)insert:(FMDatabase*)db
 {
-    NSString *SQLString = @"INSERT INTO ORDERS (ID, NAME, TEL, ADDRESS, CN, REMARK, ORDERTIME, FREIGHT, PRICE, COST, PROFIT, ISFINISH, TS) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    [db executeUpdate:SQLString,self.ID,self.name,self.tel,self.address,self.cn,self.remark,@(CFAbsoluteTimeGetCurrent()),@(self.freight),@(self.price),@(self.cost),@(self.profit),@(self.isFinish),@(CFAbsoluteTimeGetCurrent())];
+    NSString *SQLString = @"INSERT INTO ORDERS (ID, NAME, TEL, ADDRESS, CN, REMARK, ORDERTIME, FREIGHT, PRICE, COST, PROFIT ,DISCOUNT, ISFINISH, TS) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    [db executeUpdate:SQLString,self.ID,self.name,self.tel,self.address,self.cn,self.remark,@(CFAbsoluteTimeGetCurrent()),@(self.freight),@(self.price),@(self.cost),@(self.profit),@(self.discount),@(self.isFinish),@(CFAbsoluteTimeGetCurrent())];
 }
 
 
 - (void)update:(FMDatabase*)db
 {
-    NSString *SQLString = @"UPDATE ORDERS SET  NAME=?, TEL=?, ADDRESS=?, CN=?, REMARK=?, ORDERTIME=?, FREIGHT=?, PRICE=?, COST=?, PROFIT=?, ISFINISH=? WHERE ID=?";
-    [db executeUpdate:SQLString,self.name,self.tel,self.address,self.cn,self.remark,@(self.buyerOrderTime),@(self.freight),@(self.price),@(self.cost),@(self.profit),@(self.isFinish),self.ID];
+    NSString *SQLString = @"UPDATE ORDERS SET  NAME=?, TEL=?, ADDRESS=?, CN=?, REMARK=?, ORDERTIME=?, FREIGHT=?, PRICE=?, COST=?, PROFIT=?, DSICOUNT=? ISFINISH=? WHERE ID=?";
+    [db executeUpdate:SQLString,self.name,self.tel,self.address,self.cn,self.remark,@(self.buyerOrderTime),@(self.freight),@(self.price),@(self.cost),@(self.profit),@(self.discount),@(self.isFinish),self.ID];
 }
 
 - (void)delete:(FMDatabase*)db
@@ -95,6 +95,7 @@
     model.price = [rs doubleForColumn:@"PRICE"];
     model.cost = [rs doubleForColumn:@"COST"];
     model.profit = [rs doubleForColumn:@"PROFIT"];
+    model.discount = [rs doubleForColumn:@"DISCOUNT"];
     model.isFinish = [rs boolForColumn:@"ISFINISH"];
     model.ts = [rs doubleForColumn:@"TS"];
     return model;

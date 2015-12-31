@@ -16,6 +16,7 @@
     if (self)
     {
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        self.textLabel.numberOfLines = 0;
     }
     return self;
 }

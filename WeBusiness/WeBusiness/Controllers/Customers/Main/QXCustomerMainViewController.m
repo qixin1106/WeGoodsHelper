@@ -73,8 +73,6 @@ QXSearchResultViewControllerDelegate>
     self.searchController.searchBar.delegate = self;
     self.searchController.searchResultsUpdater = self;
     self.searchController.searchBar.placeholder = @"搜索人名/地址/电话";
-    self.searchController.dimsBackgroundDuringPresentation = YES;
-    self.searchController.hidesNavigationBarDuringPresentation = YES;
     self.tableView.tableHeaderView = self.searchController.searchBar;
 }
 
@@ -149,10 +147,10 @@ QXSearchResultViewControllerDelegate>
     {
         QXCustomerModel *model = self.dataArray[indexPath.section][indexPath.row];
         [model remove];
-        [self.dataArray removeObject:model];
+        [self.dataArray[indexPath.section] removeObject:model];
         
         [self.tableView beginUpdates];
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [self.tableView endUpdates];
     }
 }

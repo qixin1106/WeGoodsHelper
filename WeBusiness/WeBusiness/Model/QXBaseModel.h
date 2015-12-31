@@ -13,6 +13,5 @@
 @interface QXBaseModel : NSObject
 @property (copy, nonatomic) NSString *ID;
 @property (assign, nonatomic) CFTimeInterval ts;
-
 - (BOOL)isExistTable:(NSString *)tableName db:(FMDatabase*)db;
 @end

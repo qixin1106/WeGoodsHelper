@@ -27,6 +27,7 @@
         
         __block NSInteger count = 0;
         __block CGFloat totalPrice = 0.0f;
+        __block CGFloat totalCost = 0.0f;
         [_orderModel.orderGoodsList enumerateObjectsUsingBlock:^(QXOrderGoodsModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             QXGoodsModel *model = [[QXGoodsModel alloc] init];
             model.ID = obj.goodsID;
@@ -34,9 +35,12 @@
             
             count += obj.buyCount;
             totalPrice += ((obj.adjustPrice)?obj.adjustPrice:model.retailPrice)*obj.buyCount;
+            totalCost += ((obj.adjustCost)?obj.adjustCost:model.costPrice)*obj.buyCount;
         }];
         totalPrice += _orderModel.freight;
-        self.infoLabel.text = STR_FORMAT(@"共%ld件商品 合计:￥%.2f (含运费:￥%.2f)",count,totalPrice,_orderModel.freight);
+        _orderModel.price = totalPrice;
+        _orderModel.cost = totalCost;
+        self.infoLabel.text = STR_FORMAT(@"共%ld件 合计:￥%.2f(含运费:￥%.2f) 赚:￥%.2f ",count,totalPrice,_orderModel.freight,totalCost);
     }
 }
 

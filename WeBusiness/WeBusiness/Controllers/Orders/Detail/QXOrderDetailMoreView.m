@@ -7,17 +7,41 @@
 //
 
 #import "QXOrderDetailMoreView.h"
+#import "QXOrderGoodsModel.h"
+@interface QXOrderDetailMoreView ()
+<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *costTf;
+@property (weak, nonatomic) IBOutlet UITextField *priceTf;
+@property (weak, nonatomic) IBOutlet UITextField *countTf;
+@end
 
 @implementation QXOrderDetailMoreView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (void)awakeFromNib
 {
-    self = [super initWithFrame:frame];
-    if (self)
-    {
-        
-    }
-    return self;
+    [super awakeFromNib];
+    self.costTf.delegate = self;
+    self.priceTf.delegate = self;
+    self.countTf.delegate = self;
 }
 
+
+- (void)setModel:(QXOrderGoodsModel *)model
+{
+    if (_model!=model)
+    {
+        _model=model;
+    }
+    self.costTf.text = STR_FORMAT(@"%.2f",_model.adjustCost);
+    self.priceTf.text = STR_FORMAT(@"%.2f",_model.adjustPrice);
+    self.countTf.text = STR_FORMAT(@"%ld",_model.buyCount);
+}
+
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    QXLog(@"%@",textField.text);
+    return YES;
+}
 @end

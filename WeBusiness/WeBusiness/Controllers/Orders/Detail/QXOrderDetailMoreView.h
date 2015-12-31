@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class QXOrderGoodsModel;
 @interface QXOrderDetailMoreView : UIControl
-
+@property (strong, nonatomic) QXOrderGoodsModel *model;
 @end

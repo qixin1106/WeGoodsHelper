@@ -46,6 +46,7 @@
 		99A56AB21C271EE400D757ED /* QXInputStringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56AB11C271EE400D757ED /* QXInputStringViewController.m */; };
 		99CF141C1C2CF3EC00CF3517 /* QXOrderGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99CF141B1C2CF3EB00CF3517 /* QXOrderGoodsModel.m */; };
 		99E78A6B1C2B076700D64A46 /* QXGoodsMainMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E78A6A1C2B076700D64A46 /* QXGoodsMainMoreView.m */; };
+		99EC845E1C350A330007BE77 /* QXOrderDetailMoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99EC845D1C350A330007BE77 /* QXOrderDetailMoreView.xib */; };
 		99F26B5A1C267CA400C66DE1 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B501C267CA400C66DE1 /* FMDatabase.m */; };
 		99F26B5B1C267CA400C66DE1 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B521C267CA400C66DE1 /* FMDatabaseAdditions.m */; };
 		99F26B5C1C267CA400C66DE1 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F26B541C267CA400C66DE1 /* FMDatabasePool.m */; };
@@ -160,6 +161,7 @@
 		99CF141B1C2CF3EB00CF3517 /* QXOrderGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXOrderGoodsModel.m; sourceTree = "<group>"; };
 		99E78A691C2B076700D64A46 /* QXGoodsMainMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXGoodsMainMoreView.h; sourceTree = "<group>"; };
 		99E78A6A1C2B076700D64A46 /* QXGoodsMainMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXGoodsMainMoreView.m; sourceTree = "<group>"; };
+		99EC845D1C350A330007BE77 /* QXOrderDetailMoreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QXOrderDetailMoreView.xib; sourceTree = "<group>"; };
 		99F26B4F1C267CA400C66DE1 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		99F26B501C267CA400C66DE1 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		99F26B511C267CA400C66DE1 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				992ED6E11C313EF700D97A53 /* QXOrderDetailCell.m */,
 				9926C9C21C31AAA00071F125 /* QXOrderDetailMoreView.h */,
 				9926C9C31C31AAA00071F125 /* QXOrderDetailMoreView.m */,
+				99EC845D1C350A330007BE77 /* QXOrderDetailMoreView.xib */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -716,6 +719,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99EC845E1C350A330007BE77 /* QXOrderDetailMoreView.xib in Resources */,
 				99594DD71C241155002660E6 /* Assets.xcassets in Resources */,
 				99594D821C23FCE0002660E6 /* LaunchScreen.storyboard in Resources */,
 				992ED6DF1C312E1500D97A53 /* QXOrderDetailFooterView.xib in Resources */,
