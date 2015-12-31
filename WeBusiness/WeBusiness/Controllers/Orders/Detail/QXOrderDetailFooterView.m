@@ -42,6 +42,7 @@
 - (IBAction)changeOrderState:(UISegmentedControl *)sender
 {
     self.orderModel.isFinish = sender.selectedSegmentIndex;
+    sender.tintColor = (sender.selectedSegmentIndex)?[UIColor greenColor]:[UIColor redColor];
     if (self.delegate && [self.delegate respondsToSelector:@selector(changeState:)])
     {
         [self.delegate changeState:sender.selectedSegmentIndex];

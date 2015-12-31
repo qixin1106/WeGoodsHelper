@@ -41,7 +41,30 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    QXLog(@"%@",textField.text);
+    switch (textField.tag)
+    {
+        case 0://进价
+        {
+            self.model.adjustCost = [textField.text floatValue];
+            break;
+        }
+        case 1://售价
+        {
+            self.model.adjustPrice = [textField.text floatValue];
+            break;
+        }
+        case 2://数量
+        {
+            self.model.buyCount = [textField.text integerValue];
+            break;
+        }
+        default:
+            break;
+    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(changeValueCallback:)])
+    {
+        [self.delegate changeValueCallback:self];
+    }
     return YES;
 }
 @end

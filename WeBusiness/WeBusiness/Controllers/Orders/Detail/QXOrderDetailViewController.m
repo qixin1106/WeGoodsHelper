@@ -29,7 +29,8 @@ static NSString *identifierFooter = @"QXOrderFooterView";
 QXGoodsMainViewControllerDelegate,
 QXOrderDetailHeadViewDelegate,
 QXCustomerMainViewControllerDelegate,
-QXOrderDetailCellDelegate>
+QXOrderDetailCellDelegate,
+QXOrderDetailMoreViewDelegate>
 @property (strong, nonatomic) QXOrderModel *orderModel;
 @property (strong, nonatomic) QXOrderDetailMoreView *moreView;
 @end
@@ -165,7 +166,10 @@ QXOrderDetailCellDelegate>
 
 
 
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self removeMoreView];
+}
 
 
 
@@ -277,8 +281,10 @@ QXOrderDetailCellDelegate>
     [self removeMoreView];
     
     self.moreView = [[[NSBundle mainBundle] loadNibNamed:@"QXOrderDetailMoreView" owner:self options:nil] lastObject];
+    self.moreView.delegate = self;
+    self.moreView.indexPath = cell.indexPath;
     self.moreView.model = orderGoodsModel;
-    [self.moreView addTarget:self action:@selector(removeMoreView) forControlEvents:UIControlEventTouchUpInside];
+//    [self.moreView addTarget:self action:@selector(removeMoreView) forControlEvents:UIControlEventTouchUpInside];
     self.moreView.frame = CGRectMake(self.view.bounds.size.width, cellFrame.origin.y, self.view.bounds.size.width-80, cellFrame.size.height-1);
     [self.tableView addSubview:self.moreView];
     
@@ -286,6 +292,23 @@ QXOrderDetailCellDelegate>
         self.moreView.frame = FRAME_ORIGINX(self.moreView, 80);
     }];
 }
+
+
+
+
+
+
+
+
+#pragma mark - QXOrderDetailMoreViewDelegate
+- (void)changeValueCallback:(QXOrderDetailMoreView*)moreView
+{
+    [self.tableView beginUpdates];
+    [self.tableView reloadRowsAtIndexPaths:@[moreView.indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
+}
+
+
 
 
 
