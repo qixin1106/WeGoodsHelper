@@ -105,7 +105,7 @@
         // Preview
         _preview = [AVCaptureVideoPreviewLayer layerWithSession:_session];
         _preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
-        _preview.frame = CGRectMake(0, self.view.bounds.size.height*0.5-100, self.view.bounds.size.width, 200);
+        _preview.frame = self.view.bounds;
         [self.view.layer insertSublayer:_preview atIndex:0];
         
         // Start
@@ -120,7 +120,7 @@
     [self.view addSubview:cancelButton];
     
     
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(50, self.view.bounds.size.height*0.5, self.view.bounds.size.width-100, ONE_PIXEL_VALUE)];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(50, self.view.bounds.size.height*0.5, self.view.bounds.size.width-100, 1)];
     line.backgroundColor = RGBA(0, 256, 128, 1);
     [self.view addSubview:line];
     

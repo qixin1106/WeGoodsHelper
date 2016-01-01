@@ -8,7 +8,7 @@
 
 #import "QXOrderDetailFooterView.h"
 #import "QXOrderModel.h"
-
+#import "NSDate+Utils.h"
 
 @interface QXOrderDetailFooterView ()
 @property (weak, nonatomic) IBOutlet UITextField *freightTextField;
@@ -22,7 +22,11 @@
 
 @implementation QXOrderDetailFooterView
 
-
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+//    self.orderDateTimePicker.datePickerMode = UIDatePickerModeCountDownTimer;
+}
 
 
 - (void)setOrderModel:(QXOrderModel *)orderModel
@@ -89,6 +93,15 @@
     }
 }
 
+- (IBAction)timeToNow:(UIButton *)sender
+{
+    [self.orderDateTimePicker setDate:[NSDate dateWithTimeIntervalSinceReferenceDate:CFAbsoluteTimeGetCurrent()] animated:YES];
+    self.orderModel.buyerOrderTime = CFAbsoluteTimeGetCurrent();
+    if (self.delegate && [self.delegate respondsToSelector:@selector(changeDate:)])
+    {
+        [self.delegate changeDate:self.orderModel.buyerOrderTime];
+    }
+}
 
 
 

@@ -46,7 +46,7 @@
                         <action selector="changeOrderState:" destination="4Ck-gB-QrG" eventType="valueChanged" id="gdu-JU-PN3"/>
                     </connections>
                 </segmentedControl>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="efa-P1-FqR">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="efa-P1-FqR">
                     <rect key="frame" x="60" y="65" width="315" height="30"/>
                     <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -69,13 +69,13 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8Sf-CU-Bdk">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8Sf-CU-Bdk">
                     <rect key="frame" x="60" y="104" width="313" height="30"/>
                     <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="azR-9V-ceB"/>
                     </constraints>
-                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="1" green="0.88055788590604023" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
                     <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                     <connections>
@@ -182,12 +182,18 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="暂时以保存时间为下单时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ha0-Rk-T1z">
-                    <rect key="frame" x="78" y="303" width="144" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="usy-cB-PM8">
+                    <rect key="frame" x="337" y="299" width="46" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="46" id="T9C-ud-qX6"/>
+                        <constraint firstAttribute="height" constant="30" id="drz-ti-c96"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="现在"/>
+                    <connections>
+                        <action selector="timeToNow:" destination="4Ck-gB-QrG" eventType="touchUpInside" id="Oea-fY-QFg"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -196,7 +202,9 @@
                 <constraint firstItem="ozk-HX-9Wc" firstAttribute="top" secondItem="t6o-w7-K4j" secondAttribute="bottom" constant="-1" id="2L1-C6-bVD"/>
                 <constraint firstItem="VWo-Tt-H0p" firstAttribute="top" secondItem="ozk-HX-9Wc" secondAttribute="bottom" constant="9" id="2TH-nm-CEq"/>
                 <constraint firstItem="gxe-2x-E3n" firstAttribute="top" secondItem="YUy-aK-Qmq" secondAttribute="bottom" constant="19" id="4kG-jl-Hcw"/>
+                <constraint firstAttribute="trailing" secondItem="usy-cB-PM8" secondAttribute="trailing" id="4kN-VR-WSq"/>
                 <constraint firstItem="cg7-hj-OFY" firstAttribute="centerY" secondItem="gxe-2x-E3n" secondAttribute="centerY" id="5S2-b7-nwJ"/>
+                <constraint firstItem="usy-cB-PM8" firstAttribute="centerY" secondItem="VWo-Tt-H0p" secondAttribute="centerY" id="6YL-wD-MKd"/>
                 <constraint firstItem="K2O-UC-HqO" firstAttribute="leading" secondItem="4Ck-gB-QrG" secondAttribute="leading" constant="8" id="7g2-cL-7AE"/>
                 <constraint firstItem="u7k-07-OdA" firstAttribute="top" secondItem="4Ck-gB-QrG" secondAttribute="top" constant="8" id="7hW-gz-WqT"/>
                 <constraint firstItem="diq-zx-pZ4" firstAttribute="leading" secondItem="4Ck-gB-QrG" secondAttribute="leading" constant="10" id="AFZ-DF-MJL"/>
