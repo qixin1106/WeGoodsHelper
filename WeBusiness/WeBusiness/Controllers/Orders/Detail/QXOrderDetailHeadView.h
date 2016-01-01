@@ -18,4 +18,5 @@
 
 @protocol QXOrderDetailHeadViewDelegate <NSObject>
 - (void)onClickSelectCustomer:(QXOrderDetailHeadView*)header;
+- (void)onScanButton:(QXOrderDetailHeadView*)header;
 @end

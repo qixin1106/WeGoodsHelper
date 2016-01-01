@@ -17,7 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol QXOrderDetailFooterViewDelegate <NSObject>
 - (void)addGoodsClick;
-- (void)changeState:(BOOL)isFinish;
+- (void)changeState:(BOOL)isFinish;//切换交易状态
+- (void)changeFreight:(CGFloat)freight;//改变运费
+- (void)changeDiscount:(CGFloat)discount;//改变折扣
+- (void)changeDate:(NSTimeInterval)date;//改变下单时间
 @end
 
 NS_ASSUME_NONNULL_END

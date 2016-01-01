@@ -92,7 +92,7 @@
                 <outlet property="countTf" destination="YKe-32-8yQ" id="buD-sJ-pJO"/>
                 <outlet property="priceTf" destination="g1x-qx-fwu" id="s2m-s4-YhT"/>
             </connections>
-            <point key="canvasLocation" x="-389.5" y="915.5"/>
+            <point key="canvasLocation" x="-324.5" y="785.5"/>
         </view>
     </objects>
 </document>

@@ -17,7 +17,7 @@
 #import "QXCustomerModel.h"
 #import "QXCustomerMainViewController.h"
 #import "QXOrderDetailMoreView.h"
-
+#import "QXScanCodeViewController.h"
 
 static NSString *identifier = @"QXOrderDetailCell";
 static NSString *identifierHeader = @"QXOrderHeaderView";
@@ -30,12 +30,45 @@ QXGoodsMainViewControllerDelegate,
 QXOrderDetailHeadViewDelegate,
 QXCustomerMainViewControllerDelegate,
 QXOrderDetailCellDelegate,
-QXOrderDetailMoreViewDelegate>
+QXOrderDetailMoreViewDelegate,
+QXScanCodeViewControllerDelegate>
 @property (strong, nonatomic) QXOrderModel *orderModel;
 @property (strong, nonatomic) QXOrderDetailMoreView *moreView;
 @end
 
 @implementation QXOrderDetailViewController
+
+
+
+
+
+
+- (void)checkPrice
+{
+    __block CGFloat totalCost=0,totalPrice=0;
+    [self.orderModel.orderGoodsList enumerateObjectsUsingBlock:^(QXOrderGoodsModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        //TODO:计算成本
+        totalCost += (obj.adjustCost * obj.buyCount);
+        //TODO:计算总价
+        totalPrice += (obj.adjustPrice * obj.buyCount);
+    }];
+    
+    //加运费
+    totalPrice += self.orderModel.freight;
+    totalPrice -= self.orderModel.discount;
+    self.orderModel.cost = totalCost;
+    self.orderModel.price = totalPrice;
+    //TODO:计算利润
+    self.orderModel.profit = self.orderModel.price - self.orderModel.cost - self.orderModel.freight;
+    
+    //刷新footer
+    QXOrderDetailFooterView *footer = (QXOrderDetailFooterView*)self.tableView.tableFooterView;
+    footer.orderModel = self.orderModel;
+}
+
+
+
+
 
 - (void)removeMoreView
 {
@@ -55,18 +88,28 @@ QXOrderDetailMoreViewDelegate>
 
 - (void)onSaveClick:(UIBarButtonItem*)sender
 {
-    QXOrderDetailHeadView *header = (QXOrderDetailHeadView*)self.tableView.tableHeaderView;
-    [header assignModel];
-    
-    [self.orderModel store];
-    [self.orderModel.orderGoodsList enumerateObjectsUsingBlock:^(QXOrderGoodsModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj store];
-    }];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(onSaveModel:)])
+    if (VALID_STRING(self.orderModel.name) &&
+        VALID_STRING(self.orderModel.tel) &&
+        VALID_STRING(self.orderModel.address) &&
+        self.orderModel.orderGoodsList.count)
     {
-        [self.delegate onSaveModel:self.orderModel];
+        QXOrderDetailHeadView *header = (QXOrderDetailHeadView*)self.tableView.tableHeaderView;
+        [header assignModel];
+        
+        [self.orderModel store];
+        [self.orderModel.orderGoodsList enumerateObjectsUsingBlock:^(QXOrderGoodsModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj store];
+        }];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(onSaveModel:)])
+        {
+            [self.delegate onSaveModel:self.orderModel];
+        }
+        [self dismissViewControllerAnimated:YES completion:NULL];
     }
-    [self dismissViewControllerAnimated:YES completion:NULL];
+    else
+    {
+        ALERT(@"姓名,电话,地址,商品必填", nil);
+    }
 }
 
 
@@ -166,9 +209,10 @@ QXOrderDetailMoreViewDelegate>
 
 
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [self removeMoreView];
+    [self.tableView endEditing:NO];
 }
 
 
@@ -176,6 +220,7 @@ QXOrderDetailMoreViewDelegate>
 
 
 #pragma mark - QXOrderDetailFooterViewDelegate
+//点击增加商品
 - (void)addGoodsClick
 {
     QXGoodsMainViewController *vc = [[QXGoodsMainViewController alloc] init];
@@ -184,13 +229,29 @@ QXOrderDetailMoreViewDelegate>
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
+//改变交易状态回调
 - (void)changeState:(BOOL)isFinish
 {
     self.orderModel.isFinish = isFinish;
 }
 
+//改变运费回调
+- (void)changeFreight:(CGFloat)freight
+{
+    [self checkPrice];
+}
 
+//改变折扣回调
+- (void)changeDiscount:(CGFloat)discount
+{
+    [self checkPrice];
+}
+
+//改变下单时间
+- (void)changeDate:(NSTimeInterval)date
+{
+    //[self checkPrice];
+}
 
 
 
@@ -209,20 +270,24 @@ QXOrderDetailMoreViewDelegate>
         }
     }];
     
-    if (orderGoodsModel)
+    if (orderGoodsModel)//已加入该商品
     {
         orderGoodsModel.buyCount++;
     }
     else
     {
-        QXOrderGoodsModel *model = [[QXOrderGoodsModel alloc] init];
-        model.goodsID = goodsModel.ID;
-        model.orderID = self.orderModel.ID;
-        model.adjustCost = goodsModel.costPrice;
-        model.adjustPrice = goodsModel.retailPrice;
-        model.buyCount = 1;
-        [self.orderModel.orderGoodsList addObject:model];
+        orderGoodsModel = [[QXOrderGoodsModel alloc] init];
+        orderGoodsModel.goodsID = goodsModel.ID;
+        orderGoodsModel.orderID = self.orderModel.ID;
+        orderGoodsModel.adjustCost = goodsModel.costPrice;
+        orderGoodsModel.adjustPrice = goodsModel.retailPrice;
+        orderGoodsModel.buyCount = 1;
+        [self.orderModel.orderGoodsList addObject:orderGoodsModel];
     }
+    
+    //计算
+    [self checkPrice];
+    
     [self.tableView reloadData];
 }
 
@@ -247,7 +312,12 @@ QXOrderDetailMoreViewDelegate>
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
+- (void)onScanButton:(QXOrderDetailHeadView*)header
+{
+    QXScanCodeViewController *vc = [[QXScanCodeViewController alloc] init];
+    vc.delegate = self;
+    [self presentViewController:vc animated:YES completion:NULL];
+}
 
 
 
@@ -284,7 +354,7 @@ QXOrderDetailMoreViewDelegate>
     self.moreView.delegate = self;
     self.moreView.indexPath = cell.indexPath;
     self.moreView.model = orderGoodsModel;
-//    [self.moreView addTarget:self action:@selector(removeMoreView) forControlEvents:UIControlEventTouchUpInside];
+    [self.moreView addTarget:self action:@selector(removeMoreView) forControlEvents:UIControlEventTouchUpInside];
     self.moreView.frame = CGRectMake(self.view.bounds.size.width, cellFrame.origin.y, self.view.bounds.size.width-80, cellFrame.size.height-1);
     [self.tableView addSubview:self.moreView];
     
@@ -303,9 +373,31 @@ QXOrderDetailMoreViewDelegate>
 #pragma mark - QXOrderDetailMoreViewDelegate
 - (void)changeValueCallback:(QXOrderDetailMoreView*)moreView
 {
+    [self checkPrice];
     [self.tableView beginUpdates];
     [self.tableView reloadRowsAtIndexPaths:@[moreView.indexPath] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
+}
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - QXScanCodeViewControllerDelegate
+- (void)scanCodeFinish:(QXScanCodeViewController*)vc code:(NSString*)code
+{
+    [vc dismissViewControllerAnimated:YES completion:NULL];
+    self.orderModel.cn = code;
+    
+    QXOrderDetailHeadView *header = (QXOrderDetailHeadView*)self.tableView.tableHeaderView;
+    header.orderModel = self.orderModel;
+    [header refreshCustomerUI];
 }
 
 

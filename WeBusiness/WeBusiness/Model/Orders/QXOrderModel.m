@@ -37,7 +37,7 @@
 - (void)insert:(FMDatabase*)db
 {
     NSString *SQLString = @"INSERT INTO ORDERS (ID, NAME, TEL, ADDRESS, CN, REMARK, ORDERTIME, FREIGHT, PRICE, COST, PROFIT ,DISCOUNT, ISFINISH, TS) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    [db executeUpdate:SQLString,self.ID,self.name,self.tel,self.address,self.cn,self.remark,@(CFAbsoluteTimeGetCurrent()),@(self.freight),@(self.price),@(self.cost),@(self.profit),@(self.discount),@(self.isFinish),@(CFAbsoluteTimeGetCurrent())];
+    [db executeUpdate:SQLString,self.ID,self.name,self.tel,self.address,self.cn,self.remark,@(self.buyerOrderTime),@(self.freight),@(self.price),@(self.cost),@(self.profit),@(self.discount),@(self.isFinish),@(CFAbsoluteTimeGetCurrent())];
 }
 
 

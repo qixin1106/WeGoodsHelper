@@ -22,10 +22,9 @@
 
 - (IBAction)onScanClick:(UIButton *)sender
 {
-    ALERT(@"还不能扫码,还没做呢", nil);
-    if (self.delegate && [self.delegate respondsToSelector:@selector(onClickSelectCustomer:)])
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onScanButton:)])
     {
-        [self.delegate onClickSelectCustomer:self];
+        [self.delegate onScanButton:self];
     }
 }
 
@@ -52,6 +51,8 @@
     self.nameTextField.text = self.orderModel.name;
     self.telTextField.text = self.orderModel.tel;
     self.addressTextView.text = self.orderModel.address;
+    self.cnTextField.text = self.orderModel.cn;
+    self.remarkTextView.text = self.orderModel.remark;
 }
 
 

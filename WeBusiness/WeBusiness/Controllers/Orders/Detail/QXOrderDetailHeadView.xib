@@ -246,7 +246,7 @@
                 <outlet property="remarkTextView" destination="ejf-dG-7bQ" id="ZV7-nt-UN2"/>
                 <outlet property="telTextField" destination="zgX-n6-6Uk" id="FAx-F9-dnX"/>
             </connections>
-            <point key="canvasLocation" x="803" y="318.5"/>
+            <point key="canvasLocation" x="727" y="306"/>
         </view>
     </objects>
 </document>

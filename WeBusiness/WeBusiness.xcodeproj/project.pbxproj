@@ -26,6 +26,10 @@
 		992ED6DD1C312DEA00D97A53 /* QXOrderDetailFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 992ED6DC1C312DEA00D97A53 /* QXOrderDetailFooterView.m */; };
 		992ED6DF1C312E1500D97A53 /* QXOrderDetailFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 992ED6DE1C312E1500D97A53 /* QXOrderDetailFooterView.xib */; };
 		992ED6E21C313EF700D97A53 /* QXOrderDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 992ED6E11C313EF700D97A53 /* QXOrderDetailCell.m */; };
+		994F53411C36F57700F78062 /* QXScanCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 994F53401C36F57700F78062 /* QXScanCodeViewController.m */; };
+		994F53431C36F58400F78062 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994F53421C36F58400F78062 /* AVFoundation.framework */; };
+		994F534A1C36FF4700F78062 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 994F53471C36FF4700F78062 /* Assets.xcassets */; };
+		994F534B1C36FF4700F78062 /* scan.wav in Resources */ = {isa = PBXBuildFile; fileRef = 994F53491C36FF4700F78062 /* scan.wav */; };
 		995373971C2C45D50026119A /* QXOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 995373961C2C45D50026119A /* QXOrderModel.m */; };
 		99594D741C23FCE0002660E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594D731C23FCE0002660E6 /* main.m */; };
 		99594D821C23FCE0002660E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99594D801C23FCE0002660E6 /* LaunchScreen.storyboard */; };
@@ -34,7 +38,6 @@
 		99594DC11C2403D3002660E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594DBC1C2403D3002660E6 /* AppDelegate.m */; };
 		99594DC21C2403D3002660E6 /* QXRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594DC01C2403D3002660E6 /* QXRootViewController.m */; };
 		99594DD41C2406A9002660E6 /* QXSetupMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99594DD31C2406A9002660E6 /* QXSetupMainViewController.m */; };
-		99594DD71C241155002660E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99594DD61C241155002660E6 /* Assets.xcassets */; };
 		997D33131C287C4500C7EABB /* QXGoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997D33121C287C4500C7EABB /* QXGoodsDetailViewController.m */; };
 		997D33161C287CBA00C7EABB /* QXGoodsModel+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 997D33151C287CBA00C7EABB /* QXGoodsModel+Utils.m */; };
 		99A56A9C1C27071A00D757ED /* QXCustomerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A56A981C27071A00D757ED /* QXCustomerDetailViewController.m */; };
@@ -118,6 +121,11 @@
 		992ED6DE1C312E1500D97A53 /* QXOrderDetailFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QXOrderDetailFooterView.xib; sourceTree = "<group>"; };
 		992ED6E01C313EF700D97A53 /* QXOrderDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXOrderDetailCell.h; sourceTree = "<group>"; };
 		992ED6E11C313EF700D97A53 /* QXOrderDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXOrderDetailCell.m; sourceTree = "<group>"; };
+		994F533F1C36F57700F78062 /* QXScanCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXScanCodeViewController.h; sourceTree = "<group>"; };
+		994F53401C36F57700F78062 /* QXScanCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXScanCodeViewController.m; sourceTree = "<group>"; };
+		994F53421C36F58400F78062 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		994F53471C36FF4700F78062 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		994F53491C36FF4700F78062 /* scan.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = scan.wav; sourceTree = "<group>"; };
 		995373951C2C45D50026119A /* QXOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXOrderModel.h; sourceTree = "<group>"; };
 		995373961C2C45D50026119A /* QXOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXOrderModel.m; sourceTree = "<group>"; };
 		99594D6F1C23FCE0002660E6 /* WeBusiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeBusiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,7 +145,6 @@
 		99594DC41C2404E0002660E6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		99594DD21C2406A9002660E6 /* QXSetupMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXSetupMainViewController.h; sourceTree = "<group>"; };
 		99594DD31C2406A9002660E6 /* QXSetupMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QXSetupMainViewController.m; sourceTree = "<group>"; };
-		99594DD61C241155002660E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		997D330E1C286DD500C7EABB /* QXGoodsMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QXGoodsMainCell.h; sourceTree = "<group>"; };
 		997D33111C287C4500C7EABB /* QXGoodsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QXGoodsDetailViewController.h; path = WeBusiness/Controllers/Goods/Main/QXGoodsDetailViewController.h; sourceTree = SOURCE_ROOT; };
 		997D33121C287C4500C7EABB /* QXGoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QXGoodsDetailViewController.m; path = WeBusiness/Controllers/Goods/Main/QXGoodsDetailViewController.m; sourceTree = SOURCE_ROOT; };
@@ -199,6 +206,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				994F53431C36F58400F78062 /* AVFoundation.framework in Frameworks */,
 				99F26B631C267EA300C66DE1 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +291,32 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		994F533E1C36F55F00F78062 /* ScanCode */ = {
+			isa = PBXGroup;
+			children = (
+				994F533F1C36F57700F78062 /* QXScanCodeViewController.h */,
+				994F53401C36F57700F78062 /* QXScanCodeViewController.m */,
+			);
+			path = ScanCode;
+			sourceTree = "<group>";
+		};
+		994F53461C36FF4700F78062 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				994F53471C36FF4700F78062 /* Assets.xcassets */,
+				994F53481C36FF4700F78062 /* Sound */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		994F53481C36FF4700F78062 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				994F53491C36FF4700F78062 /* scan.wav */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		995373941C2C45C20026119A /* Orders */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,6 +351,7 @@
 		99594D711C23FCE0002660E6 /* WeBusiness */ = {
 			isa = PBXGroup;
 			children = (
+				994F53461C36FF4700F78062 /* Resources */,
 				99F26B641C267EE700C66DE1 /* Framework */,
 				99F26B611C267E7200C66DE1 /* Utility */,
 				99F26B4D1C267C6900C66DE1 /* ThirdParty */,
@@ -331,7 +366,6 @@
 		99594D721C23FCE0002660E6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				99594DD61C241155002660E6 /* Assets.xcassets */,
 				99594D801C23FCE0002660E6 /* LaunchScreen.storyboard */,
 				99594D831C23FCE0002660E6 /* Info.plist */,
 				99594D731C23FCE0002660E6 /* main.m */,
@@ -478,6 +512,7 @@
 		99A56AAE1C271EA500D757ED /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				994F533E1C36F55F00F78062 /* ScanCode */,
 				99F33BCF1C32537800221102 /* SearchResult */,
 				99A56AAF1C271EC600D757ED /* InputString */,
 			);
@@ -545,6 +580,7 @@
 		99F26B641C267EE700C66DE1 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				994F53421C36F58400F78062 /* AVFoundation.framework */,
 				991338181C2A5686005483F4 /* AssetsLibrary.framework */,
 				99F26B621C267EA300C66DE1 /* libsqlite3.tbd */,
 			);
@@ -720,9 +756,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				99EC845E1C350A330007BE77 /* QXOrderDetailMoreView.xib in Resources */,
-				99594DD71C241155002660E6 /* Assets.xcassets in Resources */,
 				99594D821C23FCE0002660E6 /* LaunchScreen.storyboard in Resources */,
 				992ED6DF1C312E1500D97A53 /* QXOrderDetailFooterView.xib in Resources */,
+				994F534A1C36FF4700F78062 /* Assets.xcassets in Resources */,
+				994F534B1C36FF4700F78062 /* scan.wav in Resources */,
 				992ED6D91C3109C100D97A53 /* QXOrderDetailHeadView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -761,6 +798,7 @@
 				995373971C2C45D50026119A /* QXOrderModel.m in Sources */,
 				991337FB1C2A509B005483F4 /* UIImage+Utils.m in Sources */,
 				991338241C2A78DD005483F4 /* QXImageCompressUtil.m in Sources */,
+				994F53411C36F57700F78062 /* QXScanCodeViewController.m in Sources */,
 				99594DC11C2403D3002660E6 /* AppDelegate.m in Sources */,
 				9913381B1C2A56FA005483F4 /* QXGoodsMainCell.m in Sources */,
 				99594D741C23FCE0002660E6 /* main.m in Sources */,
