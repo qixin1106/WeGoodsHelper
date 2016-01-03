@@ -101,11 +101,17 @@
         }
         
         // 条码类型 AVMetadataObjectTypeQRCode
-        _output.metadataObjectTypes = _output.availableMetadataObjectTypes;
+        _output.metadataObjectTypes = @[AVMetadataObjectTypeEAN13Code,
+                                        AVMetadataObjectTypeUPCECode,
+                                        AVMetadataObjectTypeEAN8Code,
+                                        AVMetadataObjectTypeITF14Code,
+                                        AVMetadataObjectTypeCode39Code,
+                                        AVMetadataObjectTypeCode128Code,
+                                        AVMetadataObjectTypeCode93Code];
         // Preview
         _preview = [AVCaptureVideoPreviewLayer layerWithSession:_session];
         _preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
-        _preview.frame = self.view.bounds;
+        _preview.frame = CGRectMake(0, self.view.bounds.size.height*0.5-self.view.bounds.size.width*0.5, self.view.bounds.size.width, self.view.bounds.size.width);
         [self.view.layer insertSublayer:_preview atIndex:0];
         
         // Start

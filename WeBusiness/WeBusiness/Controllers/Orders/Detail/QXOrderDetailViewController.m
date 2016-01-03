@@ -199,11 +199,37 @@ QXScanCodeViewControllerDelegate>
 
 
 
-
+#pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 80;
 }
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self removeMoreView];
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle==UITableViewCellEditingStyleDelete)
+    {
+        QXOrderGoodsModel *model = self.orderModel.orderGoodsList[indexPath.row];
+        [self.orderModel.orderGoodsList removeObject:model];
+        [model remove];
+        
+        [self checkPrice];
+        
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        [self.tableView endUpdates];
+    }
+}
+
+
+
+
 
 
 
