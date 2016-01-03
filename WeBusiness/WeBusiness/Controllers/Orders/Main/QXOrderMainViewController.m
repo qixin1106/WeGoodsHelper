@@ -19,7 +19,7 @@ static NSString *identifierHeader = @"QXOrderHeaderView";
 static NSString *identifierFooter = @"QXOrderFooterView";
 
 @interface QXOrderMainViewController ()
-<QXOrderDetailViewControllerDelegate>
+<QXOrderDetailViewControllerDelegate,QXOrderFooterViewDelegate>
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @end
 
@@ -124,6 +124,7 @@ static NSString *identifierFooter = @"QXOrderFooterView";
 {
     QXOrderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:identifierFooter];
     view.orderModel = self.dataArray[section];
+    view.delegate = self;
     return view;
 }
 
@@ -135,17 +136,17 @@ static NSString *identifierFooter = @"QXOrderFooterView";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     /*
-    QXGoodsModel *model = self.dataArray[indexPath.row];
-    QXGoodsDetailViewController *vc = [[QXGoodsDetailViewController alloc] initWithGid:model.ID];
-    vc.hidesBottomBarWhenPushed = YES;
-    vc.templateType = TemplateType_Edit;
-    [vc setSaveGoodsBlock:^(QXGoodsModel *goodsModel) {
-        //保存
-        ([goodsModel fetchModel])?[goodsModel refresh]:[goodsModel store];
-        [self loadData];
-        [self.tableView reloadData];
-    }];
-    [self.navigationController pushViewController:vc animated:YES];
+     QXGoodsModel *model = self.dataArray[indexPath.row];
+     QXGoodsDetailViewController *vc = [[QXGoodsDetailViewController alloc] initWithGid:model.ID];
+     vc.hidesBottomBarWhenPushed = YES;
+     vc.templateType = TemplateType_Edit;
+     [vc setSaveGoodsBlock:^(QXGoodsModel *goodsModel) {
+     //保存
+     ([goodsModel fetchModel])?[goodsModel refresh]:[goodsModel store];
+     [self loadData];
+     [self.tableView reloadData];
+     }];
+     [self.navigationController pushViewController:vc animated:YES];
      */
 }
 
@@ -165,6 +166,61 @@ static NSString *identifierFooter = @"QXOrderFooterView";
 {
     [self.dataArray insertObject:orderModel atIndex:0];
     [self.tableView reloadData];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - QXOrderFooterViewDelegate
+- (void)footerViewOnClickRemoveOrder:(QXOrderFooterView*)footer
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"是否删除订单" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *alertDel = [UIAlertAction actionWithTitle:@"删除订单"
+                                                       style:UIAlertActionStyleDestructive
+                                                     handler:^(UIAlertAction * _Nonnull action)
+                               {
+                                   QXOrderModel *model = self.dataArray[footer.indexPath.section];
+                                   [model.orderGoodsList enumerateObjectsUsingBlock:^(QXOrderGoodsModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                       [obj remove];
+                                   }];
+                                   [self.dataArray removeObject:model];
+                                   [model remove];
+                                   
+                                   
+                                   [self.tableView beginUpdates];
+                                   [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:footer.indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+                                   [self.tableView endUpdates];
+                               }];
+    [alertController addAction:alertDel];
+    
+    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:NULL];
+    [alertController addAction:alertCancel];
+    
+    [self presentViewController:alertController animated:YES completion:NULL];
+}
+
+
+
+- (void)footerViewOnClickEditOrder:(QXOrderFooterView*)footer
+{
+    QXOrderDetailViewController *vc = [[QXOrderDetailViewController alloc] init];
+    vc.delegate = self;
+    vc.templateType = TemplateType_Edit;
+    vc.orderID = footer.orderModel.ID;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

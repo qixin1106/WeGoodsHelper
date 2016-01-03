@@ -19,6 +19,25 @@
 
 @implementation QXOrderFooterView
 
+
+- (void)onClickRemoveOrder:(UIButton*)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(footerViewOnClickRemoveOrder:)])
+    {
+        [self.delegate footerViewOnClickRemoveOrder:self];
+    }
+}
+
+- (void)onClickEditOrder:(UIButton*)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(footerViewOnClickEditOrder:)])
+    {
+        [self.delegate footerViewOnClickEditOrder:self];
+    }
+}
+
+
+
 - (void)setOrderModel:(QXOrderModel *)orderModel
 {
     if (_orderModel != orderModel)
@@ -51,7 +70,7 @@
     if (self)
     {
         self.contentView.backgroundColor = [UIColor whiteColor];
-
+        
         
         self.infoLabel = [[UILabel alloc] init];
         self.infoLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -59,6 +78,39 @@
         self.infoLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:self.infoLabel];
         
+        
+        
+        UIView *line = [[UIView alloc] init];
+        line.translatesAutoresizingMaskIntoConstraints = NO;
+        line.backgroundColor = RGBA(235, 235, 235, 1);
+        [self.contentView addSubview:line];
+        
+        
+        UIButton *deleteOrder = [UIButton buttonWithType:UIButtonTypeCustom];
+        deleteOrder.translatesAutoresizingMaskIntoConstraints = NO;
+        [deleteOrder addTarget:self action:@selector(onClickRemoveOrder:) forControlEvents:UIControlEventTouchUpInside];
+        [deleteOrder setTitle:@"删除订单" forState:UIControlStateNormal];
+        deleteOrder.titleLabel.font = [UIFont systemFontOfSize:14];
+        [deleteOrder setTitleColor:RGBA(128, 128, 128, 1) forState:UIControlStateNormal];
+        deleteOrder.layer.borderWidth = 1;
+        deleteOrder.layer.borderColor = RGBA(235, 235, 235, 1).CGColor;
+        deleteOrder.layer.cornerRadius = 5.0f;
+        deleteOrder.clipsToBounds = YES;
+        [self.contentView addSubview:deleteOrder];
+        
+        
+        UIButton *editOrder = [UIButton buttonWithType:UIButtonTypeCustom];
+        editOrder.translatesAutoresizingMaskIntoConstraints = NO;
+        [editOrder addTarget:self action:@selector(onClickEditOrder:) forControlEvents:UIControlEventTouchUpInside];
+        [editOrder setTitle:@"编辑订单" forState:UIControlStateNormal];
+        editOrder.titleLabel.font = [UIFont systemFontOfSize:14];
+        [editOrder setTitleColor:RGBA(128, 128, 128, 1) forState:UIControlStateNormal];
+        editOrder.layer.borderWidth = 1;
+        editOrder.layer.borderColor = RGBA(235, 235, 235, 1).CGColor;
+        editOrder.layer.cornerRadius = 5.0f;
+        editOrder.clipsToBounds = YES;
+        [self.contentView addSubview:editOrder];
+
         
         
         UIView *gapView = [[UIView alloc] init];
@@ -90,21 +142,106 @@
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1
                                                                       constant:-EDGE_WIDTH]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.infoLabel
+        
+        
+        
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:line
+                                                                     attribute:NSLayoutAttributeTop
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.infoLabel
+                                                                     attribute:NSLayoutAttributeBottom
+                                                                    multiplier:1
+                                                                      constant:EDGE_WIDTH]];
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:line
+                                                                     attribute:NSLayoutAttributeLeft
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.contentView
+                                                                     attribute:NSLayoutAttributeLeft
+                                                                    multiplier:1
+                                                                      constant:0]];
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:line
                                                                      attribute:NSLayoutAttributeRight
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:self.contentView
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1
-                                                                      constant:-EDGE_WIDTH]];
+                                                                      constant:0]];
+        [line addConstraint:[NSLayoutConstraint constraintWithItem:line
+                                                         attribute:NSLayoutAttributeHeight
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:nil
+                                                         attribute:NSLayoutAttributeNotAnAttribute
+                                                        multiplier:1
+                                                          constant:1]];
         
+        
+        
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:deleteOrder
+                                                                     attribute:NSLayoutAttributeTop
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:line
+                                                                     attribute:NSLayoutAttributeBottom
+                                                                    multiplier:1
+                                                                      constant:EDGE_WIDTH]];
+        [deleteOrder addConstraint:[NSLayoutConstraint constraintWithItem:deleteOrder
+                                                                attribute:NSLayoutAttributeWidth
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:nil
+                                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                               multiplier:1
+                                                                 constant:80]];
+        [deleteOrder addConstraint:[NSLayoutConstraint constraintWithItem:deleteOrder
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:nil
+                                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                               multiplier:1
+                                                                 constant:30]];
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:deleteOrder
+                                                                     attribute:NSLayoutAttributeRight
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.contentView
+                                                                     attribute:NSLayoutAttributeRight
+                                                                    multiplier:1
+                                                                      constant:-10]];
+        
+        
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:editOrder
+                                                                     attribute:NSLayoutAttributeTop
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:line
+                                                                     attribute:NSLayoutAttributeBottom
+                                                                    multiplier:1
+                                                                      constant:EDGE_WIDTH]];
+        [editOrder addConstraint:[NSLayoutConstraint constraintWithItem:editOrder
+                                                                attribute:NSLayoutAttributeWidth
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:nil
+                                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                               multiplier:1
+                                                                 constant:80]];
+        [editOrder addConstraint:[NSLayoutConstraint constraintWithItem:editOrder
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:nil
+                                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                               multiplier:1
+                                                                 constant:30]];
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:editOrder
+                                                                     attribute:NSLayoutAttributeRight
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:deleteOrder
+                                                                     attribute:NSLayoutAttributeLeft
+                                                                    multiplier:1
+                                                                      constant:-EDGE_WIDTH]];
+
         
         
         
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:gapView
                                                                      attribute:NSLayoutAttributeTop
                                                                      relatedBy:NSLayoutRelationEqual
-                                                                        toItem:self.infoLabel
+                                                                        toItem:deleteOrder
                                                                      attribute:NSLayoutAttributeBottom
                                                                     multiplier:1
                                                                       constant:EDGE_WIDTH]];

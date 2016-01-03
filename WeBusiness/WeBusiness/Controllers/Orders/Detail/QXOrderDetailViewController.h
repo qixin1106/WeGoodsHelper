@@ -12,13 +12,11 @@ typedef NS_ENUM(NSUInteger, TemplateType) {
     TemplateType_Edit=0,//default
     TemplateType_Add=1,
 };
-typedef void(^SaveCustomerBlock)(QXOrderModel *orderModel);
 @protocol QXOrderDetailViewControllerDelegate;
 @interface QXOrderDetailViewController : QXBaseTableViewController
 @property (weak, nonatomic) id<QXOrderDetailViewControllerDelegate>delegate;
 @property (copy, nonatomic) NSString *orderID;
 @property (assign, nonatomic) TemplateType templateType;
-@property (copy, nonatomic) SaveCustomerBlock saveCustomerBlock;
 @end
 
 @protocol QXOrderDetailViewControllerDelegate <NSObject>
