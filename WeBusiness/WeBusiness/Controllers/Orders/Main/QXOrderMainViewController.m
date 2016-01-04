@@ -219,11 +219,7 @@ QXSearchResultViewControllerDelegate>
                                    }];
                                    [self.dataArray removeObject:model];
                                    [model remove];
-                                   
-                                   
-                                   [self.tableView beginUpdates];
-                                   [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:footer.indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
-                                   [self.tableView endUpdates];
+                                   [self.tableView reloadData];
                                }];
     [alertController addAction:alertDel];
     
