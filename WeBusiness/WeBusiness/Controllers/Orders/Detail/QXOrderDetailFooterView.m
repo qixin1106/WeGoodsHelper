@@ -36,7 +36,7 @@
     _costLabel.text = STR_FORMAT(@"%.2f",_orderModel.cost);
     _totalPriceLabel.text = STR_FORMAT(@"%.2f",_orderModel.price);
     _profitLabel.text = STR_FORMAT(@"%.2f",_orderModel.profit);
-    _orderDateTimePicker.date = (_orderModel.buyerOrderTime)?[NSDate dateWithTimeIntervalSinceNow:_orderModel.buyerOrderTime]:[NSDate date];
+    _orderDateTimePicker.date = (_orderModel.buyerOrderTime)?[NSDate dateWithTimeIntervalSinceReferenceDate:_orderModel.buyerOrderTime]:[NSDate dateWithTimeIntervalSinceReferenceDate:CFAbsoluteTimeGetCurrent()];
 }
 
 

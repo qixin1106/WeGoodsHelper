@@ -13,14 +13,22 @@
 #import "QXOrderHeaderView.h"
 #import "QXOrderFooterView.h"
 #import "QXOrderDetailViewController.h"
+#import "QXSearchResultViewController.h"
 
 static NSString *identifier = @"QXOrderMainCell";
 static NSString *identifierHeader = @"QXOrderHeaderView";
 static NSString *identifierFooter = @"QXOrderFooterView";
 
 @interface QXOrderMainViewController ()
-<QXOrderDetailViewControllerDelegate,QXOrderFooterViewDelegate>
+<QXOrderDetailViewControllerDelegate,
+QXOrderFooterViewDelegate,
+UISearchBarDelegate,
+UISearchResultsUpdating,
+UISearchControllerDelegate,
+QXSearchResultViewControllerDelegate>
 @property (strong, nonatomic) NSMutableArray *dataArray;
+@property (strong, nonatomic, nonnull) UISearchController *searchController;
+@property (strong, nonatomic, nonnull) QXSearchResultViewController *srvc;
 @end
 
 @implementation QXOrderMainViewController
@@ -58,6 +66,7 @@ static NSString *identifierFooter = @"QXOrderFooterView";
     self.title = @"订单";
     self.tableView.tableFooterView = [UIView new];
     
+    
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAddClick:)];
     self.navigationItem.rightBarButtonItems = @[rightItem];
     
@@ -73,6 +82,15 @@ static NSString *identifierFooter = @"QXOrderFooterView";
     [self.tableView registerClass:[QXOrderMainCell class] forCellReuseIdentifier:identifier];
     
     
+    
+    self.srvc = [[QXSearchResultViewController alloc] initWithStyle:UITableViewStyleGrouped searchType:SearchType_Order];
+    self.srvc.delegate = self;
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.srvc];
+    self.searchController.delegate = self;
+    self.searchController.searchBar.delegate = self;
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.searchBar.placeholder = @"搜索人名/地址/电话";
+    self.tableView.tableHeaderView = self.searchController.searchBar;
 }
 
 - (void)viewDidLoad
@@ -226,6 +244,82 @@ static NSString *identifierFooter = @"QXOrderFooterView";
     vc.indexPath = footer.indexPath;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - UISearchResultsUpdating
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    QXLog(@"search:%@",[searchController.searchBar.text lowercaseString]);
+    QXOrderModel *orderModel = [[QXOrderModel alloc] init];
+    NSArray *models = [orderModel fetchWithKeyword:[searchController.searchBar.text lowercaseString]];
+    [models enumerateObjectsUsingBlock:^(QXOrderModel * _Nonnull orderModel, NSUInteger idx, BOOL * _Nonnull stop) {
+        QXOrderGoodsModel *goodsModel = [[QXOrderGoodsModel alloc] init];
+        NSArray *goodsList = [goodsModel fetchWithOrderID:orderModel.ID];
+        orderModel.orderGoodsList = [goodsList mutableCopy];
+    }];
+    self.srvc.resultArray = [NSMutableArray arrayWithArray:models];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - QXSearchResultViewControllerDelegate
+- (void)cancelKeyboard
+{
+    [self.searchController.searchBar resignFirstResponder];
+}
+
+
+- (void)selectModel:(id)model
+{
+    /*
+    QXOrderModel *orderModel = (QXOrderModel*)model;
+    self.searchController.active = NO;
+    if (self.type==OrderMainType_Display)
+    {
+        QXOrderDetailViewController *vc = [[QXOrderDetailViewController alloc] init];
+        vc.delegate = self;
+        vc.templateType = TemplateType_Edit;
+        vc.orderID = orderModel.ID;
+        vc.indexPath = footer.indexPath;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (self.type==OrderMainType_Select)
+    {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(vc:selectedOrder:)])
+        {
+            [self.delegate vc:self selectedOrder:orderModel];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+     */
+}
+
 
 
 @end

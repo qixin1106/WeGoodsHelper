@@ -27,5 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)remove;//delete data
 - (NSArray*)fetchAll;//select all data
 - (QXOrderModel*)fetchModel;//select model with uid
+- (NSArray*)fetchWithKeyword:(NSString*)keyword;//select models with keyword
+- (NSArray*)fetchWithIsFinish:(BOOL)isFinish;//select models with isFinish
 @end
 NS_ASSUME_NONNULL_END

@@ -80,6 +80,56 @@
 }
 
 
+- (NSArray*)selectWithKeyword:(NSString*)keyword db:(FMDatabase*)db
+{
+    NSMutableArray *array = [NSMutableArray array];
+    NSString *SQLString = @"SELECT * FROM ORDERS \
+    WHERE NAME LIKE ? \
+    OR NAME LIKE ? \
+    OR NAME LIKE ? \
+    OR ADDRESS LIKE ? \
+    OR ADDRESS LIKE ? \
+    OR ADDRESS LIKE ? \
+    OR TEL LIKE ? \
+    OR TEL LIKE ? \
+    OR TEL LIKE ? \
+    OR CN LIKE ? \
+    OR CN LIKE ? \
+    OR CN LIKE ? \
+    ORDER BY TS DESC";
+    FMResultSet *rs = [db executeQuery:SQLString,
+                       STR_FORMAT(@"%@%@",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",@"%",keyword),
+                       STR_FORMAT(@"%@%@%@",@"%",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",@"%",keyword),
+                       STR_FORMAT(@"%@%@%@",@"%",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",@"%",keyword),
+                       STR_FORMAT(@"%@%@%@",@"%",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",keyword,@"%"),
+                       STR_FORMAT(@"%@%@",@"%",keyword),
+                       STR_FORMAT(@"%@%@%@",@"%",keyword,@"%")];
+    while ([rs next])
+    {
+        [array addObject:[self assignWithResultSet:rs]];
+    }
+    return array;
+}
+
+- (NSArray*)selectWithIsFinish:(BOOL)isFinish db:(FMDatabase*)db
+{
+    NSMutableArray *array = [NSMutableArray array];
+    NSString *SQLString = @"SELECT * FROM ORDERS WHERE ISFINISH=? ORDER BY TS DESC";
+    FMResultSet *rs = [db executeQuery:SQLString,@(isFinish)];
+    while ([rs next])
+    {
+        [array addObject:[self assignWithResultSet:rs]];
+    }
+    return array;
+}
+
+
 
 - (QXOrderModel*)assignWithResultSet:(FMResultSet*)rs
 {
@@ -149,5 +199,28 @@
     }];
     return model;
 }
+
+
+- (NSArray*)fetchWithKeyword:(NSString*)keyword
+{
+    __block NSArray *array;
+    [[QXSQLiteHelper sharedDatabaseQueue] inDatabase:^(FMDatabase *db) {
+        [self createTable:db];
+        array = [self selectWithKeyword:keyword db:db];
+    }];
+    return array;
+}
+
+
+- (NSArray*)fetchWithIsFinish:(BOOL)isFinish
+{
+    __block NSArray *array;
+    [[QXSQLiteHelper sharedDatabaseQueue] inDatabase:^(FMDatabase *db) {
+        [self createTable:db];
+        array = [self selectWithIsFinish:isFinish db:db];
+    }];
+    return array;
+}
+
 
 @end
