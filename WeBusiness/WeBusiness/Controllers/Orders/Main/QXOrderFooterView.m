@@ -56,7 +56,7 @@
         totalPrice += ((obj.adjustPrice)?obj.adjustPrice:model.retailPrice)*obj.buyCount;
         totalCost += ((obj.adjustCost)?obj.adjustCost:model.costPrice)*obj.buyCount;
     }];
-    totalPrice += _orderModel.freight;
+    totalPrice += orderModel.freight;
     _orderModel.price = totalPrice;
     _orderModel.cost = totalCost;
     self.infoLabel.text = STR_FORMAT(@"共%ld件 合计:￥%.2f(含运费:￥%.2f) 赚:￥%.2f ",count,_orderModel.price,_orderModel.freight,_orderModel.profit);

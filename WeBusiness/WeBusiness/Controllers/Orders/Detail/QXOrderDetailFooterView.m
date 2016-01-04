@@ -22,11 +22,6 @@
 
 @implementation QXOrderDetailFooterView
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-//    self.orderDateTimePicker.datePickerMode = UIDatePickerModeCountDownTimer;
-}
 
 
 - (void)setOrderModel:(QXOrderModel *)orderModel

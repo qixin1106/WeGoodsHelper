@@ -43,7 +43,7 @@
 
 - (void)update:(FMDatabase*)db
 {
-    NSString *SQLString = @"UPDATE ORDERS SET  NAME=?, TEL=?, ADDRESS=?, CN=?, REMARK=?, ORDERTIME=?, FREIGHT=?, PRICE=?, COST=?, PROFIT=?, DSICOUNT=? ISFINISH=? WHERE ID=?";
+    NSString *SQLString = @"UPDATE ORDERS SET NAME=?, TEL=?, ADDRESS=?, CN=?, REMARK=?, ORDERTIME=?, FREIGHT=?, PRICE=?, COST=?, PROFIT=?, DISCOUNT=?, ISFINISH=? WHERE ID=?";
     [db executeUpdate:SQLString,self.name,self.tel,self.address,self.cn,self.remark,@(self.buyerOrderTime),@(self.freight),@(self.price),@(self.cost),@(self.profit),@(self.discount),@(self.isFinish),self.ID];
 }
 

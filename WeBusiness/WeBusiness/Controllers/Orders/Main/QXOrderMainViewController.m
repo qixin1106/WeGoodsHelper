@@ -117,6 +117,7 @@ static NSString *identifierFooter = @"QXOrderFooterView";
 {
     QXOrderHeaderView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:identifierHeader];
     view.orderModel = self.dataArray[section];
+    view.indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
     return view;
 }
 
@@ -125,6 +126,7 @@ static NSString *identifierFooter = @"QXOrderFooterView";
     QXOrderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:identifierFooter];
     view.orderModel = self.dataArray[section];
     view.delegate = self;
+    view.indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
     return view;
 }
 
@@ -135,19 +137,7 @@ static NSString *identifierFooter = @"QXOrderFooterView";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-     QXGoodsModel *model = self.dataArray[indexPath.row];
-     QXGoodsDetailViewController *vc = [[QXGoodsDetailViewController alloc] initWithGid:model.ID];
-     vc.hidesBottomBarWhenPushed = YES;
-     vc.templateType = TemplateType_Edit;
-     [vc setSaveGoodsBlock:^(QXGoodsModel *goodsModel) {
-     //保存
-     ([goodsModel fetchModel])?[goodsModel refresh]:[goodsModel store];
-     [self loadData];
-     [self.tableView reloadData];
-     }];
-     [self.navigationController pushViewController:vc animated:YES];
-     */
+    
 }
 
 
@@ -162,10 +152,23 @@ static NSString *identifierFooter = @"QXOrderFooterView";
 
 
 
-- (void)onSaveModel:(QXOrderModel*)orderModel
+- (void)orderDetail:(QXOrderDetailViewController*)vc onSaveModel:(QXOrderModel*)orderModel;
 {
-    [self.dataArray insertObject:orderModel atIndex:0];
-    [self.tableView reloadData];
+    //新增
+    if (vc.templateType==TemplateType_Add)
+    {
+        [self.dataArray insertObject:orderModel atIndex:0];
+        [self.tableView reloadData];
+        return;
+    }
+    
+    //编辑
+    if (vc.templateType==TemplateType_Edit)
+    {
+        [self.dataArray replaceObjectAtIndex:vc.indexPath.section withObject:orderModel];
+        [self.tableView reloadData];
+        return;
+    }
 }
 
 
@@ -220,6 +223,7 @@ static NSString *identifierFooter = @"QXOrderFooterView";
     vc.delegate = self;
     vc.templateType = TemplateType_Edit;
     vc.orderID = footer.orderModel.ID;
+    vc.indexPath = footer.indexPath;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -46,6 +46,23 @@
 }
 
 
+
+
+
+- (void)setOrderModel:(QXOrderModel *)orderModel
+{
+    if (_orderModel!=orderModel)
+    {
+        _orderModel=orderModel;
+    }
+    self.nameTextField.text = self.orderModel.name;
+    self.telTextField.text = self.orderModel.tel;
+    self.addressTextView.text = self.orderModel.address;
+    self.cnTextField.text = self.orderModel.cn;
+    self.remarkTextView.text = self.orderModel.remark;
+}
+
+
 - (void)refreshCustomerUI
 {
     self.nameTextField.text = self.orderModel.name;

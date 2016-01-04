@@ -17,8 +17,9 @@ typedef NS_ENUM(NSUInteger, TemplateType) {
 @property (weak, nonatomic) id<QXOrderDetailViewControllerDelegate>delegate;
 @property (copy, nonatomic) NSString *orderID;
 @property (assign, nonatomic) TemplateType templateType;
+@property (strong, nonatomic) NSIndexPath *indexPath;
 @end
 
 @protocol QXOrderDetailViewControllerDelegate <NSObject>
-- (void)onSaveModel:(QXOrderModel*)orderModel;
+- (void)orderDetail:(QXOrderDetailViewController*)vc onSaveModel:(QXOrderModel*)orderModel;
 @end

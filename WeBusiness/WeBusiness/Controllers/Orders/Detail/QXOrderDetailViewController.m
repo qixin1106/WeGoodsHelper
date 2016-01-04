@@ -88,27 +88,60 @@ QXScanCodeViewControllerDelegate>
 
 - (void)onSaveClick:(UIBarButtonItem*)sender
 {
-    if (VALID_STRING(self.orderModel.name) &&
-        VALID_STRING(self.orderModel.tel) &&
-        VALID_STRING(self.orderModel.address) &&
-        self.orderModel.orderGoodsList.count)
+    //新增
+    if (self.templateType==TemplateType_Add)
     {
-        QXOrderDetailHeadView *header = (QXOrderDetailHeadView*)self.tableView.tableHeaderView;
-        [header assignModel];
-        
-        [self.orderModel store];
-        [self.orderModel.orderGoodsList enumerateObjectsUsingBlock:^(QXOrderGoodsModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [obj store];
-        }];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(onSaveModel:)])
+        if (VALID_STRING(self.orderModel.name) &&
+            VALID_STRING(self.orderModel.tel) &&
+            VALID_STRING(self.orderModel.address) &&
+            self.orderModel.orderGoodsList.count)
         {
-            [self.delegate onSaveModel:self.orderModel];
+            QXOrderDetailHeadView *header = (QXOrderDetailHeadView*)self.tableView.tableHeaderView;
+            [header assignModel];
+            
+            [self.orderModel store];
+            [self.orderModel.orderGoodsList enumerateObjectsUsingBlock:^(QXOrderGoodsModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [obj store];
+            }];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(orderDetail:onSaveModel:)])
+            {
+                [self.delegate orderDetail:self onSaveModel:self.orderModel];
+            }
+            [self dismissViewControllerAnimated:YES completion:NULL];
         }
-        [self dismissViewControllerAnimated:YES completion:NULL];
+        else
+        {
+            ALERT(@"姓名,电话,地址,商品必填", nil);
+        }
+        return;
     }
-    else
+    
+    //编辑
+    if (self.templateType==TemplateType_Edit)
     {
-        ALERT(@"姓名,电话,地址,商品必填", nil);
+        if (VALID_STRING(self.orderModel.name) &&
+            VALID_STRING(self.orderModel.tel) &&
+            VALID_STRING(self.orderModel.address) &&
+            self.orderModel.orderGoodsList.count)
+        {
+            QXOrderDetailHeadView *header = (QXOrderDetailHeadView*)self.tableView.tableHeaderView;
+            [header assignModel];
+            
+            [self.orderModel.orderGoodsList enumerateObjectsUsingBlock:^(QXOrderGoodsModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [obj refresh];
+            }];
+            [self.orderModel refresh];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(orderDetail:onSaveModel:)])
+            {
+                [self.delegate orderDetail:self onSaveModel:self.orderModel];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            ALERT(@"姓名,电话,地址,商品必填", nil);
+        }
+        return;
     }
 }
 
@@ -140,6 +173,7 @@ QXScanCodeViewControllerDelegate>
     footer.orderModel = self.orderModel;
     footer.delegate = self;
     self.tableView.tableFooterView = footer;
+    [self checkPrice];
     
 }
 
@@ -152,6 +186,9 @@ QXScanCodeViewControllerDelegate>
         QXOrderModel *model = [[QXOrderModel alloc] init];
         model.ID = self.orderID;
         self.orderModel = [model fetchModel];
+        QXOrderGoodsModel *goodsModel = [[QXOrderGoodsModel alloc] init];
+        NSArray *goodsList = [goodsModel fetchWithOrderID:model.ID];
+        self.orderModel.orderGoodsList = [goodsList mutableCopy];
     }
     else
     {
@@ -357,7 +394,7 @@ QXScanCodeViewControllerDelegate>
     self.orderModel.tel = customerModel.tel;
     self.orderModel.address = customerModel.address;
     QXOrderDetailHeadView *header = (QXOrderDetailHeadView*)self.tableView.tableHeaderView;
-    [header refreshCustomerUI];
+    header.orderModel = self.orderModel;
 }
 
 
@@ -423,7 +460,6 @@ QXScanCodeViewControllerDelegate>
     
     QXOrderDetailHeadView *header = (QXOrderDetailHeadView*)self.tableView.tableHeaderView;
     header.orderModel = self.orderModel;
-    [header refreshCustomerUI];
 }
 
 
