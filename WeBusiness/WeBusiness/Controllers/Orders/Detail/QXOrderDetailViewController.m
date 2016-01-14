@@ -91,10 +91,7 @@ QXScanCodeViewControllerDelegate>
     //新增
     if (self.templateType==TemplateType_Add)
     {
-        if (VALID_STRING(self.orderModel.name) &&
-            VALID_STRING(self.orderModel.tel) &&
-            VALID_STRING(self.orderModel.address) &&
-            self.orderModel.orderGoodsList.count)
+        if (self.orderModel.orderGoodsList.count)
         {
             QXOrderDetailHeadView *header = (QXOrderDetailHeadView*)self.tableView.tableHeaderView;
             [header assignModel];
@@ -111,7 +108,7 @@ QXScanCodeViewControllerDelegate>
         }
         else
         {
-            ALERT(@"姓名,电话,地址,商品必填", nil);
+            ALERT(@"商品必填", nil);
         }
         return;
     }
@@ -119,10 +116,7 @@ QXScanCodeViewControllerDelegate>
     //编辑
     if (self.templateType==TemplateType_Edit)
     {
-        if (VALID_STRING(self.orderModel.name) &&
-            VALID_STRING(self.orderModel.tel) &&
-            VALID_STRING(self.orderModel.address) &&
-            self.orderModel.orderGoodsList.count)
+        if (self.orderModel.orderGoodsList.count)
         {
             QXOrderDetailHeadView *header = (QXOrderDetailHeadView*)self.tableView.tableHeaderView;
             [header assignModel];
@@ -139,7 +133,7 @@ QXScanCodeViewControllerDelegate>
         }
         else
         {
-            ALERT(@"姓名,电话,地址,商品必填", nil);
+            ALERT(@"商品必填", nil);
         }
         return;
     }
