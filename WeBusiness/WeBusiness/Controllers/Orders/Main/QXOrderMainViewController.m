@@ -35,6 +35,12 @@ QXSearchResultViewControllerDelegate>
 
 
 
+- (void)onFinanceClick:(UIBarButtonItem*)sender
+{
+    ALERT(@"财务页面", nil);
+}
+
+
 - (void)onAddClick:(UIBarButtonItem*)sender
 {
     QXOrderDetailViewController *vc = [[QXOrderDetailViewController alloc] init];
@@ -66,7 +72,9 @@ QXSearchResultViewControllerDelegate>
     self.title = @"订单";
     self.tableView.tableFooterView = [UIView new];
     
-    
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"财务" style:UIBarButtonItemStylePlain target:self action:@selector(onFinanceClick:)];
+    self.navigationItem.leftBarButtonItems = @[leftItem];
+
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAddClick:)];
     self.navigationItem.rightBarButtonItems = @[rightItem];
     
