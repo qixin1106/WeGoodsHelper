@@ -56,6 +56,20 @@
 }
 
 
+- (NSArray*)selectAllModel:(FMDatabase*)db start:(NSInteger)start size:(NSInteger)size
+{
+    NSMutableArray *array = [NSMutableArray array];
+    NSString *SQLString = STR_FORMAT(@"SELECT * FROM GOODS ORDER BY TS DESC LIMIT %ld OFFSET %ld",size,start*size);
+    FMResultSet *rs = [db executeQuery:SQLString];
+    while ([rs next])
+    {
+        [array addObject:[self assignWithResultSet:rs]];
+    }
+    return array;
+}
+
+
+
 - (QXGoodsModel*)selectModel:(FMDatabase*)db
 {
     NSMutableArray *array = [NSMutableArray array];
@@ -119,8 +133,12 @@
     return model;
 }
 
-
-
+/**************************************************************************************************/
+/**************************************************************************************************/
+/**************************************************************************************************/
+/**************************************************************************************************/
+/**************************************************************************************************/
+/**************************************************************************************************/
 
 
 #pragma mark - Public
@@ -164,6 +182,17 @@
     [[QXSQLiteHelper sharedDatabaseQueue] inDatabase:^(FMDatabase *db) {
         [self createTable:db];
         array = [self selectAllModel:db];
+    }];
+    return array;
+}
+
+
+- (NSArray*)fetchStart:(NSInteger)start size:(NSInteger)size
+{
+    __block NSArray *array;
+    [[QXSQLiteHelper sharedDatabaseQueue] inDatabase:^(FMDatabase *db) {
+        [self createTable:db];
+        array = [self selectAllModel:db start:start size:size];
     }];
     return array;
 }

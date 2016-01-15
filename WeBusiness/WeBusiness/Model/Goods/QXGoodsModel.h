@@ -31,5 +31,6 @@ static NSString *kGoodsRefresh = @"kGoodsRefresh";
 - (NSArray*)fetchAll;//select all data
 - (QXGoodsModel*)fetchModel;//select model with uid
 - (NSArray*)fetchWithKeyword:(NSString*)keyword;//select models with keyword
+- (NSArray*)fetchStart:(NSInteger)start size:(NSInteger)size;//select models with start and size
 @end
 NS_ASSUME_NONNULL_END

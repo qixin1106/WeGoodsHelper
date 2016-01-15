@@ -32,6 +32,8 @@ QXSearchResultViewControllerDelegate>
 @property (strong, nonatomic, nullable) NSArray *pySortArray;
 @property (strong, nonatomic, nonnull) UISearchController *searchController;
 @property (strong, nonatomic, nonnull) QXSearchResultViewController *srvc;
+@property (assign, nonatomic) NSInteger start;
+@property (assign, nonatomic) BOOL isCanLoad;
 @end
 
 @implementation QXGoodsMainViewController
@@ -58,17 +60,31 @@ QXSearchResultViewControllerDelegate>
     [vc setSaveGoodsBlock:^(QXGoodsModel *goodsModel) {
         //保存
         ([goodsModel fetchModel])?[goodsModel refresh]:[goodsModel store];
-        [self loadData];
+        [self loadData:NO];
         [self.tableView reloadData];
     }];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:NULL];    
 }
 
-- (void)loadData
+- (void)loadData:(BOOL)isAdd
 {
+    self.isCanLoad = NO;
     QXGoodsModel *goodsModel = [[QXGoodsModel alloc] init];
-    self.dataArray = [NSMutableArray arrayWithArray:[goodsModel fetchAll]];
+    NSArray *fetchModels = [goodsModel fetchStart:self.start size:FETCH_SIZE];
+    if (isAdd)
+    {
+        self.isCanLoad = (fetchModels.count<FETCH_SIZE)?NO:YES;
+        self.start = (self.isCanLoad)?self.start+1:self.start;
+        [self.dataArray addObjectsFromArray:fetchModels];
+    }
+    else
+    {
+        self.start = 0;
+        self.isCanLoad = (fetchModels.count<FETCH_SIZE)?NO:YES;
+        self.start = (self.isCanLoad)?self.start+1:self.start;
+        self.dataArray = [NSMutableArray arrayWithArray:fetchModels];
+    }
 }
 
 - (void)loadUI
@@ -99,7 +115,7 @@ QXSearchResultViewControllerDelegate>
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self loadData];
+    [self loadData:NO];
     [self loadUI];
 }
 
@@ -164,7 +180,7 @@ QXSearchResultViewControllerDelegate>
         [vc setSaveGoodsBlock:^(QXGoodsModel *goodsModel) {
             //保存
             ([goodsModel fetchModel])?[goodsModel refresh]:[goodsModel store];
-            [self loadData];
+            [self loadData:NO];
             [self.tableView reloadData];
         }];
         [self.navigationController pushViewController:vc animated:YES];
@@ -197,6 +213,10 @@ QXSearchResultViewControllerDelegate>
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [self removeMoreView];
+    if (scrollView.contentOffset.y+scrollView.frame.size.height>scrollView.contentSize.height && self.isCanLoad)
+    {
+        [self loadData:YES];
+    }
 }
 
 
@@ -275,7 +295,7 @@ QXSearchResultViewControllerDelegate>
         [vc setSaveGoodsBlock:^(QXGoodsModel *goodsModel) {
             //保存
             ([goodsModel fetchModel])?[goodsModel refresh]:[goodsModel store];
-            [self loadData];
+            [self loadData:NO];
             [self.tableView reloadData];
         }];
         [self.navigationController pushViewController:vc animated:YES];

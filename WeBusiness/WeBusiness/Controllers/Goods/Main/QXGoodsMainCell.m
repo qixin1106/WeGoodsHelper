@@ -106,14 +106,14 @@
         self.countLabel.numberOfLines = 1;
         [self.contentView addSubview:self.countLabel];
         
-        
+        /*
         //更多操作按钮
         self.moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.moreButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self.moreButton addTarget:self action:@selector(onClickMore:) forControlEvents:UIControlEventTouchUpInside];
         [self.moreButton setImage:[UIImage imageNamed:@"search_item_shop_info_button"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.moreButton];
-        
+        */
         
         //分割线
         _line = [[UIView alloc] init];
@@ -243,7 +243,7 @@
                                                                       constant:MARGIN_SPACE]];
         
         
-        
+        /*
         //更多
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.moreButton
                                                                      attribute:NSLayoutAttributeRight
@@ -273,7 +273,7 @@
                                                                         attribute:NSLayoutAttributeNotAnAttribute
                                                                        multiplier:1
                                                                          constant:30]];
-
+         */
 
 
         
