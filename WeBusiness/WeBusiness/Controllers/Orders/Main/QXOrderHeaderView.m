@@ -115,7 +115,7 @@
                                                                       constant:0]];
         
         
-        
+        /*
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.stateLabel
                                                                      attribute:NSLayoutAttributeCenterY
                                                                      relatedBy:NSLayoutRelationEqual
@@ -123,6 +123,14 @@
                                                                      attribute:NSLayoutAttributeCenterY
                                                                     multiplier:1
                                                                       constant:0]];
+         */
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.stateLabel
+                                                                     attribute:NSLayoutAttributeTop
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.contentView
+                                                                     attribute:NSLayoutAttributeTop
+                                                                    multiplier:1
+                                                                      constant:EDGE_WIDTH]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.stateLabel
                                                                      attribute:NSLayoutAttributeRight
                                                                      relatedBy:NSLayoutRelationEqual

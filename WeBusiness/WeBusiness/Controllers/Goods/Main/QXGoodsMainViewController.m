@@ -189,7 +189,8 @@ QXSearchResultViewControllerDelegate>
     if (self.type==Type_Select)//选择
     {
         QXGoodsModel *model = self.dataArray[indexPath.row];
-        if (model.count)
+        //2016-01-16 亓鑫 根据用户需求就算是0商品数量也可添加,暂时不做动态调整库存商品数量功能/////////
+        if (YES)//(model.count)
         {
             if (self.delegate && [self.delegate respondsToSelector:@selector(selectedGoods:)])
             {
