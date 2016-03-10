@@ -33,7 +33,7 @@
 
 - (void)onShareClick:(UIBarButtonItem*)sender
 {
-    /*
+    
     self.scrollView.bounds = CGRectMake(0, 0, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
     UIImage *image = [UIImage screenShotWithView:self.scrollView];
     self.scrollView.bounds = self.view.bounds;
@@ -44,8 +44,8 @@
     [controller setCompletionWithItemsHandler:^(NSString * __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError){
         
     }];
-     */
     
+    /*
     NSString *sharedText = STR_FORMAT(@"%@\n\n%@",self.goodsModel.name,self.goodsModel.descs);
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     [pasteboard setString:sharedText];
@@ -65,7 +65,7 @@
     [controller setCompletionWithItemsHandler:^(NSString * __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError){
         
     }];
-
+     */
 }
 
 
