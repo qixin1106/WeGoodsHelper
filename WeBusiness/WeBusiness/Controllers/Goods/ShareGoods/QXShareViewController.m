@@ -187,22 +187,25 @@
     [self.view setNeedsDisplay];
     [self.view layoutIfNeeded];
     
-    NSArray *picIDArray = [self.goodsModel.picID componentsSeparatedByString:@";"];
-    __block UIView *lastView = descsLabel;
-    [picIDArray enumerateObjectsUsingBlock:^(NSString * _Nonnull picID, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIImage *img = [UIImage imageWithPicID:picID];
-        CGFloat height = img.size.height * self.view.bounds.size.width / img.size.width;
-        
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:img];
-        imageView.frame = CGRectMake(0,
-                                     lastView.frame.origin.y+lastView.frame.size.height+10,
-                                     self.view.bounds.size.width, height);
-        [self.scrollView addSubview:imageView];
-        lastView = imageView;
-        
-        self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, imageView.frame.origin.y+imageView.frame.size.height);
-        /************************************************************************************/
-    }];
+    if (VALID_STRING(self.goodsModel.picID))
+    {
+        NSArray *picIDArray = [self.goodsModel.picID componentsSeparatedByString:@";"];
+        __block UIView *lastView = descsLabel;
+        [picIDArray enumerateObjectsUsingBlock:^(NSString * _Nonnull picID, NSUInteger idx, BOOL * _Nonnull stop) {
+            UIImage *img = [UIImage imageWithPicID:picID];
+            CGFloat height = img.size.height * self.view.bounds.size.width / img.size.width;
+            
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:img];
+            imageView.frame = CGRectMake(0,
+                                         lastView.frame.origin.y+lastView.frame.size.height+10,
+                                         self.view.bounds.size.width, height);
+            [self.scrollView addSubview:imageView];
+            lastView = imageView;
+            
+            self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, imageView.frame.origin.y+imageView.frame.size.height);
+            /************************************************************************************/
+        }];
+    }
 }
 
 

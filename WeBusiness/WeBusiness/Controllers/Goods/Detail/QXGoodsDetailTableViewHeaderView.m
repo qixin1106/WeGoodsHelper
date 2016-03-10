@@ -27,7 +27,7 @@ static NSString *itemID = @"QXGoodsDetailImageItemCell";
     if (_picID!=picID)
     {
         _picID=picID;
-        _imgs = [NSMutableArray arrayWithArray:[_picID componentsSeparatedByString:@";"]];
+        _imgs = (VALID_STRING(picID))?[NSMutableArray arrayWithArray:[_picID componentsSeparatedByString:@";"]]:[NSMutableArray array];
         self.pageControl.numberOfPages = _imgs.count+1;
         [self.collectionView reloadData];
     }
@@ -124,7 +124,7 @@ static NSString *itemID = @"QXGoodsDetailImageItemCell";
                                                          attribute:NSLayoutAttributeRight
                                                         multiplier:1
                                                           constant:0]];
-
+        
     }
     return self;
 }
