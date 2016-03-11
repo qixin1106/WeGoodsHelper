@@ -71,9 +71,9 @@ QXSearchResultViewControllerDelegate>
 {
     self.isCanLoad = NO;
     QXGoodsModel *goodsModel = [[QXGoodsModel alloc] init];
-    NSArray *fetchModels = [goodsModel fetchStart:self.start size:FETCH_SIZE];
     if (isAdd)
     {
+        NSArray *fetchModels = [goodsModel fetchStart:self.start size:FETCH_SIZE];
         self.isCanLoad = (fetchModels.count<FETCH_SIZE)?NO:YES;
         self.start = (self.isCanLoad)?self.start+1:self.start;
         [self.dataArray addObjectsFromArray:fetchModels];
@@ -81,6 +81,7 @@ QXSearchResultViewControllerDelegate>
     else
     {
         self.start = 0;
+        NSArray *fetchModels = [goodsModel fetchStart:self.start size:FETCH_SIZE];
         self.isCanLoad = (fetchModels.count<FETCH_SIZE)?NO:YES;
         self.start = (self.isCanLoad)?self.start+1:self.start;
         self.dataArray = [NSMutableArray arrayWithArray:fetchModels];
@@ -217,6 +218,7 @@ QXSearchResultViewControllerDelegate>
     if (scrollView.contentOffset.y+scrollView.frame.size.height>scrollView.contentSize.height && self.isCanLoad)
     {
         [self loadData:YES];
+        [self.tableView reloadData];
     }
 }
 
